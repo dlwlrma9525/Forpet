@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/heart" />
+        app:srcCompat="@drawable/heart_logo" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -24,14 +24,14 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:srcCompat="@drawable/forpet_ci" />
+        app:srcCompat="@drawable/forpet" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="11.8dp"
-        android:text="내 곁의 동물병원, 동물약국"
+        android:text="@string/app_title"
         android:textSize="12sp"
         android:textColor="#919191"
         android:fontFamily="@font/nanum_square"
@@ -39,4 +39,5 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView2"
         app:layout_constraintStart_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
 </android.support.constraint.ConstraintLayout>

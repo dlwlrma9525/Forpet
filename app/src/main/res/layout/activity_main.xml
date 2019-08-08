@@ -9,19 +9,23 @@
     <FrameLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/navigation_view"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <BottomNavigationView
-        android:id="@+id/navigation_view"
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
         android:layout_width="0dp"
         android:layout_height="69dp"
+        android:background="@android:color/white"
+        app:itemBackground="@android:color/white"
+        app:itemIconTint="@drawable/navigation_selector"
+        app:itemTextColor="@drawable/navigation_selector"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-    </BottomNavigationView>
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/navigation_items" />
 
 </android.support.constraint.ConstraintLayout>
