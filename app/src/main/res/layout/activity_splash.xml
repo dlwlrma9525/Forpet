@@ -7,7 +7,7 @@
     tools:context=".view.splash.activity.SplashActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="286dp"
@@ -17,13 +17,13 @@
         app:srcCompat="@drawable/heart_logo" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageViewCi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewLogo"
+        app:layout_constraintStart_toStartOf="@+id/imageViewLogo"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLogo"
         app:srcCompat="@drawable/forpet" />
 
     <TextView
@@ -31,13 +31,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="11.8dp"
-        android:text="@string/app_title"
-        android:textSize="12sp"
-        android:textColor="#919191"
         android:fontFamily="@font/nanum_square"
         android:includeFontPadding="false"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        android:text="@string/app_title"
+        android:textColor="#919191"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewCi"
+        app:layout_constraintStart_toStartOf="@+id/imageViewCi"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewCi" />
 
 </android.support.constraint.ConstraintLayout>

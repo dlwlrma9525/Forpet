@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item android:id="@+id/action_supplies"
         android:title="@string/menu_ani_shop"
         android:icon="@drawable/icon_ani_shop" />
@@ -19,4 +20,5 @@
     <item android:id="@+id/action_more"
         android:title="@string/menu_more"
         android:icon="@drawable/icon_more" />
+
 </menu>
