@@ -1,9 +1,11 @@
 package kr.forpet.view.main.activity;
 
+import android.Manifest;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.graphics.drawable.DrawerArrowDrawable;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
@@ -22,11 +24,16 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 
 import kr.forpet.R;
+import kr.forpet.util.Permission;
 import kr.forpet.view.main.presenter.MainPresenter;
 import kr.forpet.view.main.presenter.MainPresenterImpl;
 
 public class MainActivity extends AppCompatActivity
         implements MainPresenter.View,NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
+
+    private static final String[] PERMISSION_ARRAY
+            = { Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION };
+    private static final int REQUEST_PERMISSION = 0;
 
     private MainPresenter mMainPresenter;
     private GoogleMap mMap;
@@ -38,33 +45,28 @@ public class MainActivity extends AppCompatActivity
 
         mMainPresenter = new MainPresenterImpl();
         mMainPresenter.setView(this);
+        mMainPresenter.onCreate(getApplicationContext());
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (Permission.checkPermission(this, PERMISSION_ARRAY, REQUEST_PERMISSION))
+                init();
+        }
+    }
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowTitleEnabled(false);
-        // actionBar.setDisplayHomeAsUpEnabled(true);
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mMainPresenter.onDestroy();
+    }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        toggle.setDrawerIndicatorEnabled(false);
-        toggle.setHomeAsUpIndicator(R.drawable.icon_menu_hamburg);
-        toggle.setToolbarNavigationClickListener((v) -> {
-            if (drawer.isDrawerVisible(GravityCompat.START))
-                drawer.closeDrawer(GravityCompat.START);
-            else
-                drawer.openDrawer(GravityCompat.START);
-        });
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        navigationView.setNavigationItemSelectedListener(this);
-
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        if(Permission.onCheckResult(grantResults))
+            init();
+        else
+            finish();
     }
 
     /**
@@ -79,21 +81,16 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMainPresenter.onMapReady(googleMap);
     }
 
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        if (drawer.isDrawerOpen(GravityCompat.START))
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        else
             super.onBackPressed();
-        }
     }
 
     @Override
@@ -122,24 +119,61 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_tools) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        switch (item.getItemId()) {
+            case R.id.nav_home:         break;
+            case R.id.nav_gallery:      break;
+            case R.id.nav_slideshow:    break;
+            case R.id.nav_tools:        break;
+            case R.id.nav_share:        break;
+            case R.id.nav_send:         break;
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    // MainPresenter.View implements..
+
+    @Override
+    public void addMarker(MarkerOptions marker) {
+        // Add a marker and move the camera..
+        mMap.addMarker(marker);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(marker.getPosition()));
+    }
+
+    @Override
+    public void moveCamera(LatLng latLng) {
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f));
+    }
+
+    private void init() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
+        // actionBar.setDisplayHomeAsUpEnabled(true);
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle.setDrawerIndicatorEnabled(false);
+        toggle.setHomeAsUpIndicator(R.drawable.icon_menu_hamburg);
+        toggle.setToolbarNavigationClickListener((v) -> {
+            if (drawer.isDrawerVisible(GravityCompat.START))
+                drawer.closeDrawer(GravityCompat.START);
+            else
+                drawer.openDrawer(GravityCompat.START);
+        });
+
+        navigationView.setNavigationItemSelectedListener(this);
+
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
     }
 }
