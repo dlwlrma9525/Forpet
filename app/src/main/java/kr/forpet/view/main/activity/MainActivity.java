@@ -29,7 +29,7 @@ import kr.forpet.view.main.presenter.MainPresenter;
 import kr.forpet.view.main.presenter.MainPresenterImpl;
 
 public class MainActivity extends AppCompatActivity
-        implements MainPresenter.View,NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
+        implements MainPresenter.View, OnMapReadyCallback {
 
     private static final String[] PERMISSION_ARRAY
             = { Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION };
@@ -115,25 +115,6 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-
-        switch (item.getItemId()) {
-            case R.id.nav_home:         break;
-            case R.id.nav_gallery:      break;
-            case R.id.nav_slideshow:    break;
-            case R.id.nav_tools:        break;
-            case R.id.nav_share:        break;
-            case R.id.nav_send:         break;
-        }
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
     // MainPresenter.View implements..
 
     @Override
@@ -168,8 +149,6 @@ public class MainActivity extends AppCompatActivity
             else
                 drawer.openDrawer(GravityCompat.START);
         });
-
-        navigationView.setNavigationItemSelectedListener(this);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
