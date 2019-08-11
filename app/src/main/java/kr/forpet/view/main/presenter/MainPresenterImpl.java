@@ -1,6 +1,5 @@
 package kr.forpet.view.main.presenter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
 import android.util.Log;
@@ -9,11 +8,11 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import kr.forpet.view.main.model.MainModel;
+import kr.forpet.map.GoogleMapsMarkerBuilder;
 
 public class MainPresenterImpl implements MainPresenter {
 
@@ -48,14 +47,17 @@ public class MainPresenterImpl implements MainPresenter {
     public void onMyGps() {
         try {
             Task task = mainModel.getMyLocation();
-            task.addOnCompleteListener((Activity) mView, new OnCompleteListener<Location>() {
+            task.addOnCompleteListener(new OnCompleteListener<Location>() {
                 @Override
                 public void onComplete(@NonNull Task<Location> task) {
                     if(task.isSuccessful()) {
                         Location result = task.getResult();
                         LatLng latLng = new LatLng(result.getLatitude(), result.getLongitude());
 
-                        mView.addMarker(new MarkerOptions().position(latLng).title("Here!"));
+                        mView.addMarker(new GoogleMapsMarkerBuilder(mView.getContext(), latLng)
+                                .type("hospital")
+                                .event(true)
+                                .build());
                         mView.moveCamera(latLng);
                     } else {
                         Log.d("GooglePlayServices", "Current location is null. Using defaults.");

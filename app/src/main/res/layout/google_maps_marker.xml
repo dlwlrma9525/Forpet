@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageHeartRate"
+        android:layout_width="26dp"
+        android:layout_height="7dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageMarker"
+        android:layout_width="26dp"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageHeartRate"
+        app:layout_constraintStart_toStartOf="@+id/imageHeartRate"
+        app:layout_constraintTop_toBottomOf="@+id/imageHeartRate" />
+
+    <ImageView
+        android:id="@+id/imageEvent"
+        android:layout_width="31dp"
+        android:layout_height="12dp"
+        android:layout_marginBottom="4dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/imageMarker"
+        app:layout_constraintEnd_toEndOf="@+id/imageMarker"
+        app:layout_constraintStart_toStartOf="@+id/imageMarker" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

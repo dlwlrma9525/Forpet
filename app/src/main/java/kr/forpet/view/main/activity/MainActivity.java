@@ -1,6 +1,7 @@
 package kr.forpet.view.main.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -116,6 +117,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     // MainPresenter.View implements..
+
+    @Override
+    public Context getContext() {
+        return getApplicationContext();
+    }
 
     @Override
     public void addMarker(MarkerOptions marker) {

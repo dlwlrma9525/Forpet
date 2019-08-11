@@ -16,6 +16,7 @@ public interface MainPresenter {
     void onMyGps();
 
     interface View {
+        Context getContext();
         void addMarker(MarkerOptions marker);
         void moveCamera(LatLng latLng);
     }
