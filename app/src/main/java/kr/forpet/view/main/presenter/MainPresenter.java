@@ -13,6 +13,7 @@ public interface MainPresenter {
     void onDestroy();
 
     void onMapReady(GoogleMap googleMap);
+    void onMyGps();
 
     interface View {
         void addMarker(MarkerOptions marker);

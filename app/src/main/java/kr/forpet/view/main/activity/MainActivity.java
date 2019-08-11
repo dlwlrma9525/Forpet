@@ -175,5 +175,8 @@ public class MainActivity extends AppCompatActivity
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        findViewById(R.id.imageButtonGps)
+                .setOnClickListener((v) -> mMainPresenter.onMyGps());
     }
 }
