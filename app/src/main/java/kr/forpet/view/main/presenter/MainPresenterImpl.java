@@ -41,26 +41,7 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        try {
-            Task task = mainModel.getMyLocation();
-            task.addOnCompleteListener((Activity) mView, new OnCompleteListener<Location>() {
-                @Override
-                public void onComplete(@NonNull Task<Location> task) {
-                    if(task.isSuccessful()) {
-                        Location result = task.getResult();
-                        LatLng latLng = new LatLng(result.getLatitude(), result.getLongitude());
-
-                        mView.addMarker(new MarkerOptions().position(latLng).title("Here!"));
-                        mView.moveCamera(latLng);
-                    } else {
-                        Log.d("GooglePlayServices", "Current location is null. Using defaults.");
-                        Log.e("GooglePlayServices", "Exception: %s", task.getException());
-                    }
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        onMyGps();
     }
 
     @Override
