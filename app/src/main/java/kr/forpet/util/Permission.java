@@ -10,7 +10,7 @@ public class Permission {
     public static boolean checkPermission(Activity activity, String[] permissionArr, int requestCode) {
         boolean flag = true;
 
-        for(String permission : permissionArr)
+        for (String permission : permissionArr)
             if (activity.checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
                 activity.requestPermissions(permissionArr, requestCode);
                 flag = false;
@@ -24,8 +24,8 @@ public class Permission {
     public static boolean onCheckResult(int[] grantResults) {
         boolean flag = true;
 
-        for(int grantResult : grantResults) {
-            if(grantResult != PackageManager.PERMISSION_GRANTED) {
+        for (int grantResult : grantResults) {
+            if (grantResult != PackageManager.PERMISSION_GRANTED) {
                 flag = false;
 
                 return flag;

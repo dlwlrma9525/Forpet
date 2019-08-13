@@ -9,7 +9,7 @@ import com.google.android.gms.tasks.Task;
 public class MainModel {
     private FusedLocationProviderClient mFusedLocationProviderClient;
 
-    public void initGooglePlayService(Context context){
+    public void initGooglePlayService(Context context) {
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
     }
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_supplies"
+        android:icon="@drawable/icon_ani_shop"
+        android:title="@string/menu_ani_shop" />
+
+    <item
+        android:id="@+id/action_pharm"
+        android:icon="@drawable/icon_pharm"
+        android:title="@string/menu_pharm" />
+
+    <item
+        android:id="@+id/action_hospital"
+        android:icon="@drawable/icon_hospital"
+        android:title="@string/menu_hospital" />
+
+    <item
+        android:id="@+id/action_hair"
+        android:icon="@drawable/icon_hairshop"
+        android:title="@string/menu_hair" />
+
+    <item
+        android:id="@+id/action_more"
+        android:icon="@drawable/icon_more"
+        android:title="@string/menu_more" />
+
+</menu>

@@ -2,9 +2,10 @@
     <string name="app_name">Forpet</string>
     <string name="app_title">"내 곁의 동물병원, 동물약국"</string>
 
-    <string name="menu_ani_shop">용품</string>
+    <string name="menu_ani_shop">반려용품샵</string>
     <string name="menu_pharm">약국</string>
     <string name="menu_hospital">병원</string>
+    <string name="menu_hair">미용</string>
     <string name="menu_play">놀이</string>
     <string name="menu_more">더보기</string>
 
@@ -12,15 +13,35 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="nav_header_login">로그인 하기</string>
-    <string name="nav_header_logout">로그아웃</string>
+    <string name="nav_login">로그인 하기</string>
+    <string name="nav_logout">로그아웃</string>
 
-    <string name="nav_header_regist_hosp">병원 등록요청</string>
-    <string name="nav_header_regist_pharm">약국 등록요청</string>
-    <string name="nav_header_regist_shop">영업점 등록요청</string>
-    <string name="nav_header_regist_event">광고 요청하기</string>
-
-    <string name="nav_header_favorite">자주찾는 곳</string>
-    <string name="nav_header_email">example@domain.com</string>
+    <string name="nav_register_hosp">병원 등록요청</string>
+    <string name="nav_register_pharm">약국 등록요청</string>
+    <string name="nav_register_shop">영업점 등록요청</string>
+    <string name="nav_register_event">광고 요청하기</string>
+    <string name="nav_favorite">자주찾는 곳</string>
     <string name="nav_header_desc">Navigation header</string>
+
+    <string name="detail_header_request">수정요청</string>
+    <string name="detail_header_opened">진료중</string>
+    <string name="detail_header_op_time">운영시간</string>
+
+    <string name="detail_header_rating">포펫평가</string>
+    <string name="detail_rating">만족도평가</string>
+    <string name="detail_rating_consensus">펫과의교감</string>
+    <string name="detail_rating_place">시설만족도</string>
+    <string name="detail_rating_pay">가격만족도</string>
+
+    <string name="detail_header_pay">치료비 공개</string>
+    <string name="detail_header_intro">간단소개</string>
+
+    <string name="address">주소</string>
+    <string name="call">전화</string>
+    <string name="navigation">길찾기</string>
+    <string name="place">장소</string>
+
+    <string name="dummy_email">example@domain.com</string>
+    <string name="dummy_url">http://forpet.kr/</string>
+    <string name="dummy_op_time">월~금 : 오전 9시~ 오후 9시\n토 : 오전 9시 ~ 오후 1시\n일 : 휴일</string>
 </resources>

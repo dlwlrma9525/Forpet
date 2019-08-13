@@ -52,28 +52,42 @@ public class GoogleMapsMarkerBuilder {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.google_maps_marker, null);
 
-        ImageView imageMarker = view.findViewById(R.id.imageMarker);
-        ImageView imageEvent = view.findViewById(R.id.imageEvent);
+        ImageView imageMarker = view.findViewById(R.id.image_marker);
+        ImageView imageEvent = view.findViewById(R.id.image_event);
 
         int drawable = 0;
         switch (type) {
-            case "cafe":     drawable = R.drawable.marker_cafe;     break;
-            case "hair":     drawable = R.drawable.marker_hair;     break;
-            case "hospital": drawable = R.drawable.marker_hospital; break;
-            case "pension":  drawable = R.drawable.marker_pension;  break;
-            case "pharmacy": drawable = R.drawable.marker_pharmacy; break;
-            case "play":     drawable = R.drawable.marker_play;     break;
-            case "shop":     drawable = R.drawable.marker_shop;     break;
+            case "cafe":
+                drawable = R.drawable.marker_cafe;
+                break;
+            case "hair":
+                drawable = R.drawable.marker_hair;
+                break;
+            case "hospital":
+                drawable = R.drawable.marker_hospital;
+                break;
+            case "pension":
+                drawable = R.drawable.marker_pension;
+                break;
+            case "pharmacy":
+                drawable = R.drawable.marker_pharmacy;
+                break;
+            case "play":
+                drawable = R.drawable.marker_play;
+                break;
+            case "shop":
+                drawable = R.drawable.marker_shop;
+                break;
         }
 
         imageMarker.setImageDrawable(ContextCompat.getDrawable(context, drawable));
 
-        if(event) {
+        if (event) {
             imageEvent.setVisibility(View.VISIBLE);
             imageEvent.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.icon_event_marker));
         }
 
-        if(sale) {
+        if (sale) {
             imageEvent.setVisibility(View.VISIBLE);
             imageEvent.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.icon_dc_marker));
         }

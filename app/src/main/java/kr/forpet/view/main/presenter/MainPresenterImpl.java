@@ -50,7 +50,7 @@ public class MainPresenterImpl implements MainPresenter {
             task.addOnCompleteListener(new OnCompleteListener<Location>() {
                 @Override
                 public void onComplete(@NonNull Task<Location> task) {
-                    if(task.isSuccessful()) {
+                    if (task.isSuccessful()) {
                         Location result = task.getResult();
                         LatLng latLng = new LatLng(result.getLatitude(), result.getLongitude());
 

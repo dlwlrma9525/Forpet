@@ -7,7 +7,7 @@
     tools:context=".view.splash.activity.SplashActivity">
 
     <ImageView
-        android:id="@+id/imageViewLogo"
+        android:id="@+id/image_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="286dp"
@@ -17,17 +17,17 @@
         app:srcCompat="@drawable/heart_logo" />
 
     <ImageView
-        android:id="@+id/imageViewCi"
+        android:id="@+id/image_ci"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewLogo"
-        app:layout_constraintStart_toStartOf="@+id/imageViewLogo"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewLogo"
+        app:layout_constraintEnd_toEndOf="@+id/image_logo"
+        app:layout_constraintStart_toStartOf="@+id/image_logo"
+        app:layout_constraintTop_toBottomOf="@+id/image_logo"
         app:srcCompat="@drawable/forpet" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="11.8dp"
@@ -36,8 +36,8 @@
         android:text="@string/app_title"
         android:textColor="#919191"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewCi"
-        app:layout_constraintStart_toStartOf="@+id/imageViewCi"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewCi" />
+        app:layout_constraintEnd_toEndOf="@+id/image_ci"
+        app:layout_constraintStart_toStartOf="@+id/image_ci"
+        app:layout_constraintTop_toBottomOf="@+id/image_ci" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

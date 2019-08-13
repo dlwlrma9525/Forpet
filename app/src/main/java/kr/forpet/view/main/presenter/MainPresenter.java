@@ -8,7 +8,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public interface MainPresenter {
     void setView(View view);
-
     void onCreate(Context context);
     void onDestroy();
 
@@ -17,6 +16,7 @@ public interface MainPresenter {
 
     interface View {
         Context getContext();
+
         void addMarker(MarkerOptions marker);
         void moveCamera(LatLng latLng);
     }

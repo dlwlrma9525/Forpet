@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+
 import android.view.MenuItem;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -17,11 +18,15 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.Menu;
 
 import kr.forpet.R;
@@ -33,7 +38,7 @@ public class MainActivity extends AppCompatActivity
         implements MainPresenter.View, OnMapReadyCallback {
 
     private static final String[] PERMISSION_ARRAY
-            = { Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION };
+            = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
     private static final int REQUEST_PERMISSION = 0;
 
     private MainPresenter mMainPresenter;
@@ -48,7 +53,7 @@ public class MainActivity extends AppCompatActivity
         mMainPresenter.setView(this);
         mMainPresenter.onCreate(getApplicationContext());
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (Permission.checkPermission(this, PERMISSION_ARRAY, REQUEST_PERMISSION))
                 init();
         }
@@ -64,7 +69,7 @@ public class MainActivity extends AppCompatActivity
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if(Permission.onCheckResult(grantResults))
+        if (Permission.onCheckResult(grantResults))
             init();
         else
             finish();
@@ -97,7 +102,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.toolbar, menu);
         return true;
     }
 
@@ -156,12 +161,46 @@ public class MainActivity extends AppCompatActivity
                 drawer.openDrawer(GravityCompat.START);
         });
 
+        FloatingActionButton fabDiagnosis = findViewById(R.id.fab_diagnosis);
+        FloatingActionButton fabSearchPharm = findViewById(R.id.fab_search_pharm);
+        FloatingActionButton fabSearchMeal = findViewById(R.id.fab_search_meal);
+        fabDiagnosis.hide();
+        fabSearchPharm.hide();
+        fabSearchMeal.hide();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
+        bottomNavigationView.setOnNavigationItemSelectedListener((@NonNull MenuItem item) -> {
+            if (fabDiagnosis.isShown()) {
+                fabDiagnosis.hide();
+                fabSearchPharm.hide();
+                fabSearchMeal.hide();
+            }
+
+            switch (item.getItemId()) {
+                case R.id.action_supplies:
+                    return true;
+                case R.id.action_pharm:
+                    return true;
+                case R.id.action_hospital:
+                    return true;
+                case R.id.action_hair:
+                    return true;
+                case R.id.action_more:
+                    fabDiagnosis.show();
+                    fabSearchPharm.show();
+                    fabSearchMeal.show();
+                    return true;
+            }
+
+            return false;
+        });
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        findViewById(R.id.imageButtonGps)
+        findViewById(R.id.image_button_gps)
                 .setOnClickListener((v) -> mMainPresenter.onMyGps());
     }
 }

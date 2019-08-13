@@ -8,7 +8,7 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/imageViewProfile"
+        android:id="@+id/image_profile"
         android:layout_width="68dp"
         android:layout_height="68dp"
         android:layout_marginStart="21dp"
@@ -19,20 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButtonLogin"
-        android:layout_width="18.4dp"
-        android:layout_height="15dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="2dp"
-        android:background="@drawable/login"
-        android:contentDescription="@string/nav_header_desc"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewLogin"
-        app:layout_constraintStart_toEndOf="@+id/textViewLogin"
-        app:layout_constraintTop_toTopOf="@+id/textViewLogin" />
-
-    <ImageButton
-        android:id="@+id/imageButtonClose"
+        android:id="@+id/image_button_close"
         android:layout_width="14dp"
         android:layout_height="14dp"
         android:layout_marginTop="13dp"
@@ -43,34 +30,36 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewLogin"
+        android:id="@+id/text_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="11dp"
         android:layout_marginTop="16dp"
+        android:drawableEnd="@drawable/login"
+        android:drawablePadding="3dp"
         android:fontFamily="@font/nanum_square"
         android:includeFontPadding="false"
-        android:text="@string/nav_header_login"
+        android:text="@string/nav_login"
         android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/imageViewProfile"
-        app:layout_constraintTop_toTopOf="@+id/imageViewProfile" />
+        app:layout_constraintStart_toEndOf="@+id/image_profile"
+        app:layout_constraintTop_toTopOf="@+id/image_profile" />
 
     <TextView
-        android:id="@+id/textEmail"
+        android:id="@+id/text_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:lineSpacingExtra="4sp"
         android:fontFamily="@font/nanum_square"
         android:includeFontPadding="false"
-        android:text="@string/nav_header_email"
+        android:lineSpacingExtra="4sp"
+        android:text="@string/dummy_email"
         android:textColor="#4b4b4b"
-        android:textSize="13dp"
-        app:layout_constraintStart_toStartOf="@+id/textViewLogin"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLogin" />
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@+id/text_login"
+        app:layout_constraintTop_toBottomOf="@+id/text_login" />
 
     <ImageView
-        android:id="@+id/imageViewFavorite"
+        android:id="@+id/image_favorite"
         android:layout_width="12dp"
         android:layout_height="18dp"
         android:layout_marginStart="21dp"
@@ -78,109 +67,110 @@
         android:background="@drawable/icon_favorite"
         android:contentDescription="@string/nav_header_desc"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewProfile" />
+        app:layout_constraintTop_toBottomOf="@+id/image_profile" />
 
     <TextView
-        android:id="@+id/textFavorite"
+        android:id="@+id/text_favorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:fontFamily="@font/nanum_square"
         android:includeFontPadding="false"
-        android:text="@string/nav_header_favorite"
+        android:text="@string/nav_favorite"
         android:textColor="#000000"
-        android:textSize="15dp"
-        app:layout_constraintStart_toEndOf="@+id/imageViewFavorite"
-        app:layout_constraintTop_toTopOf="@+id/imageViewFavorite" />
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/image_favorite"
+        app:layout_constraintTop_toTopOf="@+id/image_favorite" />
 
     <ListView
-        android:id="@+id/listFavorite"
+        android:id="@+id/list_favorite"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="14dp"
-        app:layout_constraintTop_toBottomOf="@+id/textFavorite" />
+        app:layout_constraintTop_toBottomOf="@+id/text_favorite" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/listFavorite">
+        app:layout_constraintTop_toBottomOf="@+id/list_favorite">
 
         <Button
-            android:id="@+id/buttonRegistHosp"
+            android:id="@+id/button_register_hosp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/background_rect_white"
-            android:drawableLeft="@drawable/icon_hospital"
-            android:drawableRight="@drawable/arrow_right"
+            android:drawableStart="@drawable/icon_hospital"
+            android:drawableEnd="@drawable/arrow_right"
             android:drawablePadding="14dp"
             android:gravity="start|center"
-            android:paddingLeft="16dp"
-            android:paddingRight="20dp"
-            android:text="@string/nav_header_regist_hosp"
+            android:paddingStart="16dp"
+            android:paddingEnd="20dp"
+            android:text="@string/nav_register_hosp"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/buttonRegistPharm"
+            android:id="@+id/button_register_pharm"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/background_rect_white"
-            android:drawableLeft="@drawable/icon_pharm"
-            android:drawableRight="@drawable/arrow_right"
+            android:drawableStart="@drawable/icon_pharm"
+            android:drawableEnd="@drawable/arrow_right"
             android:drawablePadding="14dp"
             android:gravity="start|center"
-            android:paddingLeft="16dp"
-            android:paddingRight="20dp"
-            android:text="@string/nav_header_regist_pharm"
+            android:paddingStart="16dp"
+            android:paddingEnd="20dp"
+            android:text="@string/nav_register_pharm"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/buttonRegistShop"
+            android:id="@+id/button_register_shop"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/background_rect_white"
-            android:drawableLeft="@drawable/icon_ani_shop"
-            android:drawableRight="@drawable/arrow_right"
+            android:drawableStart="@drawable/icon_ani_shop"
+            android:drawableEnd="@drawable/arrow_right"
             android:drawablePadding="14dp"
             android:gravity="start|center"
-            android:paddingLeft="16dp"
-            android:paddingRight="20dp"
-            android:text="@string/nav_header_regist_shop"
+            android:paddingStart="16dp"
+            android:paddingEnd="20dp"
+            android:text="@string/nav_register_shop"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/buttonRegistEvent"
+            android:id="@+id/button_register_event"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/background_rect_white"
-            android:drawableLeft="@drawable/icon_event"
-            android:drawableRight="@drawable/arrow_right"
+            android:drawableStart="@drawable/icon_event"
+            android:drawableEnd="@drawable/arrow_right"
             android:drawablePadding="14dp"
             android:gravity="start|center"
-            android:paddingLeft="16dp"
-            android:paddingRight="20dp"
-            android:text="@string/nav_header_regist_event"
+            android:paddingStart="16dp"
+            android:paddingEnd="20dp"
+            android:text="@string/nav_register_event"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/buttonLogout"
+        android:id="@+id/button_logout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:drawableLeft="@drawable/logout"
+        android:background="#ff6586"
+        android:drawableStart="@drawable/logout"
         android:drawablePadding="11.6dp"
         android:drawableTint="@android:color/white"
-        android:background="#ff6586"
         android:gravity="start|center"
-        android:paddingLeft="19dp"
-        android:text="@string/nav_header_logout"
+        android:paddingStart="19dp"
+        android:paddingEnd="0dp"
+        android:text="@string/nav_logout"
         android:textColor="@android:color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent" />
