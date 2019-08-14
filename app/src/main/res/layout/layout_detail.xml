@@ -27,12 +27,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_request"
+        android:id="@+id/button_modify"
         android:layout_width="71dp"
         android:layout_height="21dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/background_stroke_gray"
-        android:text="@string/detail_header_request"
+        android:background="@drawable/background_stroke_corners_15dp"
+        android:text="@string/detail_header_modify"
         android:textColor="#9b9b9b"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/image_photo"
@@ -55,13 +55,13 @@
         app:layout_constraintTop_toTopOf="@+id/image_photo" />
 
     <TextView
-        android:id="@+id/text_name"
+        android:id="@+id/text_place_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4.7dp"
         android:fontFamily="@font/nanum_square"
         android:includeFontPadding="false"
-        android:text="@string/place"
+        android:text="@string/place_name"
         android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/header_opened"
@@ -70,61 +70,20 @@
     <LinearLayout
         android:id="@+id/linear_Layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="21dp"
         android:layout_marginTop="7.3dp"
         android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="@+id/text_name"
-        app:layout_constraintTop_toBottomOf="@+id/text_name">
-
-        <ImageView
-            android:id="@+id/image_parking"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/icon_parking" />
-
-        <ImageView
-            android:id="@+id/image_full_time"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:layout_marginStart="5dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/icon_24" />
-
-        <ImageView
-            android:id="@+id/image_night"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:layout_marginStart="5dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/icon_night" />
-
-        <ImageView
-            android:id="@+id/image_reservation"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:layout_marginStart="5dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/icon_reservation" />
-
-        <ImageView
-            android:id="@+id/image_wifi"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:layout_marginStart="5dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/icon_wifi" />
-
-    </LinearLayout>
+        app:layout_constraintStart_toStartOf="@+id/text_place_name"
+        app:layout_constraintTop_toBottomOf="@+id/text_place_name" />
 
     <TextView
-        android:id="@+id/text_address"
+        android:id="@+id/text_address_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
         android:fontFamily="@font/nanum_square"
         android:includeFontPadding="false"
-        android:text="@string/address"
+        android:text="@string/address_name"
         android:textColor="#000000"
         android:textSize="13sp"
         app:layout_constraintStart_toStartOf="@+id/linear_Layout"
@@ -138,38 +97,38 @@
         android:fontFamily="@font/nanum_square"
         android:includeFontPadding="false"
         android:lineSpacingExtra="4sp"
-        android:text="@string/dummy_url"
+        android:text="@string/dummy_email"
         android:textColor="#4bbeff"
         android:textSize="13sp"
-        app:layout_constraintStart_toStartOf="@+id/text_address"
-        app:layout_constraintTop_toBottomOf="@+id/text_address" />
+        app:layout_constraintStart_toStartOf="@+id/text_address_name"
+        app:layout_constraintTop_toBottomOf="@+id/text_address_name" />
 
     <TextView
-        android:id="@+id/header_op_time"
+        android:id="@+id/header_business_hours"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="75dp"
         android:fontFamily="@font/nanum_square"
         android:includeFontPadding="false"
-        android:text="@string/detail_header_op_time"
+        android:text="@string/detail_header_business_hours"
         android:textColor="#000000"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/image_photo"
         app:layout_constraintTop_toBottomOf="@+id/image_photo" />
 
     <TextView
-        android:id="@+id/text_op_time"
+        android:id="@+id/text_business_hours"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:fontFamily="@font/nanum_square"
         android:includeFontPadding="false"
         android:lineSpacingExtra="4sp"
-        android:text="@string/dummy_op_time"
+        android:text="@string/dummy_business_hours"
         android:textColor="#3c3c3c"
         android:textSize="13sp"
-        app:layout_constraintStart_toStartOf="@+id/header_op_time"
-        app:layout_constraintTop_toBottomOf="@+id/header_op_time" />
+        app:layout_constraintStart_toStartOf="@+id/header_business_hours"
+        app:layout_constraintTop_toBottomOf="@+id/header_business_hours" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/image_heart_rate"
+        android:id="@+id/image_love_point"
         android:layout_width="26dp"
         android:layout_height="7dp"
         android:visibility="gone"
@@ -17,9 +17,9 @@
         android:id="@+id/image_marker"
         android:layout_width="26dp"
         android:layout_height="40dp"
-        app:layout_constraintEnd_toEndOf="@+id/image_heart_rate"
-        app:layout_constraintStart_toStartOf="@+id/image_heart_rate"
-        app:layout_constraintTop_toBottomOf="@+id/image_heart_rate" />
+        app:layout_constraintEnd_toEndOf="@+id/image_love_point"
+        app:layout_constraintStart_toStartOf="@+id/image_love_point"
+        app:layout_constraintTop_toBottomOf="@+id/image_love_point" />
 
     <ImageView
         android:id="@+id/image_event"

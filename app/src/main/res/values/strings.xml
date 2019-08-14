@@ -23,25 +23,49 @@
     <string name="nav_favorite">자주찾는 곳</string>
     <string name="nav_header_desc">Navigation header</string>
 
-    <string name="detail_header_request">수정요청</string>
+    <string name="detail_header_modify">수정요청</string>
     <string name="detail_header_opened">진료중</string>
-    <string name="detail_header_op_time">운영시간</string>
-
+    <string name="detail_header_business_hours">운영시간</string>
+    <string name="detail_header_pay">치료비 공개</string>
+    <string name="detail_header_intro">간단소개</string>
     <string name="detail_header_rating">포펫평가</string>
+
     <string name="detail_rating">만족도평가</string>
     <string name="detail_rating_consensus">펫과의교감</string>
     <string name="detail_rating_place">시설만족도</string>
     <string name="detail_rating_pay">가격만족도</string>
 
-    <string name="detail_header_pay">치료비 공개</string>
-    <string name="detail_header_intro">간단소개</string>
+    <string name="register_title">등록 요청하기</string>
+    <string name="register_name">이름</string>
+    <string name="register_hosp_title">병원등록 요청하기</string>
+    <string name="register_hosp_name">병원이름</string>
+    <string name="register_pharm_title">약국등록 요청하기</string>
+    <string name="register_notice">내용을 상세하게 작성해 주셔야 등록이 가능합니다.\n요청내용을 확인 후 담당자가 전화로 확인하는\n과정을 거칩니다.</string>
 
-    <string name="address">주소</string>
+    <string name="address_name">주소</string>
+    <string name="address_name_detail">(상세주소)</string>
+    <string name="business_no">사업자번호</string>
     <string name="call">전화</string>
+    <string name="charge_name">담당자이름</string>
+    <string name="ceo_name">대표자이름</string>
+    <string name="ceo_name_notice">(한 명만 기재)</string>
+
+    <string name="email">이메일</string>
+    <string name="holiday">휴일진료</string>
     <string name="navigation">길찾기</string>
-    <string name="place">장소</string>
+
+    <string name="opt">고객편의</string>
+    <string name="opt_reservation">예약가능</string>
+    <string name="opt_night">야간진료</string>
+    <string name="opt_parking">주차가능</string>
+    <string name="opt_full_time">24시간</string>
+    <string name="opt_wifi">Wifi</string>
+
+    <string name="place_name">장소</string>
+    <string name="phone">연락처</string>
+    <string name="select">선택</string>
 
     <string name="dummy_email">example@domain.com</string>
     <string name="dummy_url">http://forpet.kr/</string>
-    <string name="dummy_op_time">월~금 : 오전 9시~ 오후 9시\n토 : 오전 9시 ~ 오후 1시\n일 : 휴일</string>
+    <string name="dummy_business_hours">월~금 : 오전 9시~ 오후 9시\n토 : 오전 9시 ~ 오후 1시\n일 : 휴일</string>
 </resources>

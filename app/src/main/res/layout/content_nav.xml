@@ -70,7 +70,7 @@
         app:layout_constraintTop_toBottomOf="@+id/image_profile" />
 
     <TextView
-        android:id="@+id/text_favorite"
+        android:id="@+id/header_favorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -87,7 +87,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="14dp"
-        app:layout_constraintTop_toBottomOf="@+id/text_favorite" />
+        app:layout_constraintTop_toBottomOf="@+id/header_favorite" />
 
     <LinearLayout
         android:id="@+id/linear_layout"
