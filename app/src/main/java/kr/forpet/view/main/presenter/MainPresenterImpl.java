@@ -11,7 +11,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-import kr.forpet.map.GoogleMapsMarkerBuilder;
+import kr.forpet.map.CustomMarkerBuilder;
 import kr.forpet.view.main.model.MainModel;
 
 public class MainPresenterImpl implements MainPresenter {
@@ -40,6 +40,10 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        googleMap.setOnMapClickListener((marker) -> {
+
+        });
+
         onMyGps();
     }
 
@@ -54,7 +58,7 @@ public class MainPresenterImpl implements MainPresenter {
                         Location result = task.getResult();
                         LatLng latLng = new LatLng(result.getLatitude(), result.getLongitude());
 
-                        mView.addMarker(new GoogleMapsMarkerBuilder(mView.getContext(), latLng)
+                        mView.addMarker(new CustomMarkerBuilder(mView.getContext(), latLng)
                                 .type("hospital")
                                 .event(true)
                                 .build());

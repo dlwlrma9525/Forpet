@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
@@ -18,29 +19,29 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import kr.forpet.R;
 
-public class GoogleMapsMarkerBuilder {
+public class CustomMarkerBuilder {
     private Context context;
     private String type;
     private LatLng latLng;
     private boolean event;
     private boolean sale;
 
-    public GoogleMapsMarkerBuilder(Context context, LatLng latLng) {
+    public CustomMarkerBuilder(Context context, LatLng latLng) {
         this.context = context;
         this.latLng = latLng;
     }
 
-    public GoogleMapsMarkerBuilder type(String type) {
+    public CustomMarkerBuilder type(String type) {
         this.type = type;
         return this;
     }
 
-    public GoogleMapsMarkerBuilder event(boolean event) {
+    public CustomMarkerBuilder event(boolean event) {
         this.event = event;
         return this;
     }
 
-    public GoogleMapsMarkerBuilder sale(boolean sale) {
+    public CustomMarkerBuilder sale(boolean sale) {
         this.sale = sale;
         return this;
     }
@@ -50,10 +51,19 @@ public class GoogleMapsMarkerBuilder {
         marker.position(latLng);
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.google_maps_marker, null);
+        View view;
+
+        if(!event) {
+            view = inflater.inflate(R.layout.marker, null);
+        } else {
+            view = inflater.inflate(R.layout.marker_icon, null);
+
+            ImageView iconMarker = view.findViewById(R.id.icon_marker);
+            iconMarker.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.icon_event_marker));
+        }
 
         ImageView imageMarker = view.findViewById(R.id.image_marker);
-        ImageView imageEvent = view.findViewById(R.id.image_event);
+        TextView textMarker = view.findViewById(R.id.text_marker);
 
         int drawable = 0;
         switch (type) {
@@ -81,16 +91,7 @@ public class GoogleMapsMarkerBuilder {
         }
 
         imageMarker.setImageDrawable(ContextCompat.getDrawable(context, drawable));
-
-        if (event) {
-            imageEvent.setVisibility(View.VISIBLE);
-            imageEvent.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.icon_event_marker));
-        }
-
-        if (sale) {
-            imageEvent.setVisibility(View.VISIBLE);
-            imageEvent.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.icon_dc_marker));
-        }
+        textMarker.setText("Forpet");
 
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         marker.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(windowManager, view)));
