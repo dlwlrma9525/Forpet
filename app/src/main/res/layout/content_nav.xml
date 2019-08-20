@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
@@ -13,7 +12,7 @@
         android:layout_height="68dp"
         android:layout_marginStart="21dp"
         android:layout_marginTop="22dp"
-        android:background="@drawable/background_oval_gray"
+        android:background="@drawable/bg_oval_gray"
         android:contentDescription="@string/nav_header_desc"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -98,62 +97,62 @@
         app:layout_constraintTop_toBottomOf="@+id/list_favorite">
 
         <Button
-            android:id="@+id/button_register_hosp"
+            android:id="@+id/button_hosp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/background_rect_white"
+            android:background="@drawable/bg_rect_white"
             android:drawableStart="@drawable/icon_hospital"
             android:drawableEnd="@drawable/arrow_right"
             android:drawablePadding="14dp"
             android:gravity="start|center"
             android:paddingStart="16dp"
             android:paddingEnd="20dp"
-            android:text="@string/nav_register_hosp"
+            android:text="@string/nav_hosp"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/button_register_pharm"
+            android:id="@+id/button_pharmacy"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/background_rect_white"
+            android:background="@drawable/bg_rect_white"
             android:drawableStart="@drawable/icon_pharm"
             android:drawableEnd="@drawable/arrow_right"
             android:drawablePadding="14dp"
             android:gravity="start|center"
             android:paddingStart="16dp"
             android:paddingEnd="20dp"
-            android:text="@string/nav_register_pharm"
+            android:text="@string/nav_pharmacy"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/button_register_shop"
+            android:id="@+id/button_shop"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/background_rect_white"
+            android:background="@drawable/bg_rect_white"
             android:drawableStart="@drawable/icon_ani_shop"
             android:drawableEnd="@drawable/arrow_right"
             android:drawablePadding="14dp"
             android:gravity="start|center"
             android:paddingStart="16dp"
             android:paddingEnd="20dp"
-            android:text="@string/nav_register_shop"
+            android:text="@string/nav_shop"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/button_register_event"
+            android:id="@+id/button_advertisement"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/background_rect_white"
+            android:background="@drawable/bg_rect_white"
             android:drawableStart="@drawable/icon_event"
             android:drawableEnd="@drawable/arrow_right"
             android:drawablePadding="14dp"
             android:gravity="start|center"
             android:paddingStart="16dp"
             android:paddingEnd="20dp"
-            android:text="@string/nav_register_event"
+            android:text="@string/nav_advertisement"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 

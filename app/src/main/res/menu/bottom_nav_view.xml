@@ -9,7 +9,7 @@
     <item
         android:id="@+id/action_pharm"
         android:icon="@drawable/icon_pharm"
-        android:title="@string/menu_pharm" />
+        android:title="@string/menu_pharmacy" />
 
     <item
         android:id="@+id/action_hospital"

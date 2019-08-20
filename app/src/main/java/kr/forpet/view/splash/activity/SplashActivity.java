@@ -1,11 +1,10 @@
 package kr.forpet.view.splash.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
 
 import kr.forpet.R;
 import kr.forpet.view.main.activity.MainActivity;

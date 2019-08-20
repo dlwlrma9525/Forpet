@@ -11,8 +11,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-import kr.forpet.view.main.model.MainModel;
 import kr.forpet.map.GoogleMapsMarkerBuilder;
+import kr.forpet.view.main.model.MainModel;
 
 public class MainPresenterImpl implements MainPresenter {
 

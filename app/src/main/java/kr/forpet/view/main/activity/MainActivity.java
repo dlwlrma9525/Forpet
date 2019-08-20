@@ -2,15 +2,19 @@ package kr.forpet.view.main.activity;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-
-import android.view.MenuItem;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -22,17 +26,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.Menu;
-
 import kr.forpet.R;
+import kr.forpet.data.PetShop;
 import kr.forpet.util.Permission;
 import kr.forpet.view.main.presenter.MainPresenter;
 import kr.forpet.view.main.presenter.MainPresenterImpl;
+import kr.forpet.view.request.activity.RequestActivity;
 
 public class MainActivity extends AppCompatActivity
         implements MainPresenter.View, OnMapReadyCallback {
@@ -150,6 +149,8 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        initNavigationView(navigationView);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.setDrawerIndicatorEnabled(false);
@@ -162,7 +163,7 @@ public class MainActivity extends AppCompatActivity
         });
 
         FloatingActionButton fabDiagnosis = findViewById(R.id.fab_diagnosis);
-        FloatingActionButton fabSearchPharm = findViewById(R.id.fab_search_pharm);
+        FloatingActionButton fabSearchPharm = findViewById(R.id.fab_search_pharmacy);
         FloatingActionButton fabSearchMeal = findViewById(R.id.fab_search_meal);
         fabDiagnosis.hide();
         fabSearchPharm.hide();
@@ -202,5 +203,22 @@ public class MainActivity extends AppCompatActivity
 
         findViewById(R.id.image_button_gps)
                 .setOnClickListener((v) -> mMainPresenter.onMyGps());
+    }
+
+    private void initNavigationView(NavigationView navigationView) {
+        navigationView.findViewById(R.id.button_hosp).setOnClickListener((v) -> {
+        });
+
+        navigationView.findViewById(R.id.button_pharmacy).setOnClickListener((v) -> {
+        });
+
+        navigationView.findViewById(R.id.button_shop).setOnClickListener((v) -> {
+            Intent intent = new Intent(this, RequestActivity.class);
+            intent.putExtra("type", PetShop.class);
+            startActivity(intent);
+        });
+
+        navigationView.findViewById(R.id.button_advertisement).setOnClickListener((v) -> {
+        });
     }
 }

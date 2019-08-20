@@ -30,7 +30,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
-        android:background="@drawable/background_toolbar"
+        android:background="@drawable/bg_toolbar"
         android:elevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +51,7 @@
         android:layout_height="35dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="6dp"
-        android:background="@drawable/background_corners_white_6dp"
+        android:background="@drawable/bg_corners_white_6dp"
         android:elevation="5dp"
         android:src="@drawable/icon_my_location"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,7 +70,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_search_pharm"
+        android:id="@+id/fab_search_pharmacy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -90,7 +90,7 @@
         android:src="@drawable/icon_meal"
         app:backgroundTint="#ffffff"
         app:fabCustomSize="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/fab_search_pharm"
+        app:layout_constraintBottom_toTopOf="@+id/fab_search_pharmacy"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -98,9 +98,9 @@
         android:layout_width="0dp"
         android:layout_height="69dp"
         android:background="#ffffff"
-        app:itemBackground="#ffffff"
-        app:itemIconTint="@drawable/navigation_selector"
-        app:itemTextColor="@drawable/navigation_selector"
+        app:itemBackground="@android:color/white"
+        app:itemIconTint="@drawable/nav_selector"
+        app:itemTextColor="@drawable/nav_selector"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

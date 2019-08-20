@@ -7,6 +7,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public interface MainPresenter {
+
     void setView(View view);
     void onCreate(Context context);
     void onDestroy();
@@ -15,6 +16,7 @@ public interface MainPresenter {
     void onMyGps();
 
     interface View {
+
         Context getContext();
 
         void addMarker(MarkerOptions marker);
