@@ -10,10 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import kr.forpet.R;
-import kr.forpet.data.Advertisement;
-import kr.forpet.data.Hospital;
-import kr.forpet.data.PetShop;
-import kr.forpet.data.Pharmacy;
+import kr.forpet.data.entity.ForpetShop;
 import kr.forpet.view.factory.ItemViewFactory;
 import kr.forpet.view.factory.RequestViewFactory;
 
@@ -38,13 +35,7 @@ public class RequestActivity extends AppCompatActivity {
         FrameLayout frameLayout = findViewById(R.id.content_request);
         frameLayout.addView(contentView);
 
-        if (clazz.getName().equals(Hospital.class.getName()))
-            textView.setText(getString(R.string.regist_header_hosp));
-        else if (clazz.getName().equals(Pharmacy.class.getName()))
-            textView.setText(getString(R.string.regist_header_pharmacy));
-        else if (clazz.getName().equals(PetShop.class.getName()))
+        if (clazz.getName().equals(ForpetShop.class.getName()))
             textView.setText(getString(R.string.regist_header_shop));
-        else if (clazz.getName().equals(Advertisement.class.getName()))
-            textView.setText(getString(R.string.regist_header_ad));
     }
 }

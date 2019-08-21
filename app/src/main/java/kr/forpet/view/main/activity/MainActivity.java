@@ -27,7 +27,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import kr.forpet.R;
-import kr.forpet.data.PetShop;
+import kr.forpet.data.entity.ForpetShop;
 import kr.forpet.util.Permission;
 import kr.forpet.view.main.presenter.MainPresenter;
 import kr.forpet.view.main.presenter.MainPresenterImpl;
@@ -214,7 +214,7 @@ public class MainActivity extends AppCompatActivity
 
         navigationView.findViewById(R.id.button_shop).setOnClickListener((v) -> {
             Intent intent = new Intent(this, RequestActivity.class);
-            intent.putExtra("type", PetShop.class);
+            intent.putExtra("type", ForpetShop.class);
             startActivity(intent);
         });
 
