@@ -2,8 +2,6 @@ package kr.forpet.view.main.model;
 
 import android.content.Context;
 
-import androidx.room.Room;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -11,8 +9,8 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.List;
 
-import kr.forpet.R;
 import kr.forpet.data.db.AppDatabase;
+import kr.forpet.data.db.SQLiteLoader;
 import kr.forpet.data.entity.ForpetShop;
 
 public class MainModel {
@@ -22,7 +20,7 @@ public class MainModel {
     private FusedLocationProviderClient mFusedLocationProviderClient;
 
     public void initAppDatabase(Context context) {
-        db = Room.databaseBuilder(context, AppDatabase.class, context.getString(R.string.db_name)).build();
+        db = SQLiteLoader.assetsToDisk(context);
     }
 
     public void initGooglePlayService(Context context) {

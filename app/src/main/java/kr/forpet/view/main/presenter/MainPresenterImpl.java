@@ -56,7 +56,8 @@ public class MainPresenterImpl implements MainPresenter {
             new AsyncTask<String, Void, List<ForpetShop>>() {
                 @Override
                 protected List<ForpetShop> doInBackground(String... strings) {
-                    return mainModel.getForpetShopList(latLngBounds, strings[0]);
+                    // return mainModel.getForpetShopList(latLngBounds, strings[0]);
+                    return mainModel.getForpetShopList();
                 }
 
                 @Override
@@ -64,7 +65,7 @@ public class MainPresenterImpl implements MainPresenter {
                     super.onPostExecute(forpetShops);
 
                     for (ForpetShop shop : forpetShops)
-                        Log.i("db", shop.getPlaceName());
+                        Log.i("db", shop.placeName);
                 }
             }.execute("HOSPITAL");
         });
