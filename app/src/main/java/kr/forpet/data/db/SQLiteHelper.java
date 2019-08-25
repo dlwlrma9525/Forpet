@@ -1,8 +1,6 @@
 package kr.forpet.data.db;
 
 import android.content.Context;
-import android.content.res.AssetManager;
-import android.util.Log;
 
 import androidx.room.Room;
 import androidx.room.migration.Migration;
@@ -17,7 +15,8 @@ import java.io.InputStream;
 
 import kr.forpet.R;
 
-public class SQLiteLoader {
+public class SQLiteHelper {
+
     public static AppDatabase assetsToDisk(Context context) {
         try {
             File file = context.getDatabasePath(context.getString(R.string.db_name));
@@ -25,9 +24,7 @@ public class SQLiteLoader {
             if (file.exists())
                 return Room.databaseBuilder(context, AppDatabase.class, context.getString(R.string.db_name)).build();
 
-            AssetManager manager = context.getAssets();
-
-            InputStream is = manager.open(context.getString(R.string.db_name));
+            InputStream is = context.getAssets().open(context.getString(R.string.db_name));
             BufferedInputStream bis = new BufferedInputStream(is);
             FileOutputStream fos = new FileOutputStream(file);
             BufferedOutputStream bos = new BufferedOutputStream(fos);
@@ -56,6 +53,7 @@ public class SQLiteLoader {
     static final Migration VERSION_1 = new Migration(0, 1) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
+            // migrate..
         }
     };
 }

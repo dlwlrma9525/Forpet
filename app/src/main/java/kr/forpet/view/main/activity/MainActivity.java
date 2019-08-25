@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -19,13 +20,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import kr.forpet.R;
 import kr.forpet.data.entity.ForpetShop;
 import kr.forpet.util.Permission;
@@ -43,10 +48,35 @@ public class MainActivity extends AppCompatActivity
     private MainPresenter mMainPresenter;
     private GoogleMap mMap;
 
+    @BindView(R.id.toolbar)
+    private Toolbar toolbar;
+
+    @BindView(R.id.drawer_layout)
+    private DrawerLayout drawer;
+
+    @BindView(R.id.nav_view)
+    private NavigationView navigationView;
+
+    @BindView(R.id.bottom_navigation_view)
+    private BottomNavigationView bottomNavigationView;
+
+    @BindView(R.id.fab_diagnosis)
+    private FloatingActionButton fabDiagnosis;
+
+    @BindView(R.id.fab_search_pharmacy)
+    private FloatingActionButton fabSearchPharm;
+
+    @BindView(R.id.fab_search_meal)
+    private FloatingActionButton fabSearchMeal;
+
+    @BindView(R.id.image_button_gps)
+    Button buttonGps;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         mMainPresenter = new MainPresenterImpl();
         mMainPresenter.setView(this);
@@ -87,6 +117,31 @@ public class MainActivity extends AppCompatActivity
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMainPresenter.onMapReady(googleMap);
+
+        googleMap.setOnCameraIdleListener(() -> {
+            // Called when camera movement has ended, there are no pending animations and the user has stopped interacting with the map.
+
+            ForpetShop.CatCode catCode = ForpetShop.CatCode.SHOP;
+            switch (bottomNavigationView.getSelectedItemId()) {
+                case R.id.action_supplies:
+                    catCode = ForpetShop.CatCode.SHOP;
+                    break;
+                case R.id.action_pharm:
+                    catCode = ForpetShop.CatCode.PHARM;
+                    break;
+                case R.id.action_hospital:
+                    catCode = ForpetShop.CatCode.HOSPITAL;
+                    break;
+                case R.id.action_hair:
+                    catCode = ForpetShop.CatCode.BEAUTY;
+                    break;
+            }
+
+            Projection projection = mMap.getProjection();
+            LatLngBounds latLngBounds = projection.getVisibleRegion().latLngBounds;
+
+            mMainPresenter.onMapSearch(catCode, latLngBounds);
+        });
     }
 
     @Override
@@ -131,7 +186,6 @@ public class MainActivity extends AppCompatActivity
     public void addMarker(MarkerOptions marker) {
         // Add a marker and move the camera..
         mMap.addMarker(marker);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(marker.getPosition()));
     }
 
     @Override
@@ -139,16 +193,18 @@ public class MainActivity extends AppCompatActivity
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f));
     }
 
+    @Override
+    public void clearMap() {
+        mMap.clear();
+    }
+
     private void init() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         // actionBar.setDisplayHomeAsUpEnabled(true);
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
         initNavigationView(navigationView);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -162,14 +218,6 @@ public class MainActivity extends AppCompatActivity
                 drawer.openDrawer(GravityCompat.START);
         });
 
-        FloatingActionButton fabDiagnosis = findViewById(R.id.fab_diagnosis);
-        FloatingActionButton fabSearchPharm = findViewById(R.id.fab_search_pharmacy);
-        FloatingActionButton fabSearchMeal = findViewById(R.id.fab_search_meal);
-        fabDiagnosis.hide();
-        fabSearchPharm.hide();
-        fabSearchMeal.hide();
-
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         bottomNavigationView.setOnNavigationItemSelectedListener((@NonNull MenuItem item) -> {
             if (fabDiagnosis.isShown()) {
                 fabDiagnosis.hide();
@@ -177,23 +225,18 @@ public class MainActivity extends AppCompatActivity
                 fabSearchMeal.hide();
             }
 
-            switch (item.getItemId()) {
-                case R.id.action_supplies:
-                    return true;
-                case R.id.action_pharm:
-                    return true;
-                case R.id.action_hospital:
-                    return true;
-                case R.id.action_hair:
-                    return true;
-                case R.id.action_more:
-                    fabDiagnosis.show();
-                    fabSearchPharm.show();
-                    fabSearchMeal.show();
-                    return true;
+            if (item.getItemId() == R.id.action_more) {
+                fabDiagnosis.show();
+                fabSearchPharm.show();
+                fabSearchMeal.show();
+            } else {
+                Projection projection = mMap.getProjection();
+                LatLngBounds latLngBounds = projection.getVisibleRegion().latLngBounds;
+
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngBounds.getCenter(), mMap.getCameraPosition().zoom));
             }
 
-            return false;
+            return true;
         });
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -201,8 +244,11 @@ public class MainActivity extends AppCompatActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        findViewById(R.id.image_button_gps)
-                .setOnClickListener((v) -> mMainPresenter.onMyGps());
+        fabDiagnosis.hide();
+        fabSearchPharm.hide();
+        fabSearchMeal.hide();
+
+        buttonGps.setOnClickListener((v) -> mMainPresenter.onMyGps());
     }
 
     private void initNavigationView(NavigationView navigationView) {

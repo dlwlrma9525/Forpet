@@ -10,7 +10,7 @@ import com.google.android.gms.tasks.Task;
 import java.util.List;
 
 import kr.forpet.data.db.AppDatabase;
-import kr.forpet.data.db.SQLiteLoader;
+import kr.forpet.data.db.SQLiteHelper;
 import kr.forpet.data.entity.ForpetShop;
 
 public class MainModel {
@@ -20,7 +20,7 @@ public class MainModel {
     private FusedLocationProviderClient mFusedLocationProviderClient;
 
     public void initAppDatabase(Context context) {
-        db = SQLiteLoader.assetsToDisk(context);
+        db = SQLiteHelper.assetsToDisk(context);
     }
 
     public void initGooglePlayService(Context context) {
@@ -35,12 +35,8 @@ public class MainModel {
         }
     }
 
-    public List<ForpetShop> getForpetShopList() {
-        return db.forpetShopDAO().getAll();
-    }
-
     public List<ForpetShop> getForpetShopList(LatLngBounds bounds, String catCode) {
-        return db.forpetShopDAO().getByBounds(
+        return db.forpetShopDAO().getByVisibleRegion(
                 bounds.southwest.longitude,
                 bounds.northeast.longitude,
                 bounds.southwest.latitude,

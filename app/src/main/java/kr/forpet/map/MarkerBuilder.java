@@ -18,30 +18,39 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import kr.forpet.R;
+import kr.forpet.data.entity.ForpetShop;
 
-public class CustomMarkerBuilder {
+public class MarkerBuilder {
+
     private Context context;
-    private String type;
     private LatLng latLng;
-    private boolean event;
-    private boolean sale;
 
-    public CustomMarkerBuilder(Context context, LatLng latLng) {
+    private String catCode;
+    private String title;
+    private String event;
+    private String sale;
+
+    public MarkerBuilder(Context context, LatLng latLng) {
         this.context = context;
         this.latLng = latLng;
     }
 
-    public CustomMarkerBuilder type(String type) {
-        this.type = type;
+    public MarkerBuilder catCode(String catCode) {
+        this.catCode = catCode;
         return this;
     }
 
-    public CustomMarkerBuilder event(boolean event) {
+    public MarkerBuilder title(String title) {
+        this.title = title;
+        return this;
+    }
+
+    public MarkerBuilder event(String event) {
         this.event = event;
         return this;
     }
 
-    public CustomMarkerBuilder sale(boolean sale) {
+    public MarkerBuilder sale(String sale) {
         this.sale = sale;
         return this;
     }
@@ -53,45 +62,32 @@ public class CustomMarkerBuilder {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view;
 
-        if(!event) {
+        if (event.equals("N")) {
             view = inflater.inflate(R.layout.marker, null);
         } else {
             view = inflater.inflate(R.layout.marker_icon, null);
 
-            ImageView iconMarker = view.findViewById(R.id.icon_marker);
-            iconMarker.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.icon_event_marker));
+            ImageView icon = view.findViewById(R.id.icon_marker);
+            icon.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.icon_event_marker));
         }
 
-        ImageView imageMarker = view.findViewById(R.id.image_marker);
-        TextView textMarker = view.findViewById(R.id.text_marker);
+        ImageView logoView = view.findViewById(R.id.image_marker);
+        TextView titleView = view.findViewById(R.id.text_marker);
 
         int drawable = 0;
-        switch (type) {
-            case "cafe":
-                drawable = R.drawable.marker_cafe;
-                break;
-            case "hair":
-                drawable = R.drawable.marker_hair;
-                break;
-            case "hospital":
-                drawable = R.drawable.marker_hospital;
-                break;
-            case "pension":
-                drawable = R.drawable.marker_pension;
-                break;
-            case "pharmacy":
-                drawable = R.drawable.marker_pharmacy;
-                break;
-            case "play":
-                drawable = R.drawable.marker_play;
-                break;
-            case "shop":
-                drawable = R.drawable.marker_shop;
-                break;
+        switch (ForpetShop.CatCode.compare(catCode)) {
+            case SHOP:          drawable = R.drawable.icon_ani_shop_s;  break;
+            case PHARM:         drawable = R.drawable.icon_pharm_s;     break;
+            case HOSPITAL:      drawable = R.drawable.icon_hospital_s;  break;
+            case DOGPENSION:    drawable = R.drawable.icon_pension_s;   break;
+            case DOGGROUND:     drawable = R.drawable.icon_play_s;      break;
+            case DOGCAFE:       drawable = R.drawable.icon_dog_cafe_s;  break;
+            case CATCAFE:       drawable = R.drawable.icon_cat_cafe_s;  break;
+            case BEAUTY:        drawable = R.drawable.icon_hairshop;    break;
         }
 
-        imageMarker.setImageDrawable(ContextCompat.getDrawable(context, drawable));
-        textMarker.setText("Forpet");
+        logoView.setImageDrawable(ContextCompat.getDrawable(context, drawable));
+        titleView.setText(title);
 
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         marker.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(windowManager, view)));

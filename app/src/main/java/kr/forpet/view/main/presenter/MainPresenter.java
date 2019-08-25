@@ -4,7 +4,10 @@ import android.content.Context;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import kr.forpet.data.entity.ForpetShop;
 
 public interface MainPresenter {
 
@@ -13,6 +16,7 @@ public interface MainPresenter {
     void onDestroy();
 
     void onMapReady(GoogleMap googleMap);
+    void onMapSearch(ForpetShop.CatCode catCode, LatLngBounds latLngBounds);
     void onMyGps();
 
     interface View {
@@ -21,5 +25,6 @@ public interface MainPresenter {
 
         void addMarker(MarkerOptions marker);
         void moveCamera(LatLng latLng);
+        void clearMap();
     }
 }

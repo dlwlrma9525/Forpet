@@ -15,8 +15,7 @@ import kr.forpet.data.entity.ForpetShop;
 @Dao
 public interface ForpetShopDAO {
 
-    @Insert
-        // @Insert(onConflict = OnConflictStrategy.REPLACE) PK
+    @Insert // @Insert(onConflict = OnConflictStrategy.REPLACE) PK
     void insert(ForpetShop shop);
 
     @Update
@@ -36,16 +35,16 @@ public interface ForpetShopDAO {
      * @return ForpetShop entity
      */
     @Query("SELECT * FROM forpet_shop WHERE x BETWEEN :x1 AND :x2 AND y BETWEEN :y1 AND :y2")
-    List<ForpetShop> getByBounds(double x1, double x2, double y1, double y2);
+    List<ForpetShop> getByVisibleRegion(double x1, double x2, double y1, double y2);
 
     /**
-     * @param x1      southwest longitude
-     * @param x2      northwest longitude
-     * @param y1      southwest latitude
-     * @param y2      northwest latitude
+     * @param x1 southwest longitude
+     * @param x2 northwest longitude
+     * @param y1 southwest latitude
+     * @param y2 northwest latitude
      * @param catCode category_group_code
      * @return ForpetShop entity
      */
     @Query("SELECT * FROM forpet_shop WHERE category_group_code = :catCode AND x BETWEEN :x1 AND :x2 AND y BETWEEN :y1 AND :y2")
-    List<ForpetShop> getByBounds(double x1, double x2, double y1, double y2, String catCode);
+    List<ForpetShop> getByVisibleRegion(double x1, double x2, double y1, double y2, String catCode);
 }
