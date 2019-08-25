@@ -34,7 +34,7 @@ public interface ForpetShopDAO {
      * @param y2 northwest latitude
      * @return ForpetShop entity
      */
-    @Query("SELECT * FROM forpet_shop WHERE x BETWEEN :x1 AND :x2 AND y BETWEEN :y1 AND :y2")
+    @Query("SELECT * FROM forpet_shop WHERE x BETWEEN :x1 AND :x2 AND y BETWEEN :y1 AND :y2 LIMIT 50")
     List<ForpetShop> getByVisibleRegion(double x1, double x2, double y1, double y2);
 
     /**
@@ -45,6 +45,6 @@ public interface ForpetShopDAO {
      * @param catCode category_group_code
      * @return ForpetShop entity
      */
-    @Query("SELECT * FROM forpet_shop WHERE category_group_code = :catCode AND x BETWEEN :x1 AND :x2 AND y BETWEEN :y1 AND :y2")
+    @Query("SELECT * FROM forpet_shop WHERE category_group_code = :catCode AND x BETWEEN :x1 AND :x2 AND y BETWEEN :y1 AND :y2 LIMIT 50")
     List<ForpetShop> getByVisibleRegion(double x1, double x2, double y1, double y2, String catCode);
 }
