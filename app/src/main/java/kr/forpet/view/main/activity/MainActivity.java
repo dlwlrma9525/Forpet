@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -49,28 +50,28 @@ public class MainActivity extends AppCompatActivity
     private GoogleMap mMap;
 
     @BindView(R.id.toolbar)
-    private Toolbar toolbar;
+    Toolbar toolbar;
 
     @BindView(R.id.drawer_layout)
-    private DrawerLayout drawer;
+    DrawerLayout drawer;
 
     @BindView(R.id.nav_view)
-    private NavigationView navigationView;
+    NavigationView navigationView;
 
     @BindView(R.id.bottom_navigation_view)
-    private BottomNavigationView bottomNavigationView;
+    BottomNavigationView bottomNavigationView;
 
     @BindView(R.id.fab_diagnosis)
-    private FloatingActionButton fabDiagnosis;
+    FloatingActionButton fabDiagnosis;
 
     @BindView(R.id.fab_search_pharmacy)
-    private FloatingActionButton fabSearchPharm;
+    FloatingActionButton fabSearchPharm;
 
     @BindView(R.id.fab_search_meal)
-    private FloatingActionButton fabSearchMeal;
+    FloatingActionButton fabSearchMeal;
 
     @BindView(R.id.image_button_gps)
-    Button buttonGps;
+    ImageButton buttonGps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
