@@ -52,8 +52,6 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onMapSearch(ForpetShop.CatCode catCode, LatLngBounds latLngBounds) {
-        mView.clearMap();
-
         new AsyncTask<String, Void, List<ForpetShop>>() {
             @Override
             protected List<ForpetShop> doInBackground(String... strings) {
@@ -67,6 +65,7 @@ public class MainPresenterImpl implements MainPresenter {
                 for (ForpetShop shop : shops) {
                     mView.addMarker(new MarkerBuilder(mView.getContext(), new LatLng(shop.getY(), shop.getX()))
                             .catCode(shop.getCategoryGroupCode())
+                            .hash(shop.getPlaceName())
                             .title(shop.getPlaceName())
                             .event(shop.getEvent())
                             .build());

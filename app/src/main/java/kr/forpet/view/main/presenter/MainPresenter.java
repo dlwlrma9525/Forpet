@@ -23,8 +23,7 @@ public interface MainPresenter {
 
         Context getContext();
 
-        void addMarker(MarkerOptions marker);
+        void addMarker(MarkerOptions markerOptions);
         void moveCamera(LatLng latLng);
-        void clearMap();
     }
 }

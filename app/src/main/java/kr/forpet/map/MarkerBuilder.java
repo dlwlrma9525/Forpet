@@ -26,6 +26,7 @@ public class MarkerBuilder {
     private LatLng latLng;
 
     private String catCode;
+    private String hash;
     private String title;
     private String event;
     private String sale;
@@ -37,6 +38,11 @@ public class MarkerBuilder {
 
     public MarkerBuilder catCode(String catCode) {
         this.catCode = catCode;
+        return this;
+    }
+
+    public MarkerBuilder hash(String hash) {
+        this.hash = hash;
         return this;
     }
 
@@ -58,6 +64,7 @@ public class MarkerBuilder {
     public MarkerOptions build() {
         MarkerOptions marker = new MarkerOptions();
         marker.position(latLng);
+        marker.snippet(hash);
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view;

@@ -24,10 +24,14 @@ import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,6 +52,8 @@ public class MainActivity extends AppCompatActivity
     private MainPresenter mMainPresenter;
     private GoogleMap mMap;
 
+    private List<Marker> cache = new ArrayList();
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -64,7 +70,7 @@ public class MainActivity extends AppCompatActivity
     FloatingActionButton fabDiagnosis;
 
     @BindView(R.id.fab_search_pharmacy)
-    FloatingActionButton fabSearchPharm;
+    FloatingActionButton fabSearchPharmacy;
 
     @BindView(R.id.fab_search_meal)
     FloatingActionButton fabSearchMeal;
@@ -116,9 +122,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMainPresenter.onMapReady(googleMap);
-
-        googleMap.setOnCameraIdleListener(() -> {
+        mMap.setOnCameraIdleListener(() -> {
             // Called when camera movement has ended, there are no pending animations and the user has stopped interacting with the map.
 
             ForpetShop.CatCode catCode = ForpetShop.CatCode.SHOP;
@@ -142,6 +146,8 @@ public class MainActivity extends AppCompatActivity
 
             mMainPresenter.onMapSearch(catCode, latLngBounds);
         });
+
+        mMainPresenter.onMapReady(googleMap);
     }
 
     @Override
@@ -183,19 +189,18 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void addMarker(MarkerOptions marker) {
+    public void addMarker(MarkerOptions markerOptions) {
         // Add a marker and move the camera..
-        mMap.addMarker(marker);
+        for (Marker marker : cache)
+            if (marker.getPosition().equals(markerOptions.getPosition()))
+                return;
+
+        cache.add(mMap.addMarker(markerOptions));
     }
 
     @Override
     public void moveCamera(LatLng latLng) {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f));
-    }
-
-    @Override
-    public void clearMap() {
-        mMap.clear();
     }
 
     private void init() {
@@ -221,18 +226,20 @@ public class MainActivity extends AppCompatActivity
         bottomNavigationView.setOnNavigationItemSelectedListener((@NonNull MenuItem item) -> {
             if (fabDiagnosis.isShown()) {
                 fabDiagnosis.hide();
-                fabSearchPharm.hide();
+                fabSearchPharmacy.hide();
                 fabSearchMeal.hide();
             }
 
             if (item.getItemId() == R.id.action_more) {
                 fabDiagnosis.show();
-                fabSearchPharm.show();
+                fabSearchPharmacy.show();
                 fabSearchMeal.show();
             } else {
                 Projection projection = mMap.getProjection();
                 LatLngBounds latLngBounds = projection.getVisibleRegion().latLngBounds;
 
+                cache.clear();
+                mMap.clear();
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngBounds.getCenter(), mMap.getCameraPosition().zoom));
             }
 
@@ -245,8 +252,16 @@ public class MainActivity extends AppCompatActivity
         mapFragment.getMapAsync(this);
 
         fabDiagnosis.hide();
-        fabSearchPharm.hide();
+        fabDiagnosis.setOnClickListener((v) -> {
+        });
+
+        fabSearchPharmacy.hide();
+        fabSearchPharmacy.setOnClickListener((v) -> {
+        });
+
         fabSearchMeal.hide();
+        fabSearchMeal.setOnClickListener((v) -> {
+        });
 
         buttonGps.setOnClickListener((v) -> mMainPresenter.onMyGps());
     }
