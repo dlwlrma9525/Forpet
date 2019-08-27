@@ -24,8 +24,8 @@ public interface ForpetShopDAO {
     @Query("SELECT * FROM forpet_shop")
     List<ForpetShop> getAll();
 
-    @Query("SELECT * From forpet_shop WHERE place_name = :name")
-    ForpetShop getByShopName(String name);
+    @Query("SELECT * From forpet_shop WHERE forpet_hash = :hashCode")
+    ForpetShop getByHashCode(String hashCode);
 
     /**
      * @param x1 southwest longitude

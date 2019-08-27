@@ -1,4 +1,4 @@
-package kr.forpet.view.splash.activity;
+package kr.forpet.view.splash;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package kr.forpet.view.request.activity;
+package kr.forpet.view.request;
 
 import android.content.Intent;
 import android.os.Bundle;

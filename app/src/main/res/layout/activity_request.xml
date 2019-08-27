@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffff"
-        tools:context=".view.request.activity.RequestActivity">
+        tools:context=".view.request.RequestActivity">
 
         <ImageView
             android:id="@+id/logo_request"
@@ -42,7 +42,7 @@
             android:layout_marginStart="17dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="17dp"
-            android:background="@drawable/bg_corners_stroke_8dp"
+            android:background="@drawable/bg_stroke_gray_8dp"
             android:fontFamily="@font/nanum_square"
             android:includeFontPadding="false"
             android:padding="8dp"

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -47,7 +48,7 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        onMyGps();
+        onRequestGps();
     }
 
     @Override
@@ -65,7 +66,7 @@ public class MainPresenterImpl implements MainPresenter {
                 for (ForpetShop shop : shops) {
                     mView.addMarker(new MarkerBuilder(mView.getContext(), new LatLng(shop.getY(), shop.getX()))
                             .catCode(shop.getCategoryGroupCode())
-                            .hash(shop.getPlaceName())
+                            .hash(shop.getForpetHash())
                             .title(shop.getPlaceName())
                             .event(shop.getEvent())
                             .build());
@@ -75,7 +76,23 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void onMyGps() {
+    public void onMarkerClick(Marker marker) {
+        new AsyncTask<String, Void, ForpetShop>() {
+            @Override
+            protected ForpetShop doInBackground(String... strings) {
+                return mainModel.getForpetShop(strings[0]);
+            }
+
+            @Override
+            protected void onPostExecute(ForpetShop shop) {
+                super.onPostExecute(shop);
+                mView.showCard(shop);
+            }
+        }.execute(marker.getSnippet());
+    }
+
+    @Override
+    public void onRequestGps() {
         try {
             Task task = mainModel.getMyLocation();
             task.addOnCompleteListener(new OnCompleteListener<Location>() {

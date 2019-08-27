@@ -35,6 +35,10 @@ public class MainModel {
         }
     }
 
+    public ForpetShop getForpetShop(String hashCode) {
+        return db.forpetShopDAO().getByHashCode(hashCode);
+    }
+
     public List<ForpetShop> getForpetShopList(LatLngBounds bounds, String catCode) {
         return db.forpetShopDAO().getByVisibleRegion(
                 bounds.southwest.longitude,

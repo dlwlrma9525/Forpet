@@ -7,7 +7,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -27,6 +31,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
@@ -40,7 +45,7 @@ import kr.forpet.data.entity.ForpetShop;
 import kr.forpet.util.Permission;
 import kr.forpet.view.main.presenter.MainPresenter;
 import kr.forpet.view.main.presenter.MainPresenterImpl;
-import kr.forpet.view.request.activity.RequestActivity;
+import kr.forpet.view.request.RequestActivity;
 
 public class MainActivity extends AppCompatActivity
         implements MainPresenter.View, OnMapReadyCallback {
@@ -50,6 +55,7 @@ public class MainActivity extends AppCompatActivity
     private static final int REQUEST_PERMISSION = 0;
 
     private MainPresenter mMainPresenter;
+    private BottomSheetBehavior bottomSheetBehavior;
     private GoogleMap mMap;
 
     private List<Marker> cache = new ArrayList();
@@ -65,6 +71,12 @@ public class MainActivity extends AppCompatActivity
 
     @BindView(R.id.bottom_navigation_view)
     BottomNavigationView bottomNavigationView;
+
+    @BindView(R.id.include_pop_up)
+    ViewGroup popUpView;
+
+    @BindView(R.id.include_card)
+    ViewGroup cardView;
 
     @BindView(R.id.fab_diagnosis)
     FloatingActionButton fabDiagnosis;
@@ -122,7 +134,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.setOnCameraIdleListener(() -> {
+        mMainPresenter.onMapReady(googleMap);
+
+        googleMap.setOnCameraIdleListener(() -> {
             // Called when camera movement has ended, there are no pending animations and the user has stopped interacting with the map.
 
             ForpetShop.CatCode catCode = ForpetShop.CatCode.SHOP;
@@ -147,16 +161,24 @@ public class MainActivity extends AppCompatActivity
             mMainPresenter.onMapSearch(catCode, latLngBounds);
         });
 
-        mMainPresenter.onMapReady(googleMap);
+        googleMap.setOnMarkerClickListener((marker) -> {
+            mMainPresenter.onMarkerClick(marker);
+            return false;
+        });
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START))
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        else
+        } else if (cardView.getVisibility() == View.VISIBLE) {
+            if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED)
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+            cardView.setVisibility(View.GONE);
+        } else {
             super.onBackPressed();
+        }
     }
 
     @Override
@@ -203,14 +225,46 @@ public class MainActivity extends AppCompatActivity
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f));
     }
 
+    @Override
+    public void showCard(ForpetShop shop) {
+        if (shop != null) {
+            TextView textPlaceName = cardView.findViewById(R.id.text_place_name);
+            TextView textAddressName = cardView.findViewById(R.id.text_address_name);
+            Button buttonNavigation = cardView.findViewById(R.id.button_navigation);
+            Button buttonCall = cardView.findViewById(R.id.button_call);
+
+            textPlaceName.setText(shop.getPlaceName());
+            textAddressName.setText(shop.getRoadAddressName());
+
+            buttonNavigation.setOnClickListener((v) -> {
+//                StringBuilder sb = new StringBuilder("http://maps.google.com/maps?");
+//
+//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(sb.toString()));
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent.addCategory(Intent.CATEGORY_LAUNCHER);
+//                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+//
+//                startActivity(intent);
+            });
+
+            buttonCall.setOnClickListener((v) -> {
+
+            });
+
+            cardView.setOnClickListener((v) -> {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            });
+
+            cardView.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void init() {
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         // actionBar.setDisplayHomeAsUpEnabled(true);
-
-        initNavigationView(navigationView);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -221,6 +275,21 @@ public class MainActivity extends AppCompatActivity
                 drawer.closeDrawer(GravityCompat.START);
             else
                 drawer.openDrawer(GravityCompat.START);
+        });
+
+        navigationView.findViewById(R.id.button_hosp).setOnClickListener((v) -> {
+        });
+
+        navigationView.findViewById(R.id.button_pharmacy).setOnClickListener((v) -> {
+        });
+
+        navigationView.findViewById(R.id.button_shop).setOnClickListener((v) -> {
+            Intent intent = new Intent(this, RequestActivity.class);
+            intent.putExtra("type", ForpetShop.class);
+            startActivity(intent);
+        });
+
+        navigationView.findViewById(R.id.button_advertisement).setOnClickListener((v) -> {
         });
 
         bottomNavigationView.setOnNavigationItemSelectedListener((@NonNull MenuItem item) -> {
@@ -235,6 +304,9 @@ public class MainActivity extends AppCompatActivity
                 fabSearchPharmacy.show();
                 fabSearchMeal.show();
             } else {
+                if (cardView.getVisibility() == View.VISIBLE)
+                    cardView.setVisibility(View.GONE);
+
                 Projection projection = mMap.getProjection();
                 LatLngBounds latLngBounds = projection.getVisibleRegion().latLngBounds;
 
@@ -245,6 +317,8 @@ public class MainActivity extends AppCompatActivity
 
             return true;
         });
+
+        bottomSheetBehavior = BottomSheetBehavior.from(popUpView);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -263,23 +337,6 @@ public class MainActivity extends AppCompatActivity
         fabSearchMeal.setOnClickListener((v) -> {
         });
 
-        buttonGps.setOnClickListener((v) -> mMainPresenter.onMyGps());
-    }
-
-    private void initNavigationView(NavigationView navigationView) {
-        navigationView.findViewById(R.id.button_hosp).setOnClickListener((v) -> {
-        });
-
-        navigationView.findViewById(R.id.button_pharmacy).setOnClickListener((v) -> {
-        });
-
-        navigationView.findViewById(R.id.button_shop).setOnClickListener((v) -> {
-            Intent intent = new Intent(this, RequestActivity.class);
-            intent.putExtra("type", ForpetShop.class);
-            startActivity(intent);
-        });
-
-        navigationView.findViewById(R.id.button_advertisement).setOnClickListener((v) -> {
-        });
+        buttonGps.setOnClickListener((v) -> mMainPresenter.onRequestGps());
     }
 }

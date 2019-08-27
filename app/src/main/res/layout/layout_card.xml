@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="97dp"
+    android:background="@drawable/bg_toolbar"
+    android:elevation="5dp">
+
+    <TextView
+        android:id="@+id/header_opened"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/nanum_square"
+        android:includeFontPadding="false"
+        android:text="@string/detail_header_opened"
+        android:textColor="#ff6586"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_place_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/nanum_square"
+        android:includeFontPadding="false"
+        android:text="@string/place"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/header_opened"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_address_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/nanum_square"
+        android:includeFontPadding="false"
+        android:text="@string/dummy_address"
+        android:textColor="#444444"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/header_opened"
+        app:layout_constraintTop_toBottomOf="@+id/header_opened" />
+
+    <LinearLayout
+        android:id="@+id/linear_Layout"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:layout_marginTop="13dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@+id/text_address_name"
+        app:layout_constraintTop_toBottomOf="@+id/text_address_name" />
+
+    <Button
+        android:id="@+id/button_navigation"
+        android:layout_width="65dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_stroke_pink_15dp"
+        android:text="@string/navigation"
+        android:textColor="#ff6586"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_call" />
+
+    <Button
+        android:id="@+id/button_call"
+        android:layout_width="65dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_stroke_pink_15dp"
+        android:text="@string/call"
+        android:textColor="#ff6586"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
