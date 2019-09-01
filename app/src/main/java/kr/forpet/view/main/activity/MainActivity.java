@@ -3,6 +3,7 @@ package kr.forpet.view.main.activity;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
@@ -29,6 +30,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -46,6 +48,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import kr.forpet.R;
 import kr.forpet.data.entity.Shop;
+import kr.forpet.map.MarkerBuilder;
 import kr.forpet.util.Permission;
 import kr.forpet.view.main.presenter.MainPresenter;
 import kr.forpet.view.main.presenter.MainPresenterImpl;
@@ -60,11 +63,10 @@ public class MainActivity extends AppCompatActivity
 
     private MainPresenter mMainPresenter;
     private GoogleMap mMap;
-
     private BottomSheetBehavior persistentBottomSheet;
 
-    private List<Marker> cache = new ArrayList<>();
-    private float zoom = 15.0f;
+    private List<Marker> makerCache = new ArrayList<>();
+    private Marker lastMarker;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -147,7 +149,6 @@ public class MainActivity extends AppCompatActivity
 
         googleMap.setOnCameraIdleListener(() -> {
             // Called when camera movement has ended, there are no pending animations and the user has stopped interacting with the map.
-
             Shop.CatCode catCode = Shop.CatCode.SHOP;
             switch (bottomNavigationView.getSelectedItemId()) {
                 case R.id.action_supplies:
@@ -164,20 +165,31 @@ public class MainActivity extends AppCompatActivity
                     break;
             }
 
-            if (mMap.getCameraPosition().zoom < zoom) {
-                cache.clear();
-                mMap.clear();
-            }
-
-            zoom = mMap.getCameraPosition().zoom;
-
             Projection projection = mMap.getProjection();
             LatLngBounds latLngBounds = projection.getVisibleRegion().latLngBounds;
+
+            if (makerCache.size() > 50) {
+                if (lastMarker != null) {
+                    for (Marker marker : makerCache)
+                        if (!marker.equals(lastMarker))
+                            marker.remove();
+                }
+
+                makerCache.clear();
+                makerCache.add(lastMarker);
+            }
 
             mMainPresenter.onMapSearch(catCode, latLngBounds);
         });
 
         googleMap.setOnMarkerClickListener((marker) -> {
+            if (lastMarker != null)
+                lastMarker.setIcon(MarkerBuilder.createIconFromDrawable(getContext(), lastMarker.getSnippet().split(",")[1]));
+
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) getResources().getDrawable(R.drawable.marker_current);
+            marker.setIcon(BitmapDescriptorFactory.fromBitmap(bitmapDrawable.getBitmap()));
+
+            lastMarker = marker;
             mMainPresenter.onMarkerClick(marker);
             return false;
         });
@@ -246,11 +258,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void addMarker(MarkerOptions markerOptions) {
         // Add a marker and move the camera..
-        for (Marker marker : cache)
+        for (Marker marker : makerCache)
             if (marker.getPosition().equals(markerOptions.getPosition()))
                 return;
 
-        cache.add(mMap.addMarker(markerOptions));
+        makerCache.add(mMap.addMarker(markerOptions));
     }
 
     @Override
@@ -269,23 +281,18 @@ public class MainActivity extends AppCompatActivity
             textPlaceName.setText(shop.getPlaceName());
             textAddressName.setText(shop.getRoadAddressName());
 
-            buttonNavigation.setOnClickListener((v) -> mMainPresenter.onMyLocate((@NonNull Task<Location> task) -> {
-                if (task.isSuccessful()) {
-                    Location result = task.getResult();
-                    LatLng latLng = new LatLng(result.getLatitude(), result.getLongitude());
+            buttonNavigation.setOnClickListener((v) -> {
+                mMainPresenter.onMyLocate((@NonNull Task<Location> task) -> {
+                    if (task.isSuccessful()) {
+                        Location result = task.getResult();
 
-                    StringBuilder sb = new StringBuilder("http://maps.google.com/maps?")
-                            .append("saddr=").append(latLng.latitude).append(",").append(latLng.longitude)
-                            .append("&daddr=").append(shop.getY()).append(",").append(shop.getX());
+                        LatLng start = new LatLng(result.getLatitude(), result.getLongitude());
+                        LatLng dest = new LatLng(shop.getY(), shop.getX());
 
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(sb.toString()));
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.addCategory(Intent.CATEGORY_LAUNCHER);
-                    intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
-
-                    startActivity(intent);
-                }
-            }));
+                        broadcastGoogleMaps(start, dest);
+                    }
+                });
+            });
 
             buttonCall.setOnClickListener((v) -> {
                 Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + shop.getPhone()));
@@ -354,7 +361,9 @@ public class MainActivity extends AppCompatActivity
                 Projection projection = mMap.getProjection();
                 LatLngBounds latLngBounds = projection.getVisibleRegion().latLngBounds;
 
-                cache.clear();
+                makerCache.clear();
+                lastMarker = null;
+
                 mMap.clear();
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngBounds.getCenter(), mMap.getCameraPosition().zoom));
             }
@@ -413,5 +422,18 @@ public class MainActivity extends AppCompatActivity
                 Log.e("GooglePlayServices", "Exception: %s", task.getException());
             }
         }));
+    }
+
+    private void broadcastGoogleMaps(LatLng start, LatLng dest) {
+        StringBuilder sb = new StringBuilder("http://maps.google.com/maps?")
+                .append("saddr=").append(start.latitude).append(",").append(start.longitude)
+                .append("&daddr=").append(dest.latitude).append(",").append(dest.longitude);
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(sb.toString()));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+
+        startActivity(intent);
     }
 }

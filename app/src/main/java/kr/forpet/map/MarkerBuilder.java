@@ -1,18 +1,9 @@
 package kr.forpet.map;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.graphics.drawable.BitmapDrawable;
 
-import androidx.core.content.ContextCompat;
-
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -22,7 +13,6 @@ import kr.forpet.data.entity.Shop;
 
 public class MarkerBuilder {
 
-    private Context context;
     private LatLng latLng;
 
     private String catCode;
@@ -31,8 +21,7 @@ public class MarkerBuilder {
     private String event;
     private String sale;
 
-    public MarkerBuilder(Context context, LatLng latLng) {
-        this.context = context;
+    public MarkerBuilder(LatLng latLng) {
         this.latLng = latLng;
     }
 
@@ -61,75 +50,47 @@ public class MarkerBuilder {
         return this;
     }
 
-    public MarkerOptions build() {
+    public MarkerOptions build(Context context) {
+        StringBuilder sb = new StringBuilder(hash).append(",").append(catCode);
+
         MarkerOptions marker = new MarkerOptions();
         marker.position(latLng);
-        marker.snippet(hash);
+        marker.snippet(sb.toString());
+        marker.icon(MarkerBuilder.createIconFromDrawable(context, catCode));
 
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view;
-
-        if (event.equals("N")) {
-            view = inflater.inflate(R.layout.marker, null);
-        } else {
-            view = inflater.inflate(R.layout.marker_icon, null);
-
-            ImageView icon = view.findViewById(R.id.icon_marker);
-            icon.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.icon_event_marker));
-        }
-
-        ImageView logoView = view.findViewById(R.id.image_marker);
-        TextView titleView = view.findViewById(R.id.text_marker);
-
-        int drawable = 0;
-        switch (Shop.CatCode.compare(catCode)) {
-            case SHOP:
-                drawable = R.drawable.icon_ani_shop_s;
-                break;
-            case PHARM:
-                drawable = R.drawable.icon_pharm_s;
-                break;
-            case HOSPITAL:
-                drawable = R.drawable.icon_hospital_s;
-                break;
-            case DOGPENSION:
-                drawable = R.drawable.icon_pension_s;
-                break;
-            case DOGGROUND:
-                drawable = R.drawable.icon_play_s;
-                break;
-            case DOGCAFE:
-                drawable = R.drawable.icon_dog_cafe_s;
-                break;
-            case CATCAFE:
-                drawable = R.drawable.icon_cat_cafe_s;
-                break;
-            case BEAUTY:
-                drawable = R.drawable.icon_hairshop;
-                break;
-        }
-
-        logoView.setImageDrawable(ContextCompat.getDrawable(context, drawable));
-        titleView.setText(title);
-
-        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        marker.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(windowManager, view)));
         return marker;
     }
 
-    private Bitmap createDrawableFromView(WindowManager windowManager, View view) {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+    public static BitmapDescriptor createIconFromDrawable(Context context, String catCode) {
+        int drawable = 0;
+        switch (Shop.CatCode.compare(catCode)) {
+            case SHOP:
+                drawable = R.drawable.marker_shop;
+                break;
+            case PHARM:
+                drawable = R.drawable.marker_pharm;
+                break;
+            case HOSPITAL:
+                drawable = R.drawable.marker_hospital;
+                break;
+            case DOGPENSION:
+                drawable = R.drawable.marker_dogpension;
+                break;
+            case DOGGROUND:
+                drawable = R.drawable.marker_dogground;
+                break;
+            case DOGCAFE:
+                drawable = R.drawable.marker_cafe;
+                break;
+            case CATCAFE:
+                drawable = R.drawable.marker_cafe;
+                break;
+            case BEAUTY:
+                drawable = R.drawable.marker_beauty;
+                break;
+        }
 
-        view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        view.measure(displayMetrics.widthPixels, displayMetrics.heightPixels);
-        view.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels);
-        view.buildDrawingCache();
-
-        Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        view.draw(canvas);
-
-        return bitmap;
+        BitmapDrawable bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(drawable);
+        return BitmapDescriptorFactory.fromBitmap(bitmapDrawable.getBitmap());
     }
 }

@@ -60,12 +60,12 @@ public class MainPresenterImpl implements MainPresenter {
                 super.onPostExecute(shops);
 
                 for (Shop shop : shops) {
-                    mView.addMarker(new MarkerBuilder(mView.getContext(), new LatLng(shop.getY(), shop.getX()))
+                    mView.addMarker(new MarkerBuilder(new LatLng(shop.getY(), shop.getX()))
                             .catCode(shop.getCategoryGroupCode())
                             .hash(shop.getForpetHash())
                             .title(shop.getPlaceName())
                             .event(shop.getEvent())
-                            .build());
+                            .build(mView.getContext()));
                 }
             }
         }.execute(catCode.toString());
@@ -84,7 +84,7 @@ public class MainPresenterImpl implements MainPresenter {
                 super.onPostExecute(shop);
                 mView.showPopup(shop);
             }
-        }.execute(marker.getSnippet());
+        }.execute(marker.getSnippet().split(",")[0]);
     }
 
     @Override
