@@ -4,7 +4,7 @@
     <item
         android:id="@+id/action_supplies"
         android:icon="@drawable/icon_ani_shop"
-        android:title="@string/menu_ani_shop" />
+        android:title="@string/menu_shop" />
 
     <item
         android:id="@+id/action_pharm"

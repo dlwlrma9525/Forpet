@@ -7,8 +7,8 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-import kr.forpet.annotation.ItemView;
 import kr.forpet.annotation.Label;
+import kr.forpet.annotation.RegistItem;
 
 @Entity(tableName = "forpet_shop",
         indices = {
@@ -19,7 +19,7 @@ import kr.forpet.annotation.Label;
                 @Index(name = "idx_shop_y", value = {"y"})
         }
 )
-public class ForpetShop {
+public class Shop {
 
     public enum CatCode {
         SHOP, PHARM, HOSPITAL, DOGPENSION, DOGGROUND, DOGCAFE, CATCAFE, BEAUTY;
@@ -38,57 +38,57 @@ public class ForpetShop {
     @ColumnInfo(name = "forpet_hash")
     private String forpetHash;
 
-    @Label("주소")
-    @ItemView(idx = 4)
     @ColumnInfo(name = "address_name")
+    @Label("주소")
+    @RegistItem(idx = 4)
     private String addressName;
 
-    @Label("상세주소")
-    @ItemView(idx = 5)
     @Ignore
+    @Label("상세주소")
+    @RegistItem(idx = 5)
     private String addressNameDetail;
 
-    @Label("서비스종류")
-    @ItemView(idx = 0)
     @ColumnInfo(name = "category_group_code")
+    @Label("서비스종류")
+    @RegistItem(idx = 0)
     private String categoryGroupCode;
 
     @ColumnInfo(name = "kakao_id")
     private String kakaoId;
 
-    @Label("사업자번호")
-    @ItemView(idx = 2)
     @Ignore
+    @Label("사업자번호")
+    @RegistItem(idx = 2)
     private String businessNo;
 
-    @Label("대표자이름")
-    @ItemView(idx = 3)
     @Ignore
+    @Label("대표자이름")
+    @RegistItem(idx = 3)
     private String ceoName;
 
-    @Label("담당자이름")
-    @ItemView(idx = 6)
     @Ignore
+    @Label("담당자이름")
+    @RegistItem(idx = 6)
     private String chargeName;
 
-    @Label("연락처")
-    @ItemView(idx = 7)
     @ColumnInfo(name = "phone")
+    @Label("연락처")
+    @RegistItem(idx = 7)
     private String phone;
 
-    @Label("이메일")
-    @ItemView(idx = 8)
     @Ignore
+    @Label("이메일")
+    @RegistItem(idx = 8)
     private String email;
 
-    @Label("이름")
-    @ItemView(idx = 1)
     @ColumnInfo(name = "place_name")
+    @Label("이름")
+    @RegistItem(idx = 1)
     private String placeName;
 
-    @Label("업체사진")
-    @ItemView(idx = 9)
     @ColumnInfo(name = "place_image_url")
+    @Label("업체사진")
+    @RegistItem(idx = 9)
     private String placeImageUrl;
 
     @ColumnInfo(name = "homepage")
@@ -103,32 +103,32 @@ public class ForpetShop {
     @ColumnInfo(name = "y")
     private Double y;
 
-    @Label("주차가능")
     @ColumnInfo(name = "opt_parking")
+    @Label("주차가능")
     private String optParking;
 
-    @Label("예약가능")
     @ColumnInfo(name = "opt_reservation")
+    @Label("예약가능")
     private String optReservation;
 
-    @Label("휴일영업")
     @ColumnInfo(name = "opt_3")
+    @Label("휴일영업")
     private String opt3;
 
-    @Label("주차가능")
     @ColumnInfo(name = "opt_4")
+    @Label("주차가능")
     private String opt4;
 
-    @Label("배달가능")
     @ColumnInfo(name = "opt_5")
+    @Label("배달가능")
     private String opt5;
 
-    @Label("Wifi")
     @ColumnInfo(name = "opt_6")
+    @Label("Wifi")
     private String opt6;
 
-    @Label("추가옵션")
     @ColumnInfo(name = "opt_7")
+    @Label("추가옵션")
     private String opt7;
 
     @ColumnInfo(name = "event")
@@ -143,9 +143,9 @@ public class ForpetShop {
     @ColumnInfo(name = "love_point")
     private String lovePoint;
 
-    @Label("업체소개")
-    @ItemView(idx = 10)
     @ColumnInfo(name = "intro")
+    @Label("업체소개")
+    @RegistItem(idx = 10)
     private String intro;
 
     public Integer getNo() {
@@ -156,7 +156,6 @@ public class ForpetShop {
         this.no = no;
     }
 
-    @NonNull
     public String getForpetHash() {
         return forpetHash;
     }

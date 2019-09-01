@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import kr.forpet.R;
-import kr.forpet.annotation.ItemView;
 import kr.forpet.annotation.Label;
+import kr.forpet.annotation.RegistItem;
 
 public class RequestViewFactory implements ItemViewFactory {
 
@@ -49,13 +49,13 @@ public class RequestViewFactory implements ItemViewFactory {
         for (Field field : clazz.getDeclaredFields()) {
             Log.i("reflection", field.getName());
 
-            if (field.getAnnotation(ItemView.class) != null)
+            if (field.getAnnotation(RegistItem.class) != null)
                 fields.add(field);
         }
 
         Collections.sort(fields, (Field o1, Field o2) -> {
-            ItemView a1 = o1.getAnnotation(ItemView.class);
-            ItemView a2 = o2.getAnnotation(ItemView.class);
+            RegistItem a1 = o1.getAnnotation(RegistItem.class);
+            RegistItem a2 = o2.getAnnotation(RegistItem.class);
 
             if (a1.idx() > a2.idx())
                 return 1;
@@ -68,15 +68,15 @@ public class RequestViewFactory implements ItemViewFactory {
         for (Field field : fields) {
             Label annotation = field.getAnnotation(Label.class);
 
-            View child = inflater.inflate(R.layout.item_request, null);
+            View child = inflater.inflate(R.layout.layout_regist_item, null);
 
-            TextView textView = child.findViewById(R.id.text_item);
+            TextView textView = child.findViewById(R.id.text_regist_item);
             textView.setText(annotation.value());
 
-            EditText editText = child.findViewById(R.id.edit_item);
+            EditText editText = child.findViewById(R.id.edit_regist_item);
             editText.setTag(annotation.value());
 
-            Button button = child.findViewById(R.id.button_item);
+            Button button = child.findViewById(R.id.button_regist_item);
 
             ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
@@ -85,8 +85,8 @@ public class RequestViewFactory implements ItemViewFactory {
             params.bottomMargin = Math.round(6 * metrics.density);
 
             if (annotation.value().contains("종류")) {
-                FrameLayout frameLayout = child.findViewById(R.id.frame_item);
-                Spinner spinner = child.findViewById(R.id.spinner_item);
+                FrameLayout frameLayout = child.findViewById(R.id.frame_regist_item);
+                Spinner spinner = child.findViewById(R.id.spinner_regist_item);
 
                 editText.setVisibility(View.GONE);
                 frameLayout.setVisibility(View.VISIBLE);
@@ -112,15 +112,15 @@ public class RequestViewFactory implements ItemViewFactory {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View view = inflater.inflate(R.layout.item_request, null);
+        View view = inflater.inflate(R.layout.layout_regist_item, null);
 
-        TextView textView = view.findViewById(R.id.text_item);
+        TextView textView = view.findViewById(R.id.text_regist_item);
         textView.setText(context.getString(R.string.regist_header_opt));
 
-        EditText editText = view.findViewById(R.id.edit_item);
+        EditText editText = view.findViewById(R.id.edit_regist_item);
         editText.setVisibility(View.GONE);
 
-        GridLayout grid = view.findViewById(R.id.grid_item);
+        GridLayout grid = view.findViewById(R.id.grid_regist_item);
         grid.setVisibility(View.VISIBLE);
 
         for (Field f : clazz.getDeclaredFields()) {

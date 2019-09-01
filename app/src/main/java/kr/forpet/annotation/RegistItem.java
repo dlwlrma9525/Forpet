@@ -7,6 +7,6 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ItemView {
+public @interface RegistItem {
     int idx() default 0;
 }

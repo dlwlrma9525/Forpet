@@ -11,7 +11,7 @@ import java.util.List;
 
 import kr.forpet.data.db.AppDatabase;
 import kr.forpet.data.db.SQLiteHelper;
-import kr.forpet.data.entity.ForpetShop;
+import kr.forpet.data.entity.Shop;
 
 public class MainModel {
 
@@ -35,12 +35,12 @@ public class MainModel {
         }
     }
 
-    public ForpetShop getForpetShop(String hashCode) {
-        return db.forpetShopDAO().getByHashCode(hashCode);
+    public Shop getShop(String hashCode) {
+        return db.shopDAO().getByHashCode(hashCode);
     }
 
-    public List<ForpetShop> getForpetShopList(LatLngBounds bounds, String catCode) {
-        return db.forpetShopDAO().getByVisibleRegion(
+    public List<Shop> getShopList(LatLngBounds bounds, String catCode) {
+        return db.shopDAO().getByVisibleRegion(
                 bounds.southwest.longitude,
                 bounds.northeast.longitude,
                 bounds.southwest.latitude,

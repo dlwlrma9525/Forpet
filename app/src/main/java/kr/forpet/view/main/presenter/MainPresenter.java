@@ -1,14 +1,16 @@
 package kr.forpet.view.main.presenter;
 
 import android.content.Context;
+import android.location.Location;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 
-import kr.forpet.data.entity.ForpetShop;
+import kr.forpet.data.entity.Shop;
 
 public interface MainPresenter {
 
@@ -17,9 +19,9 @@ public interface MainPresenter {
     void onDestroy();
 
     void onMapReady(GoogleMap googleMap);
-    void onMapSearch(ForpetShop.CatCode catCode, LatLngBounds latLngBounds);
+    void onMapSearch(Shop.CatCode catCode, LatLngBounds latLngBounds);
     void onMarkerClick(Marker marker);
-    void onRequestGps();
+    void onMyLocate(OnCompleteListener<Location> listener);
 
     interface View {
 
@@ -27,7 +29,6 @@ public interface MainPresenter {
 
         void addMarker(MarkerOptions markerOptions);
         void moveCamera(LatLng latLng);
-
-        void showCard(ForpetShop shop);
+        void showPopup(Shop shop);
     }
 }

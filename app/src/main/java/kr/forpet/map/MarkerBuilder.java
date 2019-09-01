@@ -18,7 +18,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import kr.forpet.R;
-import kr.forpet.data.entity.ForpetShop;
+import kr.forpet.data.entity.Shop;
 
 public class MarkerBuilder {
 
@@ -82,15 +82,31 @@ public class MarkerBuilder {
         TextView titleView = view.findViewById(R.id.text_marker);
 
         int drawable = 0;
-        switch (ForpetShop.CatCode.compare(catCode)) {
-            case SHOP:          drawable = R.drawable.icon_ani_shop_s;  break;
-            case PHARM:         drawable = R.drawable.icon_pharm_s;     break;
-            case HOSPITAL:      drawable = R.drawable.icon_hospital_s;  break;
-            case DOGPENSION:    drawable = R.drawable.icon_pension_s;   break;
-            case DOGGROUND:     drawable = R.drawable.icon_play_s;      break;
-            case DOGCAFE:       drawable = R.drawable.icon_dog_cafe_s;  break;
-            case CATCAFE:       drawable = R.drawable.icon_cat_cafe_s;  break;
-            case BEAUTY:        drawable = R.drawable.icon_hairshop;    break;
+        switch (Shop.CatCode.compare(catCode)) {
+            case SHOP:
+                drawable = R.drawable.icon_ani_shop_s;
+                break;
+            case PHARM:
+                drawable = R.drawable.icon_pharm_s;
+                break;
+            case HOSPITAL:
+                drawable = R.drawable.icon_hospital_s;
+                break;
+            case DOGPENSION:
+                drawable = R.drawable.icon_pension_s;
+                break;
+            case DOGGROUND:
+                drawable = R.drawable.icon_play_s;
+                break;
+            case DOGCAFE:
+                drawable = R.drawable.icon_dog_cafe_s;
+                break;
+            case CATCAFE:
+                drawable = R.drawable.icon_cat_cafe_s;
+                break;
+            case BEAUTY:
+                drawable = R.drawable.icon_hairshop;
+                break;
         }
 
         logoView.setImageDrawable(ContextCompat.getDrawable(context, drawable));

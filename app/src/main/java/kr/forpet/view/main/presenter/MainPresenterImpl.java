@@ -3,21 +3,17 @@ package kr.forpet.view.main.presenter;
 import android.content.Context;
 import android.location.Location;
 import android.os.AsyncTask;
-import android.util.Log;
-
-import androidx.annotation.NonNull;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import java.util.List;
 
-import kr.forpet.data.entity.ForpetShop;
+import kr.forpet.data.entity.Shop;
 import kr.forpet.map.MarkerBuilder;
 import kr.forpet.view.main.model.MainModel;
 
@@ -48,22 +44,22 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        onRequestGps();
+
     }
 
     @Override
-    public void onMapSearch(ForpetShop.CatCode catCode, LatLngBounds latLngBounds) {
-        new AsyncTask<String, Void, List<ForpetShop>>() {
+    public void onMapSearch(Shop.CatCode catCode, LatLngBounds latLngBounds) {
+        new AsyncTask<String, Void, List<Shop>>() {
             @Override
-            protected List<ForpetShop> doInBackground(String... strings) {
-                return mainModel.getForpetShopList(latLngBounds, strings[0]);
+            protected List<Shop> doInBackground(String... strings) {
+                return mainModel.getShopList(latLngBounds, strings[0]);
             }
 
             @Override
-            protected void onPostExecute(List<ForpetShop> shops) {
+            protected void onPostExecute(List<Shop> shops) {
                 super.onPostExecute(shops);
 
-                for (ForpetShop shop : shops) {
+                for (Shop shop : shops) {
                     mView.addMarker(new MarkerBuilder(mView.getContext(), new LatLng(shop.getY(), shop.getX()))
                             .catCode(shop.getCategoryGroupCode())
                             .hash(shop.getForpetHash())
@@ -77,43 +73,25 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onMarkerClick(Marker marker) {
-        new AsyncTask<String, Void, ForpetShop>() {
+        new AsyncTask<String, Void, Shop>() {
             @Override
-            protected ForpetShop doInBackground(String... strings) {
-                return mainModel.getForpetShop(strings[0]);
+            protected Shop doInBackground(String... strings) {
+                return mainModel.getShop(strings[0]);
             }
 
             @Override
-            protected void onPostExecute(ForpetShop shop) {
+            protected void onPostExecute(Shop shop) {
                 super.onPostExecute(shop);
-                mView.showCard(shop);
+                mView.showPopup(shop);
             }
         }.execute(marker.getSnippet());
     }
 
     @Override
-    public void onRequestGps() {
+    public void onMyLocate(OnCompleteListener<Location> listener) {
         try {
             Task task = mainModel.getMyLocation();
-            task.addOnCompleteListener(new OnCompleteListener<Location>() {
-                @Override
-                public void onComplete(@NonNull Task<Location> task) {
-                    if (task.isSuccessful()) {
-                        Location result = task.getResult();
-                        LatLng latLng = new LatLng(result.getLatitude(), result.getLongitude());
-
-                        MarkerOptions markerOptions = new MarkerOptions();
-                        markerOptions.position(latLng);
-                        markerOptions.snippet("Me");
-
-                        mView.addMarker(markerOptions);
-                        mView.moveCamera(latLng);
-                    } else {
-                        Log.d("GooglePlayServices", "Current location is null. Using defaults.");
-                        Log.e("GooglePlayServices", "Exception: %s", task.getException());
-                    }
-                }
-            });
+            task.addOnCompleteListener(listener);
         } catch (Exception e) {
             e.printStackTrace();
         }

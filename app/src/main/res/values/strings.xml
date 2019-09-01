@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Forpet</string>
-    <string name="app_title">"내 곁의 동물병원, 동물약국"</string>
+    <string name="app_ci">"내 곁의 동물병원, 동물약국"</string>
 
-    <string name="menu_ani_shop">반려용품샵</string>
+    <string name="menu_shop">반려용품샵</string>
     <string name="menu_pharmacy">약국</string>
     <string name="menu_hospital">병원</string>
     <string name="menu_hair">미용</string>
@@ -16,33 +16,26 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="nav_login">로그인 하기</string>
     <string name="nav_logout">로그아웃</string>
-    <string name="nav_favorite">자주찾는 곳</string>
-    <string name="nav_hosp">병원 등록요청</string>
-    <string name="nav_pharmacy">약국 등록요청</string>
-    <string name="nav_shop">영업점 등록요청</string>
-    <string name="nav_advertisement">광고 요청하기</string>
+    <string name="nav_favor">자주찾는 곳</string>
+    <string name="nav_regist_hosp">병원 등록요청</string>
+    <string name="nav_regist_pharmacy">약국 등록요청</string>
+    <string name="nav_regist_shop">영업점 등록요청</string>
+    <string name="nav_regist_advertisement">광고 요청하기</string>
 
     <string name="detail_header_modify">수정요청</string>
     <string name="detail_header_opened">진료중</string>
     <string name="detail_header_business_hours">운영시간</string>
     <string name="detail_header_pay">치료비 공개</string>
     <string name="detail_header_intro">간단소개</string>
-    <string name="detail_header_rating">포펫평가</string>
+    <string name="detail_header_recommend">포펫평가</string>
 
-    <string name="detail_rating">만족도평가</string>
-    <string name="detail_rating_consensus">펫과의교감</string>
-    <string name="detail_rating_place">시설만족도</string>
-    <string name="detail_rating_pay">가격만족도</string>
-
-    <string name="request_header">요청하기</string>
     <string name="modify">수정요청</string>
     <string name="regist">등록요청</string>
     <string name="regist_notice">내용을 상세하게 작성해 주셔야 등록이 가능합니다.\n요청내용을 확인 후 담당자가 전화로 확인하는\n과정을 거칩니다.</string>
-    <string name="regist_header">등록 요청하기</string>
     <string name="regist_header_hosp">병원등록 요청하기</string>
     <string name="regist_header_pharmacy">약국등록 요청하기</string>
     <string name="regist_header_shop">영업점(샵, 카페, 펜션..) 등록요청하기</string>
-    <string name="regist_header_ad">광고 요청하기</string>
+    <string name="regist_header_advertisement">광고 요청하기</string>
     <string name="regist_header_opt">고객편의</string>
 
     <string name="call">전화</string>
