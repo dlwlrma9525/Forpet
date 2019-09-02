@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity
                 mMakerCache.add(mLastMarker);
             }
 
-            mMainPresenter.onMapSearch(getCodeAtBottomNavigationViewItem(), latLngBounds);
+            mMainPresenter.onSearch(getCodeAtBottomNavigationViewItem(), latLngBounds);
         });
 
         googleMap.setOnMarkerClickListener((marker) -> {

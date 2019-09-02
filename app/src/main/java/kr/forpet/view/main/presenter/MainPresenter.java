@@ -21,8 +21,8 @@ public interface MainPresenter {
     void onDestroy();
 
     void onMapReady(GoogleMap googleMap);
-    void onMapSearch(Shop.CatCode catCode, LatLngBounds latLngBounds);
     void onMarkerClick(Marker marker);
+    void onSearch(Shop.CatCode catCode, LatLngBounds latLngBounds);
     void onMyLocate(OnCompleteListener<Location> listener);
 
     interface View {

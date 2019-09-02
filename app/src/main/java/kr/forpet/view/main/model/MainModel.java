@@ -1,6 +1,7 @@
 package kr.forpet.view.main.model;
 
 import android.content.Context;
+import android.location.Location;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -27,7 +28,7 @@ public class MainModel {
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
     }
 
-    public Task getMyLocation() throws SecurityException {
+    public Task<Location> getMyLocation() throws SecurityException {
         try {
             return mFusedLocationProviderClient.getLastLocation();
         } catch (SecurityException e) {
