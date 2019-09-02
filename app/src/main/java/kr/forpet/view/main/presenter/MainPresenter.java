@@ -10,6 +10,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 
+import java.util.List;
+
 import kr.forpet.data.entity.Shop;
 
 public interface MainPresenter {
@@ -29,6 +31,6 @@ public interface MainPresenter {
 
         void addMarker(MarkerOptions markerOptions);
         void moveCamera(LatLng latLng);
-        void showPopup(Shop shop);
+        void showPopup(List<Shop> list);
     }
 }

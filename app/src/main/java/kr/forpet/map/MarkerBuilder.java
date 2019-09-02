@@ -13,50 +13,50 @@ import kr.forpet.data.entity.Shop;
 
 public class MarkerBuilder {
 
-    private LatLng latLng;
+    private LatLng mLatLng;
 
-    private String catCode;
-    private String hash;
-    private String title;
-    private String event;
-    private String sale;
+    private String mCatCode;
+    private String mHash;
+    private String mTitle;
+    private String mEvent;
+    private String mSale;
 
     public MarkerBuilder(LatLng latLng) {
-        this.latLng = latLng;
+        this.mLatLng = latLng;
     }
 
     public MarkerBuilder catCode(String catCode) {
-        this.catCode = catCode;
+        this.mCatCode = catCode;
         return this;
     }
 
     public MarkerBuilder hash(String hash) {
-        this.hash = hash;
+        this.mHash = hash;
         return this;
     }
 
     public MarkerBuilder title(String title) {
-        this.title = title;
+        this.mTitle = title;
         return this;
     }
 
     public MarkerBuilder event(String event) {
-        this.event = event;
+        this.mEvent = event;
         return this;
     }
 
     public MarkerBuilder sale(String sale) {
-        this.sale = sale;
+        this.mSale = sale;
         return this;
     }
 
     public MarkerOptions build(Context context) {
-        StringBuilder sb = new StringBuilder(hash).append(",").append(catCode);
+        StringBuilder sb = new StringBuilder(mHash).append(",").append(mCatCode);
 
         MarkerOptions marker = new MarkerOptions();
-        marker.position(latLng);
+        marker.position(mLatLng);
         marker.snippet(sb.toString());
-        marker.icon(MarkerBuilder.createIconFromDrawable(context, catCode));
+        marker.icon(MarkerBuilder.createIconFromDrawable(context, mCatCode));
 
         return marker;
     }

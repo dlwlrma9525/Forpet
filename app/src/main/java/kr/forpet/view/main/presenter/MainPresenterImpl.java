@@ -20,10 +20,10 @@ import kr.forpet.view.main.model.MainModel;
 public class MainPresenterImpl implements MainPresenter {
 
     private MainPresenter.View mView;
-    private MainModel mainModel;
+    private MainModel mMainModel;
 
     public MainPresenterImpl() {
-        mainModel = new MainModel();
+        mMainModel = new MainModel();
     }
 
     @Override
@@ -33,8 +33,8 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onCreate(Context context) {
-        mainModel.initAppDatabase(context);
-        mainModel.initGooglePlayService(context);
+        mMainModel.initAppDatabase(context);
+        mMainModel.initGooglePlayService(context);
     }
 
     @Override
@@ -52,12 +52,13 @@ public class MainPresenterImpl implements MainPresenter {
         new AsyncTask<String, Void, List<Shop>>() {
             @Override
             protected List<Shop> doInBackground(String... strings) {
-                return mainModel.getShopList(latLngBounds, strings[0]);
+                return mMainModel.getShopList(latLngBounds, strings[0]);
             }
 
             @Override
             protected void onPostExecute(List<Shop> shops) {
                 super.onPostExecute(shops);
+                mView.showPopup(shops);
 
                 for (Shop shop : shops) {
                     mView.addMarker(new MarkerBuilder(new LatLng(shop.getY(), shop.getX()))
@@ -71,18 +72,18 @@ public class MainPresenterImpl implements MainPresenter {
         }.execute(catCode.toString());
     }
 
+    // TODO: check..
     @Override
     public void onMarkerClick(Marker marker) {
         new AsyncTask<String, Void, Shop>() {
             @Override
             protected Shop doInBackground(String... strings) {
-                return mainModel.getShop(strings[0]);
+                return mMainModel.getShop(strings[0]);
             }
 
             @Override
             protected void onPostExecute(Shop shop) {
                 super.onPostExecute(shop);
-                mView.showPopup(shop);
             }
         }.execute(marker.getSnippet().split(",")[0]);
     }
@@ -90,7 +91,7 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public void onMyLocate(OnCompleteListener<Location> listener) {
         try {
-            Task task = mainModel.getMyLocation();
+            Task task = mMainModel.getMyLocation();
             task.addOnCompleteListener(listener);
         } catch (Exception e) {
             e.printStackTrace();

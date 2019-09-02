@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 
 public class Permission {
+
     @TargetApi(Build.VERSION_CODES.M)
     public static boolean checkPermission(Activity activity, String[] permissionArr, int requestCode) {
         boolean flag = true;

@@ -15,12 +15,12 @@ import kr.forpet.data.entity.Shop;
 
 public class MainModel {
 
-    private AppDatabase db;
+    private AppDatabase mAppDatabase;
 
     private FusedLocationProviderClient mFusedLocationProviderClient;
 
     public void initAppDatabase(Context context) {
-        db = SQLiteHelper.assetsToDisk(context);
+        mAppDatabase = SQLiteHelper.assetsToDisk(context);
     }
 
     public void initGooglePlayService(Context context) {
@@ -36,11 +36,11 @@ public class MainModel {
     }
 
     public Shop getShop(String hashCode) {
-        return db.shopDAO().getByHashCode(hashCode);
+        return mAppDatabase.shopDAO().getByHashCode(hashCode);
     }
 
     public List<Shop> getShopList(LatLngBounds bounds, String catCode) {
-        return db.shopDAO().getByVisibleRegion(
+        return mAppDatabase.shopDAO().getByVisibleRegion(
                 bounds.southwest.longitude,
                 bounds.northeast.longitude,
                 bounds.southwest.latitude,
