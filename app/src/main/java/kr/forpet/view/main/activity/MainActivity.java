@@ -50,9 +50,7 @@ import butterknife.ButterKnife;
 import butterknife.ViewCollections;
 import kr.forpet.R;
 import kr.forpet.data.entity.Shop;
-import kr.forpet.map.MarkerBuilder;
 import kr.forpet.util.Permission;
-import kr.forpet.view.main.adapter.PopupViewPagerAdapter;
 import kr.forpet.view.main.presenter.MainPresenter;
 import kr.forpet.view.main.presenter.MainPresenterImpl;
 import kr.forpet.view.regist.RegistActivity;
@@ -84,7 +82,7 @@ public class MainActivity extends AppCompatActivity
     BottomNavigationView bottomNavigationView;
 
     @BindView(R.id.view_pager_popup)
-    ViewPager viewPagerPopup;
+    ViewPager popupViewPager;
 
     @BindView(R.id.include_bottom_sheet)
     ViewGroup bottomSheetView;
@@ -130,15 +128,6 @@ public class MainActivity extends AppCompatActivity
             finish();
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -149,38 +138,22 @@ public class MainActivity extends AppCompatActivity
             Projection projection = mMap.getProjection();
             LatLngBounds latLngBounds = projection.getVisibleRegion().latLngBounds;
 
-            if (mMakerCache.size() > 50) {
-                if (mLastMarker != null) {
-                    for (Marker marker : mMakerCache)
-                        if (!marker.equals(mLastMarker))
-                            marker.remove();
-                }
-
-                mMakerCache.clear();
-                mMakerCache.add(mLastMarker);
-            }
-
-            mMainPresenter.onSearch(getCodeAtBottomNavigationViewItem(), latLngBounds);
+            MenuItem item = bottomNavigationView.getMenu().findItem(bottomNavigationView.getSelectedItemId());
+            mMainPresenter.onMapUpdate(latLngBounds, item);
         });
 
         googleMap.setOnMarkerClickListener((marker) -> {
-            if (mLastMarker != null)
-                mLastMarker.setIcon(MarkerBuilder.createIconFromDrawable(getContext(), mLastMarker.getSnippet().split(",")[1]));
-
             BitmapDrawable bitmapDrawable = (BitmapDrawable) getResources().getDrawable(R.drawable.marker_current);
             marker.setIcon(BitmapDescriptorFactory.fromBitmap(bitmapDrawable.getBitmap()));
 
             mLastMarker = marker;
-            mMainPresenter.onMarkerClick(marker);
             return false;
         });
 
         mMainPresenter.onMyLocate((@NonNull Task<Location> task) -> {
             if (task.isSuccessful()) {
                 Location result = task.getResult();
-                LatLng latLng = new LatLng(result.getLatitude(), result.getLongitude());
-
-                moveCamera(latLng);
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(result.getLatitude(), result.getLongitude()), 15.0f));
             } else {
                 Log.d("GooglePlayServices", "Current location is null. Using defaults.");
                 Log.e("GooglePlayServices", "Exception: %s", task.getException());
@@ -198,22 +171,16 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.toolbar, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_search) {
+        if (id == R.id.action_search)
             return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -221,56 +188,17 @@ public class MainActivity extends AppCompatActivity
     // MainPresenter.View implements..
 
     @Override
-    public Context getContext() {
-        return getApplicationContext();
+    public void updateMap(List<MarkerOptions> markerOptions) {
+        for(MarkerOptions options : markerOptions)
+            mMakerCache.add(mMap.addMarker(options));
     }
 
     @Override
-    public void addMarker(MarkerOptions markerOptions) {
-        // Add a marker and move the camera..
+    public void clearMap() {
         for (Marker marker : mMakerCache)
-            if (marker.getPosition().equals(markerOptions.getPosition()))
-                return;
+            marker.remove();
 
-        mMakerCache.add(mMap.addMarker(markerOptions));
-    }
-
-    @Override
-    public void moveCamera(LatLng latLng) {
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f));
-    }
-
-    @Override
-    public void showPopup(List<Shop> list) {
-        PopupViewPagerAdapter adapter = new PopupViewPagerAdapter(getContext(), list);
-        adapter.setItemListener(new PopupViewPagerAdapter.ItemListener() {
-            @Override
-            public void onClick(Shop shop) {
-
-            }
-
-            @Override
-            public void onNavigate(Shop shop) {
-                mMainPresenter.onMyLocate((@NonNull Task<Location> task) -> {
-                    if (task.isSuccessful()) {
-                        Location result = task.getResult();
-
-                        LatLng start = new LatLng(result.getLatitude(), result.getLongitude());
-                        LatLng dest = new LatLng(shop.getY(), shop.getX());
-
-                        broadcastGoogleMaps(start, dest);
-                    }
-                });
-            }
-
-            @Override
-            public void onCall(Shop shop) {
-                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + shop.getPhone()));
-                startActivity(intent);
-            }
-        });
-
-        viewPagerPopup.setAdapter(adapter);
+        mMakerCache.clear();
     }
 
     private void init() {
@@ -308,26 +236,23 @@ public class MainActivity extends AppCompatActivity
 
         bottomNavigationView.setOnNavigationItemSelectedListener((@NonNull MenuItem item) -> {
             if (item.getItemId() == R.id.action_more) {
-                ViewCollections.run(floatingActionButtons, (view, idx) -> {
-                    if (view.isShown())
-                        view.hide();
+                ViewCollections.run(floatingActionButtons, (v, i) -> {
+                    if (v.isShown())
+                        v.hide();
                     else
-                        view.show();
+                        v.show();
                 });
             } else {
-                ViewCollections.run(floatingActionButtons, (view, idx) -> {
-                    if (view.isShown())
-                        view.hide();
+                ViewCollections.run(floatingActionButtons, (v, i) -> {
+                    if (v.isShown())
+                        v.hide();
                 });
+
+                clearMap();
 
                 Projection projection = mMap.getProjection();
                 LatLngBounds latLngBounds = projection.getVisibleRegion().latLngBounds;
-
-                mMakerCache.clear();
-                mLastMarker = null;
-
-                mMap.clear();
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngBounds.getCenter(), mMap.getCameraPosition().zoom));
+                mMainPresenter.onMapUpdate(latLngBounds, item);
             }
 
             return true;
@@ -356,41 +281,23 @@ public class MainActivity extends AppCompatActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        ViewCollections.run(floatingActionButtons, (view, idx) -> view.hide());
+
         DisplayMetrics metrics = getResources().getDisplayMetrics();
-        viewPagerPopup.setClipToPadding(false);
-        viewPagerPopup.setPageMargin(Math.round(5 * metrics.density));
+        popupViewPager.setClipToPadding(false);
+        popupViewPager.setPageMargin(Math.round(5 * metrics.density));
 
         buttonMyLocate.setOnClickListener((v) -> mMainPresenter.onMyLocate((@NonNull Task<Location> task) -> {
             if (task.isSuccessful()) {
                 Location result = task.getResult();
                 LatLng latLng = new LatLng(result.getLatitude(), result.getLongitude());
 
-                moveCamera(latLng);
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f));
             } else {
                 Log.d("GooglePlayServices", "Current location is null. Using defaults.");
                 Log.e("GooglePlayServices", "Exception: %s", task.getException());
             }
         }));
-    }
-
-    private Shop.CatCode getCodeAtBottomNavigationViewItem() {
-        Shop.CatCode code = null;
-        switch (bottomNavigationView.getSelectedItemId()) {
-            case R.id.action_supplies:
-                code = Shop.CatCode.SHOP;
-                break;
-            case R.id.action_pharm:
-                code = Shop.CatCode.PHARM;
-                break;
-            case R.id.action_hospital:
-                code = Shop.CatCode.HOSPITAL;
-                break;
-            case R.id.action_hair:
-                code = Shop.CatCode.BEAUTY;
-                break;
-        }
-
-        return code;
     }
 
     private void broadcastGoogleMaps(LatLng start, LatLng dest) {

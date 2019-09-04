@@ -1,9 +1,5 @@
 package kr.forpet.map;
 
-import android.content.Context;
-import android.graphics.drawable.BitmapDrawable;
-
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -15,7 +11,7 @@ public class MarkerBuilder {
 
     private LatLng mLatLng;
 
-    private String mCatCode;
+    private String mCategory;
     private String mHash;
     private String mTitle;
     private String mEvent;
@@ -25,8 +21,8 @@ public class MarkerBuilder {
         this.mLatLng = latLng;
     }
 
-    public MarkerBuilder catCode(String catCode) {
-        this.mCatCode = catCode;
+    public MarkerBuilder category(String category) {
+        this.mCategory = category;
         return this;
     }
 
@@ -35,6 +31,7 @@ public class MarkerBuilder {
         return this;
     }
 
+    // TODO: remove after
     public MarkerBuilder title(String title) {
         this.mTitle = title;
         return this;
@@ -50,20 +47,20 @@ public class MarkerBuilder {
         return this;
     }
 
-    public MarkerOptions build(Context context) {
-        StringBuilder sb = new StringBuilder(mHash).append(",").append(mCatCode);
-
+    public MarkerOptions build() {
         MarkerOptions marker = new MarkerOptions();
         marker.position(mLatLng);
-        marker.snippet(sb.toString());
-        marker.icon(MarkerBuilder.createIconFromDrawable(context, mCatCode));
+        marker.title(mTitle);
+        marker.snippet(mHash);
+        marker.icon(BitmapDescriptorFactory.fromResource(MarkerBuilder.getIcon(mCategory)));
 
         return marker;
     }
 
-    public static BitmapDescriptor createIconFromDrawable(Context context, String catCode) {
+    public static int getIcon(String category) {
         int drawable = 0;
-        switch (Shop.CatCode.compare(catCode)) {
+
+        switch (Shop.CategoryGroupCode.compare(category)) {
             case SHOP:
                 drawable = R.drawable.marker_shop;
                 break;
@@ -90,7 +87,6 @@ public class MarkerBuilder {
                 break;
         }
 
-        BitmapDrawable bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(drawable);
-        return BitmapDescriptorFactory.fromBitmap(bitmapDrawable.getBitmap());
+        return drawable;
     }
 }

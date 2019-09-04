@@ -21,10 +21,10 @@ import kr.forpet.annotation.RegistItem;
 )
 public class Shop {
 
-    public enum CatCode {
+    public enum CategoryGroupCode {
         SHOP, PHARM, HOSPITAL, DOGPENSION, DOGGROUND, DOGCAFE, CATCAFE, BEAUTY;
 
-        public static CatCode compare(String str) {
+        public static CategoryGroupCode compare(String str) {
             return valueOf(str.toUpperCase());
         }
     }

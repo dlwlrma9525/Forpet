@@ -3,19 +3,20 @@ package kr.forpet.view.main.presenter;
 import android.content.Context;
 import android.location.Location;
 import android.os.AsyncTask;
-
-import androidx.annotation.NonNull;
+import android.view.MenuItem;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import kr.forpet.R;
 import kr.forpet.data.entity.Shop;
 import kr.forpet.map.MarkerBuilder;
 import kr.forpet.view.main.model.MainModel;
@@ -51,22 +52,23 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void onMarkerClick(Marker marker) {
-        new AsyncTask<String, Void, Shop>() {
-            @Override
-            protected Shop doInBackground(String... strings) {
-                return mMainModel.getShop(strings[0]);
-            }
+    public void onMapUpdate(LatLngBounds latLngBounds, MenuItem item) {
+        Shop.CategoryGroupCode code = null;
+        switch (item.getItemId()) {
+            case R.id.action_supplies:
+                code = Shop.CategoryGroupCode.SHOP;
+                break;
+            case R.id.action_pharm:
+                code = Shop.CategoryGroupCode.PHARM;
+                break;
+            case R.id.action_hospital:
+                code = Shop.CategoryGroupCode.HOSPITAL;
+                break;
+            case R.id.action_hair:
+                code = Shop.CategoryGroupCode.BEAUTY;
+                break;
+        }
 
-            @Override
-            protected void onPostExecute(Shop shop) {
-                super.onPostExecute(shop);
-            }
-        }.execute(marker.getSnippet().split(",")[0]);
-    }
-
-    @Override
-    public void onSearch(Shop.CatCode catCode, LatLngBounds latLngBounds) {
         new AsyncTask<String, Void, List<Shop>>() {
             @Override
             protected List<Shop> doInBackground(String... strings) {
@@ -77,41 +79,40 @@ public class MainPresenterImpl implements MainPresenter {
             protected void onPostExecute(List<Shop> shops) {
                 super.onPostExecute(shops);
 
-                mMainModel.getMyLocation().addOnCompleteListener((@NonNull Task<Location> task) -> {
-                    if (task.isSuccessful()) {
-                        Location result = task.getResult();
+                Collections.sort(shops, (e1, e2) -> {
+                    Location center = new Location("");
+                    center.setLatitude(latLngBounds.getCenter().latitude);
+                    center.setLongitude(latLngBounds.getCenter().longitude);
 
-                        Collections.sort(shops, (e1, e2) -> {
-                            Location l1 = new Location(e1.getForpetHash());
-                            l1.setLatitude(e1.getY());
-                            l1.setLongitude(e1.getX());
+                    Location l1 = new Location(e1.getForpetHash());
+                    l1.setLatitude(e1.getY());
+                    l1.setLongitude(e1.getX());
 
-                            Location l2 = new Location(e2.getForpetHash());
-                            l2.setLatitude(e2.getY());
-                            l2.setLongitude(e2.getX());
+                    Location l2 = new Location(e2.getForpetHash());
+                    l2.setLatitude(e2.getY());
+                    l2.setLongitude(e2.getX());
 
-                            if (result.distanceTo(l1) > result.distanceTo(l2))
-                                return 1;
-                            else if (result.distanceTo(l1) < result.distanceTo(l2))
-                                return -1;
+                    if (center.distanceTo(l1) > center.distanceTo(l2))
+                        return 1;
+                    else if (center.distanceTo(l1) < center.distanceTo(l2))
+                        return -1;
 
-                            return 0;
-                        });
-                    }
-
-                    for (Shop shop : shops) {
-                        mView.addMarker(new MarkerBuilder(new LatLng(shop.getY(), shop.getX()))
-                                .catCode(shop.getCategoryGroupCode())
-                                .hash(shop.getForpetHash())
-                                .title(shop.getPlaceName())
-                                .event(shop.getEvent())
-                                .build(mView.getContext()));
-                    }
-
-                    mView.showPopup(shops);
+                    return 0;
                 });
+
+                List<MarkerOptions> markerOptions = new ArrayList<>();
+                for (Shop shop : shops) {
+                    markerOptions.add(new MarkerBuilder(new LatLng(shop.getY(), shop.getX()))
+                            .category(shop.getCategoryGroupCode())
+                            .title(shop.getPlaceName())
+                            .hash(shop.getForpetHash())
+                            .build());
+                }
+
+                mView.clearMap();
+                mView.updateMap(markerOptions);
             }
-        }.execute(catCode.toString());
+        }.execute(code.toString());
     }
 
     @Override
