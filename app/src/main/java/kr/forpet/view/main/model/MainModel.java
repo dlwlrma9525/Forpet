@@ -40,13 +40,13 @@ public class MainModel {
         return mAppDatabase.shopDAO().getByHashCode(hashCode);
     }
 
-    public List<Shop> getShopList(LatLngBounds bounds, String catCode) {
+    public List<Shop> getShopList(LatLngBounds bounds, String categoryGroupCode) {
         return mAppDatabase.shopDAO().getByVisibleRegion(
                 bounds.southwest.longitude,
                 bounds.northeast.longitude,
                 bounds.southwest.latitude,
                 bounds.northeast.latitude,
-                catCode
+                categoryGroupCode
         );
     }
 }

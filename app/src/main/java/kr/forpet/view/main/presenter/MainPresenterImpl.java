@@ -80,9 +80,9 @@ public class MainPresenterImpl implements MainPresenter {
                 super.onPostExecute(shops);
 
                 Collections.sort(shops, (e1, e2) -> {
-                    Location center = new Location("");
-                    center.setLatitude(latLngBounds.getCenter().latitude);
-                    center.setLongitude(latLngBounds.getCenter().longitude);
+                    Location ct = new Location("");
+                    ct.setLatitude(latLngBounds.getCenter().latitude);
+                    ct.setLongitude(latLngBounds.getCenter().longitude);
 
                     Location l1 = new Location(e1.getForpetHash());
                     l1.setLatitude(e1.getY());
@@ -92,36 +92,32 @@ public class MainPresenterImpl implements MainPresenter {
                     l2.setLatitude(e2.getY());
                     l2.setLongitude(e2.getX());
 
-                    if (center.distanceTo(l1) > center.distanceTo(l2))
+                    if (ct.distanceTo(l1) > ct.distanceTo(l2))
                         return 1;
-                    else if (center.distanceTo(l1) < center.distanceTo(l2))
+                    else if (ct.distanceTo(l1) < ct.distanceTo(l2))
                         return -1;
 
                     return 0;
                 });
 
-                List<MarkerOptions> markerOptions = new ArrayList<>();
+                List<MarkerOptions> markerOptionsList = new ArrayList<>();
                 for (Shop shop : shops) {
-                    markerOptions.add(new MarkerBuilder(new LatLng(shop.getY(), shop.getX()))
-                            .category(shop.getCategoryGroupCode())
-                            .title(shop.getPlaceName())
-                            .hash(shop.getForpetHash())
+                    markerOptionsList.add(new MarkerBuilder(new LatLng(shop.getY(), shop.getX()))
+                            .categoryGroupCode(shop.getCategoryGroupCode())
+                            .placeName(shop.getPlaceName())
+                            .forpetHash(shop.getForpetHash())
                             .build());
                 }
 
                 mView.clearMap();
-                mView.updateMap(markerOptions);
+                mView.updateMap(markerOptionsList);
             }
         }.execute(code.toString());
     }
 
     @Override
     public void onMyLocate(OnCompleteListener<Location> listener) {
-        try {
-            Task task = mMainModel.getMyLocation();
-            task.addOnCompleteListener(listener);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Task task = mMainModel.getMyLocation();
+        task.addOnCompleteListener(listener);
     }
 }

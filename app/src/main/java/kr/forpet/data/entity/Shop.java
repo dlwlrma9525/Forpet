@@ -8,7 +8,6 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import kr.forpet.annotation.Label;
-import kr.forpet.annotation.RegistItem;
 
 @Entity(tableName = "forpet_shop",
         indices = {
@@ -40,17 +39,14 @@ public class Shop {
 
     @ColumnInfo(name = "address_name")
     @Label("주소")
-    @RegistItem(idx = 4)
     private String addressName;
 
     @Ignore
     @Label("상세주소")
-    @RegistItem(idx = 5)
     private String addressNameDetail;
 
     @ColumnInfo(name = "category_group_code")
     @Label("서비스종류")
-    @RegistItem(idx = 0)
     private String categoryGroupCode;
 
     @ColumnInfo(name = "kakao_id")
@@ -58,37 +54,30 @@ public class Shop {
 
     @Ignore
     @Label("사업자번호")
-    @RegistItem(idx = 2)
     private String businessNo;
 
     @Ignore
     @Label("대표자이름")
-    @RegistItem(idx = 3)
     private String ceoName;
 
     @Ignore
     @Label("담당자이름")
-    @RegistItem(idx = 6)
     private String chargeName;
 
     @ColumnInfo(name = "phone")
     @Label("연락처")
-    @RegistItem(idx = 7)
     private String phone;
 
     @Ignore
     @Label("이메일")
-    @RegistItem(idx = 8)
     private String email;
 
     @ColumnInfo(name = "place_name")
     @Label("이름")
-    @RegistItem(idx = 1)
     private String placeName;
 
     @ColumnInfo(name = "place_image_url")
     @Label("업체사진")
-    @RegistItem(idx = 9)
     private String placeImageUrl;
 
     @ColumnInfo(name = "homepage")
@@ -145,7 +134,6 @@ public class Shop {
 
     @ColumnInfo(name = "intro")
     @Label("업체소개")
-    @RegistItem(idx = 10)
     private String intro;
 
     public Integer getNo() {

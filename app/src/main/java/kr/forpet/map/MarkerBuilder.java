@@ -11,52 +11,44 @@ public class MarkerBuilder {
 
     private LatLng mLatLng;
 
-    private String mCategory;
-    private String mHash;
-    private String mTitle;
-    private String mEvent;
-    private String mSale;
+    private String mCategoryGroupCode = null;
+    private String mForpetHash = null;
+    private String mPlaceName = null;
 
     public MarkerBuilder(LatLng latLng) {
         this.mLatLng = latLng;
     }
 
-    public MarkerBuilder category(String category) {
-        this.mCategory = category;
+    public MarkerBuilder categoryGroupCode(String categoryGroupCode) {
+        this.mCategoryGroupCode = categoryGroupCode;
         return this;
     }
 
-    public MarkerBuilder hash(String hash) {
-        this.mHash = hash;
+    public MarkerBuilder forpetHash(String forpetHash) {
+        this.mForpetHash = forpetHash;
         return this;
     }
 
-    public MarkerBuilder title(String title) {
-        this.mTitle = title;
-        return this;
-    }
-
-    public MarkerBuilder event(String event) {
-        this.mEvent = event;
-        return this;
-    }
-
-    public MarkerBuilder sale(String sale) {
-        this.mSale = sale;
+    public MarkerBuilder placeName(String placeName) {
+        this.mPlaceName = placeName;
         return this;
     }
 
     public MarkerOptions build() {
-        MarkerOptions marker = new MarkerOptions();
-        marker.position(mLatLng);
-        marker.title(mTitle);
-        marker.snippet(mHash);
-        marker.icon(BitmapDescriptorFactory.fromResource(MarkerBuilder.getIcon(mCategory)));
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(mLatLng);
+        markerOptions.icon(BitmapDescriptorFactory.fromResource(getIcon(mCategoryGroupCode)));
 
-        return marker;
+        if(mPlaceName != null)
+            markerOptions.title(mPlaceName);
+
+        if(mForpetHash != null)
+            markerOptions.snippet(mForpetHash);
+
+        return markerOptions;
     }
 
-    public static int getIcon(String category) {
+    private int getIcon(String category) {
         int drawable = 0;
 
         switch (Shop.CategoryGroupCode.compare(category)) {

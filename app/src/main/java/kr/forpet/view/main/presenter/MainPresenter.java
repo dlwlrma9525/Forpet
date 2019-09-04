@@ -23,7 +23,7 @@ public interface MainPresenter {
 
     interface View {
 
-        void updateMap(List<MarkerOptions> markerOptions);
+        void updateMap(List<MarkerOptions> markerOptionsList);
         void clearMap();
     }
 }

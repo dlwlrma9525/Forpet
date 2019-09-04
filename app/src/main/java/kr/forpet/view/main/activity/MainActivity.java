@@ -2,9 +2,7 @@ package kr.forpet.view.main.activity;
 
 import android.Manifest;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -29,6 +27,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -66,7 +65,7 @@ public class MainActivity extends AppCompatActivity
     private BottomSheetBehavior mPersistentBottomSheet;
 
     private List<Marker> mMakerCache = new ArrayList<>();
-    private Marker mLastMarker;
+    private Marker mLastClickMarker;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -142,8 +141,13 @@ public class MainActivity extends AppCompatActivity
         });
 
         googleMap.setOnMarkerClickListener((marker) -> {
+            if (mLastClickMarker != null) {
+                BitmapDescriptor snapshot = (BitmapDescriptor) mLastClickMarker.getTag();
+                mLastClickMarker.setIcon(snapshot);
+            }
+
             marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_current));
-            mLastMarker = marker;
+            mLastClickMarker = marker;
             return false;
         });
 
@@ -174,9 +178,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_search)
+        if (item.getItemId() == R.id.action_search)
             return true;
 
         return super.onOptionsItemSelected(item);
@@ -185,14 +187,15 @@ public class MainActivity extends AppCompatActivity
     // MainPresenter.View implements..
 
     @Override
-    public void updateMap(List<MarkerOptions> markerOptions) {
-        for (MarkerOptions options : markerOptions) {
-            Marker marker = mMap.addMarker(options);
+    public void updateMap(List<MarkerOptions> markerOptionsList) {
+        for (MarkerOptions markerOptions : markerOptionsList) {
+            if (mLastClickMarker != null)
+                if (mLastClickMarker.getPosition().equals(markerOptions.getPosition()))
+                    continue;
 
-            if(mLastMarker != null && mLastMarker.getPosition().equals(options.getPosition())) {
-                marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_current));
-                mLastMarker = marker;
-            }
+            Marker marker = mMap.addMarker(markerOptions);
+            BitmapDescriptor snapshot = markerOptions.getIcon();
+            marker.setTag(snapshot);
 
             mMakerCache.add(marker);
         }
@@ -200,13 +203,25 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void clearMap() {
-        for (Marker marker : mMakerCache)
+        for (Marker marker : mMakerCache) {
+            if (marker.equals(mLastClickMarker))
+                continue;
+
             marker.remove();
+        }
 
         mMakerCache.clear();
     }
 
     private void init() {
+        initActionBar();
+        initGoogleMap();
+        initPopupViewPager();
+        initNavigationView();
+        initBottomNavigationView();
+    }
+
+    private void initActionBar() {
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
@@ -223,7 +238,34 @@ public class MainActivity extends AppCompatActivity
             else
                 drawer.openDrawer(GravityCompat.START);
         });
+    }
 
+    private void initGoogleMap() {
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
+        buttonMyLocate.setOnClickListener((v) -> mMainPresenter.onMyLocate((@NonNull Task<Location> task) -> {
+            if (task.isSuccessful()) {
+                Location result = task.getResult();
+                LatLng latLng = new LatLng(result.getLatitude(), result.getLongitude());
+
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f));
+            } else {
+                Log.d("GooglePlayServices", "Current location is null. Using defaults.");
+                Log.e("GooglePlayServices", "Exception: %s", task.getException());
+            }
+        }));
+    }
+
+    private void initPopupViewPager() {
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        popupViewPager.setClipToPadding(false);
+        popupViewPager.setPageMargin(Math.round(5 * metrics.density));
+    }
+
+    private void initNavigationView() {
         navigationView.findViewById(R.id.button_regist_hosp).setOnClickListener((v) -> {
         });
 
@@ -238,6 +280,10 @@ public class MainActivity extends AppCompatActivity
 
         navigationView.findViewById(R.id.button_regist_advertisement).setOnClickListener((v) -> {
         });
+    }
+
+    private void initBottomNavigationView() {
+        ViewCollections.run(floatingActionButtons, (v, i) -> v.hide());
 
         bottomNavigationView.setOnNavigationItemSelectedListener((@NonNull MenuItem item) -> {
             if (item.getItemId() == R.id.action_more) {
@@ -253,7 +299,9 @@ public class MainActivity extends AppCompatActivity
                         v.hide();
                 });
 
-                clearMap();
+                mLastClickMarker = null;
+                mMakerCache.clear();
+                mMap.clear();
 
                 Projection projection = mMap.getProjection();
                 LatLngBounds latLngBounds = projection.getVisibleRegion().latLngBounds;
@@ -280,41 +328,5 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
-
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-
-        ViewCollections.run(floatingActionButtons, (view, idx) -> view.hide());
-
-        DisplayMetrics metrics = getResources().getDisplayMetrics();
-        popupViewPager.setClipToPadding(false);
-        popupViewPager.setPageMargin(Math.round(5 * metrics.density));
-
-        buttonMyLocate.setOnClickListener((v) -> mMainPresenter.onMyLocate((@NonNull Task<Location> task) -> {
-            if (task.isSuccessful()) {
-                Location result = task.getResult();
-                LatLng latLng = new LatLng(result.getLatitude(), result.getLongitude());
-
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f));
-            } else {
-                Log.d("GooglePlayServices", "Current location is null. Using defaults.");
-                Log.e("GooglePlayServices", "Exception: %s", task.getException());
-            }
-        }));
-    }
-
-    private void broadcastGoogleMaps(LatLng start, LatLng dest) {
-        StringBuilder sb = new StringBuilder("http://maps.google.com/maps?")
-                .append("saddr=").append(start.latitude).append(",").append(start.longitude)
-                .append("&daddr=").append(dest.latitude).append(",").append(dest.longitude);
-
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(sb.toString()));
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addCategory(Intent.CATEGORY_LAUNCHER);
-        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
-
-        startActivity(intent);
     }
 }
