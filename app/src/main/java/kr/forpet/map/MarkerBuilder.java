@@ -31,7 +31,6 @@ public class MarkerBuilder {
         return this;
     }
 
-    // TODO: remove after
     public MarkerBuilder title(String title) {
         this.mTitle = title;
         return this;

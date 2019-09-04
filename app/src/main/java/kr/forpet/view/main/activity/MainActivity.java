@@ -1,7 +1,6 @@
 package kr.forpet.view.main.activity;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
@@ -143,9 +142,7 @@ public class MainActivity extends AppCompatActivity
         });
 
         googleMap.setOnMarkerClickListener((marker) -> {
-            BitmapDrawable bitmapDrawable = (BitmapDrawable) getResources().getDrawable(R.drawable.marker_current);
-            marker.setIcon(BitmapDescriptorFactory.fromBitmap(bitmapDrawable.getBitmap()));
-
+            marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_current));
             mLastMarker = marker;
             return false;
         });
@@ -189,8 +186,16 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void updateMap(List<MarkerOptions> markerOptions) {
-        for(MarkerOptions options : markerOptions)
-            mMakerCache.add(mMap.addMarker(options));
+        for (MarkerOptions options : markerOptions) {
+            Marker marker = mMap.addMarker(options);
+
+            if(mLastMarker != null && mLastMarker.getPosition().equals(options.getPosition())) {
+                marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_current));
+                mLastMarker = marker;
+            }
+
+            mMakerCache.add(marker);
+        }
     }
 
     @Override
