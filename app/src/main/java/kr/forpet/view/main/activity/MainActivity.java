@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -139,6 +140,9 @@ public class MainActivity extends AppCompatActivity
             if (mMarker != null) {
                 BitmapDescriptor snapshot = (BitmapDescriptor) mMarker.getTag();
                 mMarker.setIcon(snapshot);
+
+                if (onCameraIdleInPageSelected)
+                    onCameraIdleInPageSelected = false;
             }
 
             mMarker = marker;
@@ -281,6 +285,7 @@ public class MainActivity extends AppCompatActivity
                 Location result = task.getResult();
                 LatLng latLng = new LatLng(result.getLatitude(), result.getLongitude());
 
+                zoom = 15.0f;
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
             } else {
                 Log.d("GooglePlayServices", "Current location is null. Using defaults.");
@@ -310,7 +315,7 @@ public class MainActivity extends AppCompatActivity
                 mMarker.showInfoWindow();
 
                 onCameraIdleInPageSelected = true;
-                mMap.animateCamera(CameraUpdateFactory.newLatLng(mMarker.getPosition()));
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(mMarker.getPosition()), 400, null);
             }
 
             @Override
