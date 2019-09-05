@@ -3,7 +3,10 @@ package kr.forpet.view.main.presenter;
 import android.content.Context;
 import android.location.Location;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
@@ -25,6 +28,7 @@ public class MainPresenterImpl implements MainPresenter {
 
     private MainPresenter.View mView;
     private MainModel mMainModel;
+    private boolean isPopup;
 
     public MainPresenterImpl() {
         mMainModel = new MainModel();
@@ -76,43 +80,58 @@ public class MainPresenterImpl implements MainPresenter {
             }
 
             @Override
-            protected void onPostExecute(List<Shop> shops) {
-                super.onPostExecute(shops);
+            protected void onPostExecute(List<Shop> shopList) {
+                super.onPostExecute(shopList);
 
-                Collections.sort(shops, (e1, e2) -> {
-                    Location ct = new Location("");
-                    ct.setLatitude(latLngBounds.getCenter().latitude);
-                    ct.setLongitude(latLngBounds.getCenter().longitude);
+                mMainModel.getMyLocation().addOnCompleteListener((@NonNull Task<Location> task) -> {
+                    if (task.isSuccessful()) {
+                        Collections.sort(shopList, (e1, e2) -> {
+                            Location result = task.getResult();
 
-                    Location l1 = new Location(e1.getForpetHash());
-                    l1.setLatitude(e1.getY());
-                    l1.setLongitude(e1.getX());
+                            Location l1 = new Location(e1.getForpetHash());
+                            l1.setLatitude(e1.getY());
+                            l1.setLongitude(e1.getX());
 
-                    Location l2 = new Location(e2.getForpetHash());
-                    l2.setLatitude(e2.getY());
-                    l2.setLongitude(e2.getX());
+                            Location l2 = new Location(e2.getForpetHash());
+                            l2.setLatitude(e2.getY());
+                            l2.setLongitude(e2.getX());
 
-                    if (ct.distanceTo(l1) > ct.distanceTo(l2))
-                        return 1;
-                    else if (ct.distanceTo(l1) < ct.distanceTo(l2))
-                        return -1;
+                            if (result.distanceTo(l1) > result.distanceTo(l2))
+                                return 1;
+                            else if (result.distanceTo(l1) < result.distanceTo(l2))
+                                return -1;
 
-                    return 0;
+                            return 0;
+                        });
+
+                        List<MarkerOptions> markerOptionsList = new ArrayList<>();
+                        for (Shop shop : shopList) {
+                            markerOptionsList.add(new MarkerBuilder(new LatLng(shop.getY(), shop.getX()))
+                                    .categoryGroupCode(shop.getCategoryGroupCode())
+                                    .placeName(shop.getPlaceName())
+                                    .forpetHash(shop.getForpetHash())
+                                    .build());
+                        }
+
+                        mView.clearMap();
+                        mView.updateMap(markerOptionsList);
+
+                        if (isPopup) {
+                            mView.updatePopup(shopList);
+                            isPopup = false;
+                        }
+                    } else {
+                        Log.d("GooglePlayServices", "Current location is null. Using defaults.");
+                        Log.e("GooglePlayServices", "Exception: %s", task.getException());
+                    }
                 });
-
-                List<MarkerOptions> markerOptionsList = new ArrayList<>();
-                for (Shop shop : shops) {
-                    markerOptionsList.add(new MarkerBuilder(new LatLng(shop.getY(), shop.getX()))
-                            .categoryGroupCode(shop.getCategoryGroupCode())
-                            .placeName(shop.getPlaceName())
-                            .forpetHash(shop.getForpetHash())
-                            .build());
-                }
-
-                mView.clearMap();
-                mView.updateMap(markerOptionsList);
             }
         }.execute(code.toString());
+    }
+
+    @Override
+    public void onMarkerClick() {
+        isPopup = true;
     }
 
     @Override

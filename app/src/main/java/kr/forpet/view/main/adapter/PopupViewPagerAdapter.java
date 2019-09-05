@@ -17,8 +17,6 @@ import kr.forpet.data.entity.Shop;
 
 public class PopupViewPagerAdapter extends PagerAdapter {
 
-    private ItemListener mListener;
-
     private Context mContext;
     private List<Shop> mList;
 
@@ -45,18 +43,12 @@ public class PopupViewPagerAdapter extends PagerAdapter {
         textAddressName.setText(shop.getRoadAddressName());
 
         itemView.setOnClickListener((v) -> {
-            if (mListener != null)
-                mListener.onClick(shop);
         });
 
         buttonNavigation.setOnClickListener((v) -> {
-            if (mListener != null)
-                mListener.onNavigate(shop);
         });
 
         buttonCall.setOnClickListener((v) -> {
-            if (mListener != null)
-                mListener.onCall(shop);
         });
 
         container.addView(itemView);
@@ -76,16 +68,5 @@ public class PopupViewPagerAdapter extends PagerAdapter {
     @Override
     public int getCount() {
         return mList.size();
-    }
-
-    public void setItemListener(ItemListener listener) {
-        this.mListener = listener;
-    }
-
-    public interface ItemListener {
-
-        void onClick(Shop shop);
-        void onNavigate(Shop shop);
-        void onCall(Shop shop);
     }
 }

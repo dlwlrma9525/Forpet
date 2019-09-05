@@ -124,7 +124,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
-        android:id="@+id/dim_effect"
+        android:id="@+id/view_dim"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorDim"

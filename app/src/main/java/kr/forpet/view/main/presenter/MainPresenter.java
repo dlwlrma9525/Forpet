@@ -11,6 +11,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 
 import java.util.List;
 
+import kr.forpet.data.entity.Shop;
+
 public interface MainPresenter {
 
     void setView(View view);
@@ -19,10 +21,12 @@ public interface MainPresenter {
 
     void onMapReady(GoogleMap googleMap);
     void onMapUpdate(LatLngBounds latLngBounds, MenuItem item);
+    void onMarkerClick();
     void onMyLocate(OnCompleteListener<Location> listener);
 
     interface View {
 
+        void updatePopup(List<Shop> shopList);
         void updateMap(List<MarkerOptions> markerOptionsList);
         void clearMap();
     }
