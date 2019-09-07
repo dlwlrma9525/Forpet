@@ -72,6 +72,9 @@ public class Shop {
     @Label("이메일")
     private String email;
 
+    @Ignore
+    private float distance;
+
     @ColumnInfo(name = "place_name")
     @Label("이름")
     private String placeName;
@@ -222,6 +225,14 @@ public class Shop {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public float getDistance() {
+        return distance;
+    }
+
+    public void setDistance(float distance) {
+        this.distance = distance;
     }
 
     public String getPlaceName() {

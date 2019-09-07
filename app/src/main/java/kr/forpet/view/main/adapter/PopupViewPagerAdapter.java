@@ -32,6 +32,7 @@ public class PopupViewPagerAdapter extends PagerAdapter {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = inflater.inflate(R.layout.layout_popup, container, false);
 
+        TextView textDistance = itemView.findViewById(R.id.text_popup_distance);
         TextView textPlaceName = itemView.findViewById(R.id.text_popup_place);
         TextView textAddressName = itemView.findViewById(R.id.text_popup_address);
         Button buttonNavigation = itemView.findViewById(R.id.button_popup_navigation);
@@ -39,6 +40,7 @@ public class PopupViewPagerAdapter extends PagerAdapter {
 
         Shop shop = mList.get(position);
 
+        textDistance.setText(String.format("%.2f km", shop.getDistance() / 1000));
         textPlaceName.setText(shop.getPlaceName());
         textAddressName.setText(shop.getRoadAddressName());
 

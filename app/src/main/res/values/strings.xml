@@ -23,7 +23,7 @@
     <string name="nav_regist_advertisement">광고 요청하기</string>
 
     <string name="detail_header_modify">수정요청</string>
-    <string name="detail_header_opened">진료중</string>
+    <string name="detail_header_distance">km</string>
     <string name="detail_header_business_hours">운영시간</string>
     <string name="detail_header_pay">치료비 공개</string>
     <string name="detail_header_intro">간단소개</string>

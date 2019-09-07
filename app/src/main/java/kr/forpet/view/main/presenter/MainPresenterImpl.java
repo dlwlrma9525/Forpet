@@ -65,9 +65,13 @@ public class MainPresenterImpl implements MainPresenter {
                     l2.setLatitude(e2.getY());
                     l2.setLongitude(e2.getX());
 
-                    if (mLastLocation.distanceTo(l1) > mLastLocation.distanceTo(l2))
+                    // distanceTo return meter..
+                    e1.setDistance(mLastLocation.distanceTo(l1));
+                    e2.setDistance(mLastLocation.distanceTo(l2));
+
+                    if (e1.getDistance() > e2.getDistance())
                         return 1;
-                    else if (mLastLocation.distanceTo(l1) < mLastLocation.distanceTo(l2))
+                    else if (e1.getDistance() < e2.getDistance())
                         return -1;
 
                     return 0;

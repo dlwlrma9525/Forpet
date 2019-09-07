@@ -7,14 +7,14 @@
     android:elevation="5dp">
 
     <TextView
-        android:id="@+id/text_popup_opened"
+        android:id="@+id/text_popup_distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="13dp"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/nanum_square"
         android:includeFontPadding="false"
-        android:text="@string/detail_header_opened"
+        android:text="@string/detail_header_distance"
         android:textColor="#ff6586"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +31,7 @@
         android:text="@string/place"
         android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/text_popup_opened"
+        app:layout_constraintStart_toEndOf="@+id/text_popup_distance"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -44,8 +44,8 @@
         android:text="@string/dummy_address"
         android:textColor="#444444"
         android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="@+id/text_popup_opened"
-        app:layout_constraintTop_toBottomOf="@+id/text_popup_opened" />
+        app:layout_constraintStart_toStartOf="@+id/text_popup_distance"
+        app:layout_constraintTop_toBottomOf="@+id/text_popup_distance" />
 
     <Button
         android:id="@+id/button_popup_navigation"
