@@ -2,11 +2,9 @@ package kr.forpet.view.main.activity;
 
 import android.Manifest;
 import android.content.Intent;
-import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,20 +19,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -49,6 +44,7 @@ import butterknife.ButterKnife;
 import butterknife.ViewCollections;
 import kr.forpet.R;
 import kr.forpet.data.entity.Shop;
+import kr.forpet.map.MarkerBuilder;
 import kr.forpet.util.Permission;
 import kr.forpet.view.main.adapter.PopupViewPagerAdapter;
 import kr.forpet.view.main.presenter.MainPresenter;
@@ -67,10 +63,9 @@ public class MainActivity extends AppCompatActivity
     private BottomSheetBehavior mPersistentBottomSheet;
 
     private List<Marker> mMarkerCache = new ArrayList<>();
-    private Marker mMarker;
+    private Marker mClickedMarker;
 
-    private float zoom = 15.0f;
-    private boolean onCameraIdleInPageSelected;
+    private boolean onPageSelected = false;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -137,51 +132,22 @@ public class MainActivity extends AppCompatActivity
         mMainPresenter.onMapReady(googleMap);
 
         googleMap.setOnMarkerClickListener((marker) -> {
-            if (mMarker != null) {
-                BitmapDescriptor snapshot = (BitmapDescriptor) mMarker.getTag();
-                mMarker.setIcon(snapshot);
+            mClickedMarker = marker;
+            mClickedMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_current));
 
-                if (onCameraIdleInPageSelected)
-                    onCameraIdleInPageSelected = false;
-            }
-
-            mMarker = marker;
-            mMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_current));
-
-            mMainPresenter.onMarkerClick();
             return false;
         });
 
         googleMap.setOnCameraIdleListener(() -> {
             // Called when camera movement has ended, there are no pending animations and the user has stopped interacting with the map.
-            LatLngBounds latLngBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
+            Projection projection = mMap.getProjection();
+            LatLngBounds latLngBounds = projection.getVisibleRegion().latLngBounds;
+
             MenuItem item = bottomNavigationView.getMenu().findItem(bottomNavigationView.getSelectedItemId());
-
-            if (onCameraIdleInPageSelected) {
-                onCameraIdleInPageSelected = false;
-            } else {
-                if (popupViewPager.getVisibility() != View.GONE) {
-                    if (zoom != mMap.getCameraPosition().zoom)
-                        zoom = mMap.getCameraPosition().zoom;
-                    else
-                        mMainPresenter.onMapUpdate(latLngBounds, item);
-                } else {
-                    mMainPresenter.onMapUpdate(latLngBounds, item);
-                }
-            }
+            mMainPresenter.onMapUpdate(latLngBounds, getCategoryGroupCode(item));
         });
 
-        mMainPresenter.onMyLocate((@NonNull Task<Location> task) -> {
-            if (task.isSuccessful()) {
-                Location result = task.getResult();
-                LatLng latLng = new LatLng(result.getLatitude(), result.getLongitude());
-
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
-            } else {
-                Log.d("GooglePlayServices", "Current location is null. Using defaults.");
-                Log.e("GooglePlayServices", "Exception: %s", task.getException());
-            }
-        });
+        mMainPresenter.onMyLocate();
     }
 
     @Override
@@ -207,44 +173,46 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void updatePopup(List<Shop> shopList) {
-        PagerAdapter adapter = new PopupViewPagerAdapter(getApplicationContext(), shopList);
-        popupViewPager.setAdapter(adapter);
-        popupViewPager.setVisibility(View.VISIBLE);
-        popupViewPager.setCurrentItem(mMarkerCache.indexOf(mMarker));
+    public void updateMyLocate(LatLng latLng) {
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f));
     }
 
     @Override
-    public void updateMap(List<MarkerOptions> markerOptionsList) {
-        for (MarkerOptions markerOptions : markerOptionsList) {
-            if (mMarker != null) {
-                if (mMarker.getPosition().equals(markerOptions.getPosition())) {
-                    mMarkerCache.add(mMarker);
-                    continue;
-                }
-            }
+    public void updateMap(List<Shop> shopList) {
+        clearMap();
 
-            Marker marker = mMap.addMarker(markerOptions);
-            BitmapDescriptor snapshot = markerOptions.getIcon();
-            marker.setTag(snapshot);
+        boolean isPopup = false;
+        for (Shop shop : shopList) {
+            Marker marker = mMap.addMarker(new MarkerBuilder(new LatLng(shop.getY(), shop.getX()))
+                    .categoryGroupCode(shop.getCategoryGroupCode())
+                    .placeName(shop.getPlaceName())
+                    .forpetHash(shop.getForpetHash())
+                    .build());
+
+            if (mClickedMarker != null && mClickedMarker.getPosition().equals(marker.getPosition())) {
+                mClickedMarker = marker;
+                mClickedMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_current));
+
+                isPopup = true;
+            }
 
             mMarkerCache.add(marker);
         }
+
+        if (isPopup) {
+            Toast.makeText(this, mClickedMarker.getTitle(), Toast.LENGTH_SHORT).show();
+            onPageSelected = true;
+
+            popupViewPager.setAdapter(new PopupViewPagerAdapter(getApplicationContext(), shopList));
+            popupViewPager.setCurrentItem(mMarkerCache.indexOf(mClickedMarker));
+        }
     }
 
-    @Override
     public void clearMap() {
-        for (Marker marker : mMarkerCache) {
-            if (marker.equals(mMarker))
-                continue;
-
-            marker.remove();
-        }
-
+        mMap.clear();
         mMarkerCache.clear();
 
         popupViewPager.removeAllViews();
-        popupViewPager.setVisibility(View.GONE);
     }
 
     private void init() {
@@ -280,23 +248,11 @@ public class MainActivity extends AppCompatActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        buttonMyLocate.setOnClickListener((v) -> mMainPresenter.onMyLocate((@NonNull Task<Location> task) -> {
-            if (task.isSuccessful()) {
-                Location result = task.getResult();
-                LatLng latLng = new LatLng(result.getLatitude(), result.getLongitude());
-
-                zoom = 15.0f;
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
-            } else {
-                Log.d("GooglePlayServices", "Current location is null. Using defaults.");
-                Log.e("GooglePlayServices", "Exception: %s", task.getException());
-            }
-        }));
+        buttonMyLocate.setOnClickListener((v) -> mMainPresenter.onMyLocate());
     }
 
     private void initPopupViewPager() {
         DisplayMetrics metrics = getResources().getDisplayMetrics();
-        popupViewPager.setVisibility(View.GONE);
         popupViewPager.setClipToPadding(false);
         popupViewPager.setPageMargin(Math.round(5 * metrics.density));
         popupViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -307,15 +263,14 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onPageSelected(int position) {
-                BitmapDescriptor snapshot = (BitmapDescriptor) mMarker.getTag();
-                mMarker.setIcon(snapshot);
+                if (onPageSelected) {
+                    onPageSelected = false;
+                } else {
+                    onPageSelected = true;
 
-                mMarker = mMarkerCache.get(position);
-                mMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_current));
-                mMarker.showInfoWindow();
-
-                onCameraIdleInPageSelected = true;
-                mMap.animateCamera(CameraUpdateFactory.newLatLng(mMarker.getPosition()), 400, null);
+                    mClickedMarker = mMarkerCache.get(position);
+                    mMap.animateCamera(CameraUpdateFactory.newLatLng(mClickedMarker.getPosition()), 400, null);
+                }
             }
 
             @Override
@@ -333,8 +288,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initBottomNavigationView() {
-        ViewCollections.run(floatingActionButtons, (v, i) -> v.hide());
-
         bottomNavigationView.setOnNavigationItemSelectedListener((@NonNull MenuItem item) -> {
             if (item.getItemId() == R.id.action_more) {
                 ViewCollections.run(floatingActionButtons, (v, i) -> {
@@ -349,13 +302,11 @@ public class MainActivity extends AppCompatActivity
                         v.hide();
                 });
 
-                mMarker = null;
-                mMarkerCache.clear();
-                mMap.clear();
-                popupViewPager.removeAllViews();
+                mClickedMarker = null;
 
-                LatLngBounds latLngBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
-                mMainPresenter.onMapUpdate(latLngBounds, item);
+                Projection projection = mMap.getProjection();
+                LatLngBounds latLngBounds = projection.getVisibleRegion().latLngBounds;
+                mMainPresenter.onMapUpdate(latLngBounds, getCategoryGroupCode(item));
             }
 
             return true;
@@ -378,5 +329,26 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+
+        ViewCollections.run(floatingActionButtons, (v, i) -> v.hide());
+    }
+
+    private String getCategoryGroupCode(MenuItem item) {
+        Shop.CategoryGroupCode code;
+        switch (item.getItemId()) {
+            case R.id.action_supplies:
+                code = Shop.CategoryGroupCode.SHOP;
+                break;
+            case R.id.action_pharm:
+                code = Shop.CategoryGroupCode.PHARM;
+                break;
+            case R.id.action_hospital:
+                code = Shop.CategoryGroupCode.HOSPITAL;
+                break;
+            default:
+                code = Shop.CategoryGroupCode.BEAUTY;
+        }
+
+        return code.toString();
     }
 }
