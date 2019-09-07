@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -152,10 +153,14 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START))
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        else
+        } else if (mPersistentBottomSheet.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
+            mPersistentBottomSheet.setState(BottomSheetBehavior.STATE_HIDDEN);
+            dimView.setVisibility(View.GONE);
+        } else {
             super.onBackPressed();
+        }
     }
 
     @Override
@@ -203,7 +208,7 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(this, mClickedMarker.getTitle(), Toast.LENGTH_SHORT).show();
             onPageSelected = true;
 
-            popupViewPager.setAdapter(new PopupViewPagerAdapter(getApplicationContext(), shopList));
+            popupViewPager.setAdapter(createPagerAdapter(shopList));
             popupViewPager.setCurrentItem(mMarkerCache.indexOf(mClickedMarker));
         }
     }
@@ -312,15 +317,19 @@ public class MainActivity extends AppCompatActivity
             return true;
         });
 
+        bottomSheetView.setVisibility(View.VISIBLE);
         mPersistentBottomSheet = BottomSheetBehavior.from(bottomSheetView);
+        mPersistentBottomSheet.setState(BottomSheetBehavior.STATE_HIDDEN);
         mPersistentBottomSheet.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if (newState == BottomSheetBehavior.STATE_SETTLING) {
-                    if (dimView.getVisibility() == View.GONE)
+                switch (newState) {
+                    case BottomSheetBehavior.STATE_SETTLING:
                         dimView.setVisibility(View.VISIBLE);
-                    else
+                        break;
+                    case BottomSheetBehavior.STATE_HIDDEN:
                         dimView.setVisibility(View.GONE);
+                        break;
                 }
             }
 
@@ -350,5 +359,14 @@ public class MainActivity extends AppCompatActivity
         }
 
         return code.toString();
+    }
+
+    private PagerAdapter createPagerAdapter(List<Shop> shopList) {
+        PopupViewPagerAdapter adapter = new PopupViewPagerAdapter(getApplicationContext(), shopList);
+        adapter.setOnItemListener((shop) -> {
+            mPersistentBottomSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        });
+
+        return adapter;
     }
 }

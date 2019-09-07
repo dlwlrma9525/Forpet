@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
@@ -45,6 +46,7 @@ public class PopupViewPagerAdapter extends PagerAdapter {
         textAddressName.setText(shop.getRoadAddressName());
 
         itemView.setOnClickListener((v) -> {
+            onItemListener.onItemClick(mList.get(position));
         });
 
         buttonNavigation.setOnClickListener((v) -> {
@@ -70,5 +72,15 @@ public class PopupViewPagerAdapter extends PagerAdapter {
     @Override
     public int getCount() {
         return mList.size();
+    }
+
+    private OnItemListener onItemListener;
+
+    public void setOnItemListener(OnItemListener onItemListener) {
+        this.onItemListener = onItemListener;
+    }
+
+    public interface OnItemListener {
+        void onItemClick(Shop shop);
     }
 }

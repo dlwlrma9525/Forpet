@@ -40,6 +40,7 @@
 
     <string name="call">전화</string>
     <string name="navigation">길찾기</string>
+    <string name="opened">영업중</string>
     <string name="picture">사진</string>
     <string name="place">장소</string>
     <string name="select">선택</string>
@@ -48,6 +49,7 @@
     <string name="dummy_email">forpet@forpet.kr</string>
     <string name="dummy_url">http://forpet.kr/</string>
     <string name="dummy_business_hours">월~금 : 오전 9시~ 오후 9시\n토 : 오전 9시 ~ 오후 1시\n일 : 휴일</string>
+    <string name="dummy_phone">02-1234-5678</string>
 
     <string name="db_name">forpet.sqlite</string>
 </resources>
