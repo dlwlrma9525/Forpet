@@ -41,12 +41,17 @@ public class MainModel {
     }
 
     public List<Shop> getShopList(LatLngBounds bounds, String categoryGroupCode) {
-        return mAppDatabase.shopDAO().getByVisibleRegion(
+        List<Shop> shopList = mAppDatabase.shopDAO().getByVisibleRegion(
                 bounds.southwest.longitude,
                 bounds.northeast.longitude,
                 bounds.southwest.latitude,
                 bounds.northeast.latitude,
                 categoryGroupCode
         );
+
+        for (Shop shop : shopList)
+            shop.setOpenTimeList(mAppDatabase.openTimeDAO().getByHashCode(shop.getForpetHash()));
+
+        return shopList;
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -22,7 +23,8 @@
                 android:layout_marginTop="19dp"
                 android:background="@drawable/bg_oval_gray"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@drawable/icon_no_image" />
 
             <Button
                 android:id="@+id/button_detail_regist"
@@ -114,35 +116,69 @@
                 app:layout_constraintStart_toStartOf="@+id/text_detail_phone"
                 app:layout_constraintTop_toBottomOf="@+id/text_detail_phone" />
 
-            <LinearLayout
-                android:id="@+id/layout_detail_event"
+            <TextView
+                android:id="@+id/header_event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="91dp"
+                android:fontFamily="@font/nanum_square"
+                android:includeFontPadding="false"
+                android:text="@string/header_event"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="@+id/image_detail_photo"
+                app:layout_constraintTop_toBottomOf="@+id/image_detail_photo" />
+
+            <ImageView
+                android:id="@+id/image_detail_event"
                 android:layout_width="0dp"
-                android:layout_height="313dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="19dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="19dp"
-                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_detail_homepage">
+                app:layout_constraintTop_toBottomOf="@+id/header_event" />
 
-                <TextView
-                    android:id="@+id/header_event"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:fontFamily="@font/nanum_square"
-                    android:includeFontPadding="false"
-                    android:text="@string/header_event"
-                    android:textColor="#000000"
-                    android:textSize="15sp" />
+            <TextView
+                android:id="@+id/header_open_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:fontFamily="@font/nanum_square"
+                android:includeFontPadding="false"
+                android:text="@string/header_open_time"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="@+id/image_detail_event"
+                app:layout_constraintTop_toBottomOf="@+id/image_detail_event" />
 
-                <ImageView
-                    android:id="@+id/image_detail_event"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/text_open_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/nanum_square"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="4sp"
+                android:text="@string/dummy_open_time"
+                android:textColor="#393939"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="@+id/header_open_time"
+                app:layout_constraintTop_toBottomOf="@+id/header_open_time" />
 
-            </LinearLayout>
+            <TextView
+                android:id="@+id/header_opt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:fontFamily="@font/nanum_square"
+                android:includeFontPadding="false"
+                android:text="@string/header_opt"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="@+id/text_open_time"
+                app:layout_constraintTop_toBottomOf="@+id/text_open_time" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

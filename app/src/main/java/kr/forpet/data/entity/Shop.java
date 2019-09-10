@@ -7,6 +7,8 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.util.List;
+
 import kr.forpet.annotation.Label;
 
 @Entity(tableName = "forpet_shop",
@@ -31,6 +33,7 @@ public class Shop {
     @ColumnInfo(name = "no")
     private Integer no;
 
+    // @ColumnInfo 뒤 @PrimaryKey, @NonNull 적용
     @ColumnInfo(name = "forpet_hash")
     @PrimaryKey
     @NonNull
@@ -143,6 +146,9 @@ public class Shop {
 
     @ColumnInfo(name = "last_updated")
     private String lastUpdated;
+
+    @Ignore
+    private List<OpenTime> openTimeList;
 
     @Ignore
     private float distance;
@@ -410,6 +416,15 @@ public class Shop {
 
     public void setLastUpdated(String lastUpdated) {
         this.lastUpdated = lastUpdated;
+    }
+
+
+    public List<OpenTime> getOpenTimeList() {
+        return openTimeList;
+    }
+
+    public void setOpenTimeList(List<OpenTime> openTimeList) {
+        this.openTimeList = openTimeList;
     }
 
     public float getDistance() {

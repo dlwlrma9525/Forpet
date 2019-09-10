@@ -23,13 +23,13 @@
     <string name="nav_regist_advertisement">광고 요청하기</string>
 
     <string name="header_advertisement">광고 요청하기</string>
-    <string name="header_business_hours">운영시간</string>
     <string name="header_distance">km</string>
     <string name="header_event">이벤트</string>
     <string name="header_hosp">병원등록 요청하기</string>
     <string name="header_intro">간단소개</string>
     <string name="header_modify">수정요청</string>
     <string name="header_opt">고객편의</string>
+    <string name="header_open_time">운영시간</string>
     <string name="header_pay">치료비 공개</string>
     <string name="header_pharmacy">약국등록 요청하기</string>
     <string name="header_recommend">포펫평가</string>
@@ -47,9 +47,9 @@
 
     <string name="dummy_address">서울특별시 강남구 신사동</string>
     <string name="dummy_email">forpet@forpet.kr</string>
-    <string name="dummy_url">http://forpet.kr/</string>
-    <string name="dummy_business_hours">월~금 : 오전 9시~ 오후 9시\n토 : 오전 9시 ~ 오후 1시\n일 : 휴일</string>
+    <string name="dummy_open_time">월~금 : 오전 9시~ 오후 9시\n토 : 오전 9시 ~ 오후 1시\n일 : 휴일</string>
     <string name="dummy_phone">02-1234-5678</string>
+    <string name="dummy_url">http://forpet.kr/</string>
 
     <string name="db_name">forpet.sqlite</string>
 </resources>
