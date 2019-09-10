@@ -51,23 +51,23 @@ public class PopupViewPagerAdapter extends PagerAdapter {
         LinearLayout linearLayout = itemView.findViewById(R.id.linear_popup_option);
 
         if (shop.getOptParking() != null)
-            linearLayout.addView(createImageView(R.drawable.enable_parking));
+            linearLayout.addView(createOptionView(mContext, R.drawable.enable_parking));
         if (shop.getOptReservation() != null)
-            linearLayout.addView(createImageView(R.drawable.enable_reservation));
+            linearLayout.addView(createOptionView(mContext, R.drawable.enable_reservation));
         if (shop.getOptWifi() != null)
-            linearLayout.addView(createImageView(R.drawable.enable_wifi));
+            linearLayout.addView(createOptionView(mContext, R.drawable.enable_wifi));
         if (shop.getOpt365().equals("Y"))
-            linearLayout.addView(createImageView(R.drawable.enable_365));
+            linearLayout.addView(createOptionView(mContext, R.drawable.enable_365));
         if (shop.getOptNight().equals("Y"))
-            linearLayout.addView(createImageView(R.drawable.enable_night));
+            linearLayout.addView(createOptionView(mContext, R.drawable.enable_night));
         if (shop.getOptShop().equals("Y"))
-            linearLayout.addView(createImageView(R.drawable.enable_shop));
+            linearLayout.addView(createOptionView(mContext, R.drawable.enable_shop));
         if (shop.getOptBeauty().equals("Y"))
-            linearLayout.addView(createImageView(R.drawable.enable_beauty));
+            linearLayout.addView(createOptionView(mContext, R.drawable.enable_beauty));
         if (shop.getOptBigdog().equals("Y"))
-            linearLayout.addView(createImageView(R.drawable.enable_bigdog));
+            linearLayout.addView(createOptionView(mContext, R.drawable.enable_bigdog));
         if (shop.getOptHotel().equals("Y"))
-            linearLayout.addView(createImageView(R.drawable.enable_hotel));
+            linearLayout.addView(createOptionView(mContext, R.drawable.enable_hotel));
 
         Button buttonNavigation = itemView.findViewById(R.id.button_popup_navigation);
         buttonNavigation.setOnClickListener((v) -> {
@@ -96,16 +96,16 @@ public class PopupViewPagerAdapter extends PagerAdapter {
         return mList.size();
     }
 
-    private ImageView createImageView(int resourceId) {
+    private ImageView createOptionView(Context context, int resourceId) {
         FrameLayout.LayoutParams params
                 = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        DisplayMetrics metrics = mContext.getResources().getDisplayMetrics();
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         params.height = Math.round(21 * metrics.density);
         params.width = Math.round(21 * metrics.density);
         params.setMarginEnd(Math.round(5 * metrics.density));
 
-        ImageView image = new ImageView(mContext);
+        ImageView image = new ImageView(context);
         image.setImageResource(resourceId);
         image.setLayoutParams(params);
 

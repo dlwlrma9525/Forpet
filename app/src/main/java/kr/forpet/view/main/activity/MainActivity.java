@@ -27,10 +27,12 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -135,6 +137,15 @@ public class MainActivity extends AppCompatActivity
         mMainPresenter.onMapReady(googleMap);
 
         googleMap.setOnMarkerClickListener((marker) -> {
+            if(mClickedMarker != null) {
+                try {
+                    BitmapDescriptor snapshot = (BitmapDescriptor) mClickedMarker.getTag();
+                    mClickedMarker.setIcon(snapshot);
+                } catch (IllegalArgumentException e) {
+                    mClickedMarker.remove();
+                }
+            }
+
             mClickedMarker = marker;
             mClickedMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_current));
 
@@ -190,11 +201,14 @@ public class MainActivity extends AppCompatActivity
 
         boolean isPopup = false;
         for (Shop shop : shopList) {
-            Marker marker = mMap.addMarker(new MarkerBuilder(new LatLng(shop.getY(), shop.getX()))
+            MarkerOptions markerOptions = new MarkerBuilder(new LatLng(shop.getY(), shop.getX()))
                     .categoryGroupCode(shop.getCategoryGroupCode())
                     .placeName(shop.getPlaceName())
                     .forpetHash(shop.getForpetHash())
-                    .build());
+                    .build();
+
+            Marker marker = mMap.addMarker(markerOptions);
+            marker.setTag(markerOptions.getIcon());
 
             if (mClickedMarker != null && mClickedMarker.getPosition().equals(marker.getPosition())) {
                 mClickedMarker = marker;

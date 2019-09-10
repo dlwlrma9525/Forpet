@@ -1,8 +1,13 @@
 package kr.forpet.view.factory;
 
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import kr.forpet.R;
@@ -51,6 +56,43 @@ public class BottomSheetViewFactory implements ItemViewFactory {
         TextView textOpenTime = contentView.findViewById(R.id.text_open_time);
         textOpenTime.setText(sb.toString());
 
+        LinearLayout linearLayout = contentView.findViewById(R.id.linear_detail_option);
+
+        if (mShop.getOptParking() != null)
+            linearLayout.addView(createOptionView(context, R.drawable.enable_parking));
+        if (mShop.getOptReservation() != null)
+            linearLayout.addView(createOptionView(context, R.drawable.enable_reservation));
+        if (mShop.getOptWifi() != null)
+            linearLayout.addView(createOptionView(context, R.drawable.enable_wifi));
+        if (mShop.getOpt365().equals("Y"))
+            linearLayout.addView(createOptionView(context, R.drawable.enable_365));
+        if (mShop.getOptNight().equals("Y"))
+            linearLayout.addView(createOptionView(context, R.drawable.enable_night));
+        if (mShop.getOptShop().equals("Y"))
+            linearLayout.addView(createOptionView(context, R.drawable.enable_shop));
+        if (mShop.getOptBeauty().equals("Y"))
+            linearLayout.addView(createOptionView(context, R.drawable.enable_beauty));
+        if (mShop.getOptBigdog().equals("Y"))
+            linearLayout.addView(createOptionView(context, R.drawable.enable_bigdog));
+        if (mShop.getOptHotel().equals("Y"))
+            linearLayout.addView(createOptionView(context, R.drawable.enable_hotel));
+
         return contentView;
+    }
+
+    private ImageView createOptionView(Context context, int resourceId) {
+        FrameLayout.LayoutParams params
+                = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        params.height = Math.round(21 * metrics.density);
+        params.width = Math.round(21 * metrics.density);
+        params.setMarginEnd(Math.round(5 * metrics.density));
+
+        ImageView image = new ImageView(context);
+        image.setImageResource(resourceId);
+        image.setLayoutParams(params);
+
+        return image;
     }
 }
