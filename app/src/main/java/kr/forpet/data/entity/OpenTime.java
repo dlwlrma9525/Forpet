@@ -12,6 +12,7 @@ import androidx.room.PrimaryKey;
         }
 )
 public class OpenTime {
+
     @ColumnInfo(name = "no")
     @PrimaryKey
     private Integer no;

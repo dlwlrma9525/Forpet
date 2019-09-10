@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import kr.forpet.data.entity.Shop;
 
 public class BottomSheetViewFactory implements ItemViewFactory {
 
+    private Context mContext;
     private Shop mShop;
 
     public BottomSheetViewFactory(Shop shop) {
@@ -24,6 +26,8 @@ public class BottomSheetViewFactory implements ItemViewFactory {
 
     @Override
     public View createView(Context context) {
+        mContext = context;
+
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View contentView = inflater.inflate(R.layout.layout_bottom_sheet, null);
 
@@ -56,43 +60,90 @@ public class BottomSheetViewFactory implements ItemViewFactory {
         TextView textOpenTime = contentView.findViewById(R.id.text_open_time);
         textOpenTime.setText(sb.toString());
 
-        LinearLayout linearLayout = contentView.findViewById(R.id.linear_detail_option);
+        GridLayout grid = contentView.findViewById(R.id.linear_detail_option);
 
         if (mShop.getOptParking() != null)
-            linearLayout.addView(createOptionView(context, R.drawable.enable_parking));
+            grid.addView(createOptionView(R.drawable.enable_parking));
         if (mShop.getOptReservation() != null)
-            linearLayout.addView(createOptionView(context, R.drawable.enable_reservation));
+            grid.addView(createOptionView(R.drawable.enable_reservation));
         if (mShop.getOptWifi() != null)
-            linearLayout.addView(createOptionView(context, R.drawable.enable_wifi));
+            grid.addView(createOptionView(R.drawable.enable_wifi));
         if (mShop.getOpt365().equals("Y"))
-            linearLayout.addView(createOptionView(context, R.drawable.enable_365));
+            grid.addView(createOptionView(R.drawable.enable_365));
         if (mShop.getOptNight().equals("Y"))
-            linearLayout.addView(createOptionView(context, R.drawable.enable_night));
+            grid.addView(createOptionView(R.drawable.enable_night));
         if (mShop.getOptShop().equals("Y"))
-            linearLayout.addView(createOptionView(context, R.drawable.enable_shop));
+            grid.addView(createOptionView(R.drawable.enable_shop));
         if (mShop.getOptBeauty().equals("Y"))
-            linearLayout.addView(createOptionView(context, R.drawable.enable_beauty));
+            grid.addView(createOptionView(R.drawable.enable_beauty));
         if (mShop.getOptBigdog().equals("Y"))
-            linearLayout.addView(createOptionView(context, R.drawable.enable_bigdog));
+            grid.addView(createOptionView(R.drawable.enable_bigdog));
         if (mShop.getOptHotel().equals("Y"))
-            linearLayout.addView(createOptionView(context, R.drawable.enable_hotel));
+            grid.addView(createOptionView(R.drawable.enable_hotel));
+
+        LinearLayout layoutAdditionalInfo = contentView.findViewById(R.id.layout_additional_info);
+        if(mShop.getAdditionalInfo() != null) {
+            // do something..
+        } else {
+            layoutAdditionalInfo.setVisibility(View.GONE);
+        }
+
+        LinearLayout layoutMedicine = contentView.findViewById(R.id.layout_medicine);
+        if(mShop.getCategoryGroupCode().equals(Shop.CategoryGroupCode.PHARM.toString())) {
+            TextView textMedicine = contentView.findViewById(R.id.text_medicine);
+            textMedicine.setText(mShop.getPharmacy().getMedicineCategoriesForSale());
+        } else {
+            layoutMedicine.setVisibility(View.GONE);
+        }
 
         return contentView;
     }
 
-    private ImageView createOptionView(Context context, int resourceId) {
+    private View createOptionView(int resourceId) {
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflater.inflate(R.layout.layout_opt, null);
+
         FrameLayout.LayoutParams params
                 = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        params.height = Math.round(21 * metrics.density);
-        params.width = Math.round(21 * metrics.density);
-        params.setMarginEnd(Math.round(5 * metrics.density));
+        DisplayMetrics metrics = mContext.getResources().getDisplayMetrics();
+        params.setMargins(0, 0, Math.round(10 * metrics.density), Math.round(10 * metrics.density));
+        v.setLayoutParams(params);
 
-        ImageView image = new ImageView(context);
+        ImageView image = v.findViewById(R.id.image_opt);
         image.setImageResource(resourceId);
-        image.setLayoutParams(params);
 
-        return image;
+        TextView text = v.findViewById(R.id.text_opt);
+        switch (resourceId) {
+            case R.drawable.enable_parking:
+                text.setText("주차");
+                break;
+            case R.drawable.enable_reservation:
+                text.setText("예약");
+                break;
+            case R.drawable.enable_wifi:
+                text.setText("무선인터넷");
+                break;
+            case R.drawable.enable_365:
+                text.setText("연중무휴");
+                break;
+            case R.drawable.enable_night:
+                text.setText("야간");
+                break;
+            case R.drawable.enable_shop:
+                text.setText("용품");
+                break;
+            case R.drawable.enable_beauty:
+                text.setText("미용");
+                break;
+            case R.drawable.enable_bigdog:
+                text.setText("대형견 가능");
+                break;
+            case R.drawable.enable_hotel:
+                text.setText("호텔");
+                break;
+        }
+
+        return v;
     }
 }

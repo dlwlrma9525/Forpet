@@ -151,6 +151,9 @@ public class Shop {
     private List<OpenTime> openTimeList;
 
     @Ignore
+    private Pharmacy pharmacy;
+
+    @Ignore
     private float distance;
 
     public Integer getNo() {
@@ -418,9 +421,16 @@ public class Shop {
         this.lastUpdated = lastUpdated;
     }
 
-
     public List<OpenTime> getOpenTimeList() {
         return openTimeList;
+    }
+
+    public Pharmacy getPharmacy() {
+        return pharmacy;
+    }
+
+    public void setPharmacy(Pharmacy pharmacy) {
+        this.pharmacy = pharmacy;
     }
 
     public void setOpenTimeList(List<OpenTime> openTimeList) {

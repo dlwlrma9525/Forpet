@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.GridLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -48,26 +48,26 @@ public class PopupViewPagerAdapter extends PagerAdapter {
         TextView textAddressName = itemView.findViewById(R.id.text_popup_address);
         textAddressName.setText(shop.getRoadAddressName());
 
-        LinearLayout linearLayout = itemView.findViewById(R.id.linear_popup_option);
+        GridLayout grid = itemView.findViewById(R.id.grid_popup_opt);
 
         if (shop.getOptParking() != null)
-            linearLayout.addView(createOptionView(mContext, R.drawable.enable_parking));
+            grid.addView(createOptionView(R.drawable.enable_parking));
         if (shop.getOptReservation() != null)
-            linearLayout.addView(createOptionView(mContext, R.drawable.enable_reservation));
+            grid.addView(createOptionView(R.drawable.enable_reservation));
         if (shop.getOptWifi() != null)
-            linearLayout.addView(createOptionView(mContext, R.drawable.enable_wifi));
+            grid.addView(createOptionView(R.drawable.enable_wifi));
         if (shop.getOpt365().equals("Y"))
-            linearLayout.addView(createOptionView(mContext, R.drawable.enable_365));
+            grid.addView(createOptionView(R.drawable.enable_365));
         if (shop.getOptNight().equals("Y"))
-            linearLayout.addView(createOptionView(mContext, R.drawable.enable_night));
+            grid.addView(createOptionView(R.drawable.enable_night));
         if (shop.getOptShop().equals("Y"))
-            linearLayout.addView(createOptionView(mContext, R.drawable.enable_shop));
+            grid.addView(createOptionView(R.drawable.enable_shop));
         if (shop.getOptBeauty().equals("Y"))
-            linearLayout.addView(createOptionView(mContext, R.drawable.enable_beauty));
+            grid.addView(createOptionView(R.drawable.enable_beauty));
         if (shop.getOptBigdog().equals("Y"))
-            linearLayout.addView(createOptionView(mContext, R.drawable.enable_bigdog));
+            grid.addView(createOptionView(R.drawable.enable_bigdog));
         if (shop.getOptHotel().equals("Y"))
-            linearLayout.addView(createOptionView(mContext, R.drawable.enable_hotel));
+            grid.addView(createOptionView(R.drawable.enable_hotel));
 
         Button buttonNavigation = itemView.findViewById(R.id.button_popup_navigation);
         buttonNavigation.setOnClickListener((v) -> {
@@ -96,16 +96,16 @@ public class PopupViewPagerAdapter extends PagerAdapter {
         return mList.size();
     }
 
-    private ImageView createOptionView(Context context, int resourceId) {
+    private ImageView createOptionView(int resourceId) {
         FrameLayout.LayoutParams params
                 = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        DisplayMetrics metrics = mContext.getResources().getDisplayMetrics();
         params.height = Math.round(21 * metrics.density);
         params.width = Math.round(21 * metrics.density);
         params.setMarginEnd(Math.round(5 * metrics.density));
 
-        ImageView image = new ImageView(context);
+        ImageView image = new ImageView(mContext);
         image.setImageResource(resourceId);
         image.setLayoutParams(params);
 

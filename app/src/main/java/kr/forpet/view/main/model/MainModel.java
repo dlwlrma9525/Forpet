@@ -49,8 +49,12 @@ public class MainModel {
                 categoryGroupCode
         );
 
-        for (Shop shop : shopList)
+        for (Shop shop : shopList) {
+            if(shop.getCategoryGroupCode().equals(Shop.CategoryGroupCode.PHARM.toString()))
+                shop.setPharmacy(mAppDatabase.pharmacyDAO().getByHashCode(shop.getForpetHash()));
+
             shop.setOpenTimeList(mAppDatabase.openTimeDAO().getByHashCode(shop.getForpetHash()));
+        }
 
         return shopList;
     }
