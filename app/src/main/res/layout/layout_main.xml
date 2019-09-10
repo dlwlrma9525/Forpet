@@ -123,16 +123,15 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
-        android:id="@+id/view_dim"
+    <FrameLayout
+        android:id="@+id/dim_effect"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorDim"
         android:visibility="gone" />
 
-    <include
-        android:id="@+id/include_bottom_sheet"
-        layout="@layout/layout_bottom_sheet"
+    <FrameLayout
+        android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="684dp"
         android:visibility="gone"

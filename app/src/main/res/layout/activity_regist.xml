@@ -22,7 +22,7 @@
             app:srcCompat="@drawable/icon_hospital" />
 
         <TextView
-            android:id="@+id/text_regist_header"
+            android:id="@+id/header_regist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
@@ -45,7 +45,7 @@
             android:fontFamily="@font/nanum_square"
             android:includeFontPadding="false"
             android:padding="8dp"
-            android:text="@string/regist_notice"
+            android:text="@string/notice_regist"
             android:textColor="#ff6586"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"

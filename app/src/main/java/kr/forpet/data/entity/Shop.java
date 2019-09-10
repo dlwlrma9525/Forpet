@@ -14,7 +14,6 @@ import kr.forpet.annotation.Label;
                 @Index(name = "idx_shop_category", value = {"category_group_code"}),
                 @Index(name = "idx_shop_name", value = {"place_name"}),
                 @Index(name = "idx_shop_x", value = {"x"}),
-                @Index(name = "idx_shop_hash", value = {"forpet_hash"}),
                 @Index(name = "idx_shop_y", value = {"y"})
         }
 )
@@ -32,9 +31,9 @@ public class Shop {
     @ColumnInfo(name = "no")
     private Integer no;
 
+    @ColumnInfo(name = "forpet_hash")
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "forpet_hash")
     private String forpetHash;
 
     @ColumnInfo(name = "address_name")
@@ -52,28 +51,9 @@ public class Shop {
     @ColumnInfo(name = "kakao_id")
     private String kakaoId;
 
-    @Ignore
-    @Label("사업자번호")
-    private String businessNo;
-
-    @Ignore
-    @Label("대표자이름")
-    private String ceoName;
-
-    @Ignore
-    @Label("담당자이름")
-    private String chargeName;
-
     @ColumnInfo(name = "phone")
     @Label("연락처")
     private String phone;
-
-    @Ignore
-    @Label("이메일")
-    private String email;
-
-    @Ignore
-    private float distance;
 
     @ColumnInfo(name = "place_name")
     @Label("이름")
@@ -96,32 +76,40 @@ public class Shop {
     private Double y;
 
     @ColumnInfo(name = "opt_parking")
-    @Label("주차가능")
+    @Label("주차")
     private String optParking;
 
     @ColumnInfo(name = "opt_reservation")
-    @Label("예약가능")
+    @Label("예약")
     private String optReservation;
 
-    @ColumnInfo(name = "opt_3")
-    @Label("휴일영업")
-    private String opt3;
+    @ColumnInfo(name = "opt_wifi")
+    @Label("와이파이")
+    private String optWifi;
 
-    @ColumnInfo(name = "opt_4")
-    @Label("주차가능")
-    private String opt4;
+    @ColumnInfo(name = "opt_365")
+    @Label("연중무휴")
+    private String opt365;
 
-    @ColumnInfo(name = "opt_5")
-    @Label("배달가능")
-    private String opt5;
+    @ColumnInfo(name = "opt_night")
+    @Label("야간")
+    private String optNight;
 
-    @ColumnInfo(name = "opt_6")
-    @Label("Wifi")
-    private String opt6;
+    @ColumnInfo(name = "opt_shop")
+    @Label("용품판매")
+    private String optShop;
 
-    @ColumnInfo(name = "opt_7")
-    @Label("추가옵션")
-    private String opt7;
+    @ColumnInfo(name = "opt_beauty")
+    @Label("미용")
+    private String optBeauty;
+
+    @ColumnInfo(name = "opt_bigdog")
+    @Label("대형견가능")
+    private String optBigdog;
+
+    @ColumnInfo(name = "opt_hotel")
+    @Label("호텔")
+    private String optHotel;
 
     @ColumnInfo(name = "event")
     private String event;
@@ -132,12 +120,32 @@ public class Shop {
     @ColumnInfo(name = "forpet_recommend")
     private String forpetRecommend;
 
-    @ColumnInfo(name = "love_point")
-    private String lovePoint;
+    @ColumnInfo(name = "love_point1")
+    private Integer lovePoint1;
+
+    @ColumnInfo(name = "love_point2")
+    private Integer lovePoint2;
+
+    @ColumnInfo(name = "love_point3")
+    private Integer lovePoint3;
+
+    @ColumnInfo(name = "love_point4")
+    private Integer lovePoint4;
+
+    @ColumnInfo(name = "love_point5")
+    private Integer lovePoint5;
 
     @ColumnInfo(name = "intro")
-    @Label("업체소개")
     private String intro;
+
+    @ColumnInfo(name = "additional_info")
+    private String additionalInfo;
+
+    @ColumnInfo(name = "last_updated")
+    private String lastUpdated;
+
+    @Ignore
+    private float distance;
 
     public Integer getNo() {
         return no;
@@ -147,6 +155,7 @@ public class Shop {
         this.no = no;
     }
 
+    @NonNull
     public String getForpetHash() {
         return forpetHash;
     }
@@ -187,52 +196,12 @@ public class Shop {
         this.kakaoId = kakaoId;
     }
 
-    public String getBusinessNo() {
-        return businessNo;
-    }
-
-    public void setBusinessNo(String businessNo) {
-        this.businessNo = businessNo;
-    }
-
-    public String getCeoName() {
-        return ceoName;
-    }
-
-    public void setCeoName(String ceoName) {
-        this.ceoName = ceoName;
-    }
-
-    public String getChargeName() {
-        return chargeName;
-    }
-
-    public void setChargeName(String chargeName) {
-        this.chargeName = chargeName;
-    }
-
     public String getPhone() {
         return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public float getDistance() {
-        return distance;
-    }
-
-    public void setDistance(float distance) {
-        this.distance = distance;
     }
 
     public String getPlaceName() {
@@ -299,44 +268,60 @@ public class Shop {
         this.optReservation = optReservation;
     }
 
-    public String getOpt3() {
-        return opt3;
+    public String getOptWifi() {
+        return optWifi;
     }
 
-    public void setOpt3(String opt3) {
-        this.opt3 = opt3;
+    public void setOptWifi(String optWifi) {
+        this.optWifi = optWifi;
     }
 
-    public String getOpt4() {
-        return opt4;
+    public String getOpt365() {
+        return opt365;
     }
 
-    public void setOpt4(String opt4) {
-        this.opt4 = opt4;
+    public void setOpt365(String opt365) {
+        this.opt365 = opt365;
     }
 
-    public String getOpt5() {
-        return opt5;
+    public String getOptNight() {
+        return optNight;
     }
 
-    public void setOpt5(String opt5) {
-        this.opt5 = opt5;
+    public void setOptNight(String optNight) {
+        this.optNight = optNight;
     }
 
-    public String getOpt6() {
-        return opt6;
+    public String getOptShop() {
+        return optShop;
     }
 
-    public void setOpt6(String opt6) {
-        this.opt6 = opt6;
+    public void setOptShop(String optShop) {
+        this.optShop = optShop;
     }
 
-    public String getOpt7() {
-        return opt7;
+    public String getOptBeauty() {
+        return optBeauty;
     }
 
-    public void setOpt7(String opt7) {
-        this.opt7 = opt7;
+    public void setOptBeauty(String optBeauty) {
+        this.optBeauty = optBeauty;
+    }
+
+    public String getOptBigdog() {
+        return optBigdog;
+    }
+
+    public void setOptBigdog(String optBigdog) {
+        this.optBigdog = optBigdog;
+    }
+
+    public String getOptHotel() {
+        return optHotel;
+    }
+
+    public void setOptHotel(String optHotel) {
+        this.optHotel = optHotel;
     }
 
     public String getEvent() {
@@ -363,12 +348,44 @@ public class Shop {
         this.forpetRecommend = forpetRecommend;
     }
 
-    public String getLovePoint() {
-        return lovePoint;
+    public Integer getLovePoint1() {
+        return lovePoint1;
     }
 
-    public void setLovePoint(String lovePoint) {
-        this.lovePoint = lovePoint;
+    public void setLovePoint1(Integer lovePoint1) {
+        this.lovePoint1 = lovePoint1;
+    }
+
+    public Integer getLovePoint2() {
+        return lovePoint2;
+    }
+
+    public void setLovePoint2(Integer lovePoint2) {
+        this.lovePoint2 = lovePoint2;
+    }
+
+    public Integer getLovePoint3() {
+        return lovePoint3;
+    }
+
+    public void setLovePoint3(Integer lovePoint3) {
+        this.lovePoint3 = lovePoint3;
+    }
+
+    public Integer getLovePoint4() {
+        return lovePoint4;
+    }
+
+    public void setLovePoint4(Integer lovePoint4) {
+        this.lovePoint4 = lovePoint4;
+    }
+
+    public Integer getLovePoint5() {
+        return lovePoint5;
+    }
+
+    public void setLovePoint5(Integer lovePoint5) {
+        this.lovePoint5 = lovePoint5;
     }
 
     public String getIntro() {
@@ -377,5 +394,29 @@ public class Shop {
 
     public void setIntro(String intro) {
         this.intro = intro;
+    }
+
+    public String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
+    }
+
+    public String getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(String lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
+    public float getDistance() {
+        return distance;
+    }
+
+    public void setDistance(float distance) {
+        this.distance = distance;
     }
 }

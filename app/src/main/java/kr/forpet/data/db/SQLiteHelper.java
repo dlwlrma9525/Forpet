@@ -45,15 +45,18 @@ public class SQLiteHelper {
             e.printStackTrace();
         }
 
+        // TODO: database migration..
         return Room.databaseBuilder(context, AppDatabase.class, context.getString(R.string.db_name))
                 .addMigrations(VERSION_1)
                 .build();
     }
 
+    // https://woovictory.github.io/2019/01/25/Android-Room-Basic/
     static final Migration VERSION_1 = new Migration(0, 1) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             // migrate..
+            // database.execSQL("ALTER TABLE..");
         }
     };
 }

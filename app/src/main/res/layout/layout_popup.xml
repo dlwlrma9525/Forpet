@@ -14,7 +14,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="@font/nanum_square"
         android:includeFontPadding="false"
-        android:text="@string/detail_header_distance"
+        android:text="@string/header_distance"
         android:textColor="#ff6586"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"

@@ -12,7 +12,7 @@ import kr.forpet.R;
 
 public class RegistActivity extends AppCompatActivity {
 
-    @BindView(R.id.text_regist_header)
+    @BindView(R.id.header_regist)
     TextView testRegistHeader;
 
     @BindView(R.id.button_regist)

@@ -14,12 +14,13 @@
     <uses-permission android:name="android.permission.DIAL_PHONE" />
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!-- android:allowBackup="false": Android 6.0 (API 레벨 23)부터 기본적으로 사용되는 자동 백업 -->
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

@@ -47,6 +47,8 @@ import kr.forpet.R;
 import kr.forpet.data.entity.Shop;
 import kr.forpet.map.MarkerBuilder;
 import kr.forpet.util.Permission;
+import kr.forpet.view.factory.BottomSheetViewFactory;
+import kr.forpet.view.factory.ItemViewFactory;
 import kr.forpet.view.main.adapter.PopupViewPagerAdapter;
 import kr.forpet.view.main.presenter.MainPresenter;
 import kr.forpet.view.main.presenter.MainPresenterImpl;
@@ -83,11 +85,11 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.view_pager_popup)
     ViewPager popupViewPager;
 
-    @BindView(R.id.include_bottom_sheet)
-    ViewGroup bottomSheetView;
+    @BindView(R.id.bottom_sheet)
+    ViewGroup bottomSheet;
 
-    @BindView(R.id.view_dim)
-    View dimView;
+    @BindView(R.id.dim_effect)
+    ViewGroup dimEffect;
 
     @BindView(R.id.button_my_locate)
     ImageButton buttonMyLocate;
@@ -157,7 +159,7 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else if (mPersistentBottomSheet.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
             mPersistentBottomSheet.setState(BottomSheetBehavior.STATE_HIDDEN);
-            dimView.setVisibility(View.GONE);
+            dimEffect.setVisibility(View.GONE);
         } else {
             super.onBackPressed();
         }
@@ -317,18 +319,18 @@ public class MainActivity extends AppCompatActivity
             return true;
         });
 
-        bottomSheetView.setVisibility(View.VISIBLE);
-        mPersistentBottomSheet = BottomSheetBehavior.from(bottomSheetView);
+        bottomSheet.setVisibility(View.VISIBLE);
+        mPersistentBottomSheet = BottomSheetBehavior.from(bottomSheet);
         mPersistentBottomSheet.setState(BottomSheetBehavior.STATE_HIDDEN);
         mPersistentBottomSheet.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 switch (newState) {
                     case BottomSheetBehavior.STATE_SETTLING:
-                        dimView.setVisibility(View.VISIBLE);
+                        dimEffect.setVisibility(View.VISIBLE);
                         break;
                     case BottomSheetBehavior.STATE_HIDDEN:
-                        dimView.setVisibility(View.GONE);
+                        dimEffect.setVisibility(View.GONE);
                         break;
                 }
             }
@@ -364,6 +366,10 @@ public class MainActivity extends AppCompatActivity
     private PagerAdapter createPagerAdapter(List<Shop> shopList) {
         PopupViewPagerAdapter adapter = new PopupViewPagerAdapter(getApplicationContext(), shopList);
         adapter.setOnItemListener((shop) -> {
+            ItemViewFactory factory = new BottomSheetViewFactory(shop);
+
+            bottomSheet.removeAllViews();
+            bottomSheet.addView(factory.createView(getApplicationContext()));
             mPersistentBottomSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
         });
 
