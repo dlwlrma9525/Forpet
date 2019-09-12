@@ -1,6 +1,9 @@
 package kr.forpet.view.main.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.location.Location;
+import android.net.Uri;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +16,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.Task;
 
 import java.util.List;
 
@@ -71,10 +79,35 @@ public class PopupViewPagerAdapter extends PagerAdapter {
 
         Button buttonNavigation = itemView.findViewById(R.id.button_item_navigation);
         buttonNavigation.setOnClickListener((v) -> {
+            try {
+                FusedLocationProviderClient client = LocationServices.getFusedLocationProviderClient(mContext);
+                client.getLastLocation().addOnCompleteListener((@NonNull Task<Location> task) -> {
+                    if (task.isSuccessful()) {
+                        Location lastLocation = task.getResult();
+                        LatLng start = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
+
+                        String uri = new StringBuilder("http://maps.google.com/maps?")
+                                .append("saddr=").append(start.latitude).append(",").append(start.longitude)
+                                .append("&daddr=").append(shop.getY()).append(",").append(shop.getX())
+                                .toString();
+
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+
+                        mContext.startActivity(intent);
+                    }
+                });
+            } catch (SecurityException e) {
+                e.printStackTrace();
+            }
         });
 
         Button buttonCall = itemView.findViewById(R.id.button_item_call);
         buttonCall.setOnClickListener((v) -> {
+            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + shop.getPhone()));
+            mContext.startActivity(intent);
         });
 
         container.addView(itemView);

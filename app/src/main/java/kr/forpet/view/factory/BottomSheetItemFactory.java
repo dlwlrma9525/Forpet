@@ -1,17 +1,28 @@
 package kr.forpet.view.factory;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.location.Location;
+import android.net.Uri;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.Task;
 
 import java.lang.reflect.Field;
 
@@ -83,6 +94,37 @@ public class BottomSheetItemFactory implements ItemViewFactory {
 
         if (mShop.getIntro() != null)
             mHolder.textIntro.setText(mShop.getIntro().replace("\\r\\n", System.getProperty("line.separator")));
+
+        mHolder.buttonNavigation.setOnClickListener((v) -> {
+            try {
+                FusedLocationProviderClient client = LocationServices.getFusedLocationProviderClient(context);
+                client.getLastLocation().addOnCompleteListener((@NonNull Task<Location> task) -> {
+                    if (task.isSuccessful()) {
+                        Location lastLocation = task.getResult();
+                        LatLng start = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
+
+                        String uri = new StringBuilder("http://maps.google.com/maps?")
+                                .append("saddr=").append(start.latitude).append(",").append(start.longitude)
+                                .append("&daddr=").append(mShop.getY()).append(",").append(mShop.getX())
+                                .toString();
+
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+
+                        context.startActivity(intent);
+                    }
+                });
+            } catch (SecurityException e) {
+                e.printStackTrace();
+            }
+        });
+
+        mHolder.buttonCall.setOnClickListener((v) -> {
+            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mShop.getPhone()));
+            context.startActivity(intent);
+        });
 
         return contentView;
     }
@@ -192,6 +234,12 @@ public class BottomSheetItemFactory implements ItemViewFactory {
 
         @BindView(R.id.text_sheet_intro)
         TextView textIntro;
+
+        @BindView(R.id.button_sheet_navigation)
+        Button buttonNavigation;
+
+        @BindView(R.id.button_sheet_call)
+        Button buttonCall;
 
         public ViewHolder(View view) {
             ButterKnife.bind(this, view);
