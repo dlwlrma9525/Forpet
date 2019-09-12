@@ -39,10 +39,10 @@ public class MarkerBuilder {
         markerOptions.position(mLatLng);
         markerOptions.icon(BitmapDescriptorFactory.fromResource(getIcon(mCategoryGroupCode)));
 
-        if(mPlaceName != null)
+        if (mPlaceName != null)
             markerOptions.title(mPlaceName);
 
-        if(mForpetHash != null)
+        if (mForpetHash != null)
             markerOptions.snippet(mForpetHash);
 
         return markerOptions;

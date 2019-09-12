@@ -6,12 +6,8 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "forpet_shop_open_time",
-        indices = {
-                @Index(name = "idx_time_hash", value = {"forpet_hash"}),
-        }
-)
-public class OpenTime {
+@Entity(tableName = "forpet_shop_open_time", indices = {@Index(name = "idx_time_hash", value = {"forpet_hash"})})
+public class ShopOpenTime {
 
     @ColumnInfo(name = "no")
     @PrimaryKey

@@ -5,12 +5,8 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "forpet_shop_pharmacy",
-        indices = {
-                @Index(name = "idx_pharm_hash", value = {"forpet_hash"}),
-        }
-)
-public class Pharmacy {
+@Entity(tableName = "forpet_shop_pharmacy", indices = {@Index(name = "idx_pharm_hash", value = {"forpet_hash"})})
+public class ShopPharmacy {
 
     @ColumnInfo(name = "no")
     @PrimaryKey

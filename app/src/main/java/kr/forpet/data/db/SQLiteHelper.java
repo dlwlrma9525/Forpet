@@ -55,7 +55,6 @@ public class SQLiteHelper {
     static final Migration VERSION_1 = new Migration(0, 1) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
-            // migrate..
             // database.execSQL("ALTER TABLE..");
         }
     };

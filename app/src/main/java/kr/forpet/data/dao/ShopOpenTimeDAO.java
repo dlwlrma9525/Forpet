@@ -7,20 +7,20 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import kr.forpet.data.entity.OpenTime;
+import kr.forpet.data.entity.ShopOpenTime;
 
 @Dao
-public interface OpenTimeDAO {
+public interface ShopOpenTimeDAO {
 
     @Insert
-    void insert(OpenTime openTime);
+    void insert(ShopOpenTime time);
 
     @Update
-    void update(OpenTime openTime);
+    void update(ShopOpenTime time);
 
     @Query("SELECT * FROM forpet_shop_open_time")
-    List<OpenTime> getAll();
+    List<ShopOpenTime> getAll();
 
     @Query("SELECT * From forpet_shop_open_time WHERE forpet_hash = :hashCode")
-    List<OpenTime> getByHashCode(String hashCode);
+    List<ShopOpenTime> getByHashCode(String hashCode);
 }

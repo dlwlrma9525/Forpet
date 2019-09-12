@@ -7,7 +7,7 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/image_nav_profile"
+        android:id="@+id/image_nav_picture"
         android:layout_width="68dp"
         android:layout_height="68dp"
         android:layout_marginStart="21dp"
@@ -29,33 +29,45 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/text_nav_login"
+        android:id="@+id/text_nav_pet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="11dp"
         android:layout_marginTop="16dp"
-        android:drawableEnd="@drawable/login"
-        android:drawablePadding="3dp"
         android:fontFamily="@font/nanum_square"
         android:includeFontPadding="false"
-        android:text="@string/nav_login"
+        android:text="@string/dummy_pet"
         android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/image_nav_profile"
-        app:layout_constraintTop_toTopOf="@+id/image_nav_profile" />
+        app:layout_constraintStart_toEndOf="@+id/image_nav_picture"
+        app:layout_constraintTop_toTopOf="@+id/image_nav_picture" />
 
     <TextView
-        android:id="@+id/text_nav_email"
+        android:id="@+id/text_nav_birth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/nanum_square"
         android:includeFontPadding="false"
         android:lineSpacingExtra="4sp"
-        android:text="@string/dummy_email"
+        android:text="@string/dummy_birth"
         android:textColor="#4b4b4b"
         android:textSize="13sp"
-        app:layout_constraintStart_toStartOf="@+id/text_nav_login"
-        app:layout_constraintTop_toBottomOf="@+id/text_nav_login" />
+        app:layout_constraintStart_toStartOf="@+id/text_nav_pet"
+        app:layout_constraintTop_toBottomOf="@+id/text_nav_pet" />
+
+    <TextView
+        android:id="@+id/text_nav_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nanum_square"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="4sp"
+        android:text="@string/dummy_weight"
+        android:textColor="#4b4b4b"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@+id/text_nav_birth"
+        app:layout_constraintTop_toBottomOf="@+id/text_nav_birth" />
+
 
     <ImageView
         android:id="@+id/image_nav_favor"
@@ -66,7 +78,7 @@
         android:background="@drawable/icon_favorite"
         android:contentDescription="@string/nav_header_desc"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_nav_profile" />
+        app:layout_constraintTop_toBottomOf="@+id/image_nav_picture" />
 
     <TextView
         android:id="@+id/text_nav_favor"
@@ -84,7 +96,7 @@
     <ListView
         android:id="@+id/list_view_favor"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="162dp"
         android:layout_marginTop="14dp"
         app:layout_constraintTop_toBottomOf="@+id/text_nav_favor" />
 
@@ -96,7 +108,7 @@
         app:layout_constraintTop_toBottomOf="@+id/list_view_favor">
 
         <Button
-            android:id="@+id/button_regist_hosp"
+            android:id="@+id/button_hosp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/bg_rect_white"
@@ -106,27 +118,12 @@
             android:gravity="start|center"
             android:paddingStart="16dp"
             android:paddingEnd="20dp"
-            android:text="@string/nav_regist_hosp"
+            android:text="@string/nav_hosp"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/button_regist_pharmacy"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/bg_rect_white"
-            android:drawableStart="@drawable/icon_pharm"
-            android:drawableEnd="@drawable/arrow_right"
-            android:drawablePadding="14dp"
-            android:gravity="start|center"
-            android:paddingStart="16dp"
-            android:paddingEnd="20dp"
-            android:text="@string/nav_regist_pharmacy"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
-
-        <Button
-            android:id="@+id/button_regist_shop"
+            android:id="@+id/button_place"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/bg_rect_white"
@@ -136,12 +133,12 @@
             android:gravity="start|center"
             android:paddingStart="16dp"
             android:paddingEnd="20dp"
-            android:text="@string/nav_regist_shop"
+            android:text="@string/nav_place"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/button_regist_advertisement"
+            android:id="@+id/button_advertisement"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/bg_rect_white"
@@ -151,26 +148,10 @@
             android:gravity="start|center"
             android:paddingStart="16dp"
             android:paddingEnd="20dp"
-            android:text="@string/nav_regist_advertisement"
+            android:text="@string/nav_advertisement"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/button_nav_logout"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#ff6586"
-        android:drawableStart="@drawable/logout"
-        android:drawablePadding="11.6dp"
-        android:drawableTint="@android:color/white"
-        android:gravity="start|center"
-        android:paddingStart="19dp"
-        android:paddingEnd="0dp"
-        android:text="@string/nav_logout"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

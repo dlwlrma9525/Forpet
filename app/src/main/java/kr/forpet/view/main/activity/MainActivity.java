@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -49,7 +48,7 @@ import kr.forpet.R;
 import kr.forpet.data.entity.Shop;
 import kr.forpet.map.MarkerBuilder;
 import kr.forpet.util.Permission;
-import kr.forpet.view.factory.BottomSheetViewFactory;
+import kr.forpet.view.factory.BottomSheetItemFactory;
 import kr.forpet.view.factory.ItemViewFactory;
 import kr.forpet.view.main.adapter.PopupViewPagerAdapter;
 import kr.forpet.view.main.presenter.MainPresenter;
@@ -69,8 +68,6 @@ public class MainActivity extends AppCompatActivity
 
     private List<Marker> mMarkerCache = new ArrayList<>();
     private Marker mClickedMarker;
-
-    private boolean onPageSelected = false;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -137,7 +134,7 @@ public class MainActivity extends AppCompatActivity
         mMainPresenter.onMapReady(googleMap);
 
         googleMap.setOnMarkerClickListener((marker) -> {
-            if(mClickedMarker != null) {
+            if (mClickedMarker != null) {
                 try {
                     BitmapDescriptor snapshot = (BitmapDescriptor) mClickedMarker.getTag();
                     mClickedMarker.setIcon(snapshot);
@@ -149,7 +146,9 @@ public class MainActivity extends AppCompatActivity
             mClickedMarker = marker;
             mClickedMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_current));
 
-            return false;
+            popupViewPager.setVisibility(View.VISIBLE);
+            popupViewPager.setCurrentItem(mMarkerCache.indexOf(mClickedMarker));
+            return true;
         });
 
         googleMap.setOnCameraIdleListener(() -> {
@@ -199,7 +198,6 @@ public class MainActivity extends AppCompatActivity
     public void updateMap(List<Shop> shopList) {
         clearMap();
 
-        boolean isPopup = false;
         for (Shop shop : shopList) {
             MarkerOptions markerOptions = new MarkerBuilder(new LatLng(shop.getY(), shop.getX()))
                     .categoryGroupCode(shop.getCategoryGroupCode())
@@ -213,19 +211,11 @@ public class MainActivity extends AppCompatActivity
             if (mClickedMarker != null && mClickedMarker.getPosition().equals(marker.getPosition())) {
                 mClickedMarker = marker;
                 mClickedMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_current));
-
-                isPopup = true;
             }
 
             mMarkerCache.add(marker);
-        }
-
-        if (isPopup) {
-            Toast.makeText(this, mClickedMarker.getTitle(), Toast.LENGTH_SHORT).show();
-            onPageSelected = true;
-
+            popupViewPager.setVisibility(View.GONE);
             popupViewPager.setAdapter(createPagerAdapter(shopList));
-            popupViewPager.setCurrentItem(mMarkerCache.indexOf(mClickedMarker));
         }
     }
 
@@ -284,14 +274,11 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onPageSelected(int position) {
-                if (onPageSelected) {
-                    onPageSelected = false;
-                } else {
-                    onPageSelected = true;
+                BitmapDescriptor snapshot = (BitmapDescriptor) mClickedMarker.getTag();
+                mClickedMarker.setIcon(snapshot);
 
-                    mClickedMarker = mMarkerCache.get(position);
-                    mMap.animateCamera(CameraUpdateFactory.newLatLng(mClickedMarker.getPosition()), 400, null);
-                }
+                mClickedMarker = mMarkerCache.get(position);
+                mClickedMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_current));
             }
 
             @Override
@@ -302,7 +289,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initNavigationView() {
-        navigationView.findViewById(R.id.button_regist_shop).setOnClickListener((v) -> {
+        navigationView.findViewById(R.id.button_place).setOnClickListener((v) -> {
             Intent intent = new Intent(this, RegistActivity.class);
             startActivity(intent);
         });
@@ -380,7 +367,7 @@ public class MainActivity extends AppCompatActivity
     private PagerAdapter createPagerAdapter(List<Shop> shopList) {
         PopupViewPagerAdapter adapter = new PopupViewPagerAdapter(getApplicationContext(), shopList);
         adapter.setOnItemListener((shop) -> {
-            ItemViewFactory factory = new BottomSheetViewFactory(shop);
+            ItemViewFactory factory = new BottomSheetItemFactory(shop);
 
             bottomSheet.removeAllViews();
             bottomSheet.addView(factory.createView(getApplicationContext()));

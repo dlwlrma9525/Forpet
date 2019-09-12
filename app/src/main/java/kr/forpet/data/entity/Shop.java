@@ -148,10 +148,10 @@ public class Shop {
     private String lastUpdated;
 
     @Ignore
-    private List<OpenTime> openTimeList;
+    private List<ShopOpenTime> shopOpenTimeList;
 
     @Ignore
-    private Pharmacy pharmacy;
+    private ShopPharmacy shopPharmacy;
 
     @Ignore
     private float distance;
@@ -421,20 +421,20 @@ public class Shop {
         this.lastUpdated = lastUpdated;
     }
 
-    public List<OpenTime> getOpenTimeList() {
-        return openTimeList;
+    public List<ShopOpenTime> getShopOpenTimeList() {
+        return shopOpenTimeList;
     }
 
-    public Pharmacy getPharmacy() {
-        return pharmacy;
+    public ShopPharmacy getShopPharmacy() {
+        return shopPharmacy;
     }
 
-    public void setPharmacy(Pharmacy pharmacy) {
-        this.pharmacy = pharmacy;
+    public void setShopPharmacy(ShopPharmacy shopPharmacy) {
+        this.shopPharmacy = shopPharmacy;
     }
 
-    public void setOpenTimeList(List<OpenTime> openTimeList) {
-        this.openTimeList = openTimeList;
+    public void setShopOpenTimeList(List<ShopOpenTime> shopOpenTimeList) {
+        this.shopOpenTimeList = shopOpenTimeList;
     }
 
     public float getDistance() {

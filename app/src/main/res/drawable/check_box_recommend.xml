@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- uncheck state -->
+    <item android:drawable="@drawable/heart_bad_s" android:state_checked="false" />
+    <!-- check state -->
+    <item android:drawable="@drawable/heart_good_s" android:state_checked="true" />
+    <!-- default state -->
+    <item android:drawable="@drawable/heart_bad_s" />
+</selector>

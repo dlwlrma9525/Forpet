@@ -34,21 +34,21 @@ public class PopupViewPagerAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         // super.instantiateItem(container, position);
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View itemView = inflater.inflate(R.layout.layout_popup, container, false);
+        View itemView = inflater.inflate(R.layout.item_popup, container, false);
         itemView.setOnClickListener((v) -> onItemListener.onItemClick(mList.get(position)));
 
         Shop shop = mList.get(position);
 
-        TextView textDistance = itemView.findViewById(R.id.text_popup_distance);
+        TextView textDistance = itemView.findViewById(R.id.text_item_distance);
         textDistance.setText(String.format("%.2f km", shop.getDistance() / 1000));
 
-        TextView textPlaceName = itemView.findViewById(R.id.text_popup_place);
-        textPlaceName.setText(shop.getPlaceName());
+        TextView textPlace = itemView.findViewById(R.id.text_item_place);
+        textPlace.setText(shop.getPlaceName());
 
-        TextView textAddressName = itemView.findViewById(R.id.text_popup_address);
-        textAddressName.setText(shop.getRoadAddressName());
+        TextView textAddress = itemView.findViewById(R.id.text_item_address);
+        textAddress.setText(shop.getRoadAddressName());
 
-        GridLayout grid = itemView.findViewById(R.id.grid_popup_opt);
+        GridLayout grid = itemView.findViewById(R.id.grid_item_opt);
 
         if (shop.getOptParking() != null)
             grid.addView(createOptionView(R.drawable.enable_parking));
@@ -69,11 +69,11 @@ public class PopupViewPagerAdapter extends PagerAdapter {
         if (shop.getOptHotel().equals("Y"))
             grid.addView(createOptionView(R.drawable.enable_hotel));
 
-        Button buttonNavigation = itemView.findViewById(R.id.button_popup_navigation);
+        Button buttonNavigation = itemView.findViewById(R.id.button_item_navigation);
         buttonNavigation.setOnClickListener((v) -> {
         });
 
-        Button buttonCall = itemView.findViewById(R.id.button_popup_call);
+        Button buttonCall = itemView.findViewById(R.id.button_item_call);
         buttonCall.setOnClickListener((v) -> {
         });
 

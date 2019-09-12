@@ -50,10 +50,10 @@ public class MainModel {
         );
 
         for (Shop shop : shopList) {
-            if(shop.getCategoryGroupCode().equals(Shop.CategoryGroupCode.PHARM.toString()))
-                shop.setPharmacy(mAppDatabase.pharmacyDAO().getByHashCode(shop.getForpetHash()));
+            if (shop.getCategoryGroupCode().equals(Shop.CategoryGroupCode.PHARM.toString()))
+                shop.setShopPharmacy(mAppDatabase.shopPharmacyDAO().getByHashCode(shop.getForpetHash()));
 
-            shop.setOpenTimeList(mAppDatabase.openTimeDAO().getByHashCode(shop.getForpetHash()));
+            shop.setShopOpenTimeList(mAppDatabase.shopOpenTimeDAO().getByHashCode(shop.getForpetHash()));
         }
 
         return shopList;

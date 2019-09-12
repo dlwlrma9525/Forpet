@@ -7,21 +7,20 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import kr.forpet.data.entity.OpenTime;
-import kr.forpet.data.entity.Pharmacy;
+import kr.forpet.data.entity.ShopPharmacy;
 
 @Dao
-public interface PharmacyDAO {
+public interface ShopPharmacyDAO {
 
     @Insert
-    void insert(Pharmacy pharmacy);
+    void insert(ShopPharmacy shopPharmacy);
 
     @Update
-    void update(Pharmacy pharmacy);
+    void update(ShopPharmacy shopPharmacy);
 
     @Query("SELECT * FROM forpet_shop_pharmacy")
-    List<Pharmacy> getAll();
+    List<ShopPharmacy> getAll();
 
     @Query("SELECT * From forpet_shop_pharmacy WHERE forpet_hash = :hashCode")
-    Pharmacy getByHashCode(String hashCode);
+    ShopPharmacy getByHashCode(String hashCode);
 }

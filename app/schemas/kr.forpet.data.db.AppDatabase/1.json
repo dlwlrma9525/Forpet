@@ -1,0 +1,359 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "4ad7a7c00ba6a30e98ce47723dcb1c2e",
+    "entities": [
+      {
+        "tableName": "forpet_shop",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`no` INTEGER, `forpet_hash` TEXT NOT NULL, `address_name` TEXT, `category_group_code` TEXT, `kakao_id` TEXT, `phone` TEXT, `place_name` TEXT, `place_image_url` TEXT, `homepage` TEXT, `road_address_name` TEXT, `x` REAL, `y` REAL, `opt_parking` TEXT, `opt_reservation` TEXT, `opt_wifi` TEXT, `opt_365` TEXT, `opt_night` TEXT, `opt_shop` TEXT, `opt_beauty` TEXT, `opt_bigdog` TEXT, `opt_hotel` TEXT, `event` TEXT, `dc` TEXT, `forpet_recommend` TEXT, `love_point1` INTEGER, `love_point2` INTEGER, `love_point3` INTEGER, `love_point4` INTEGER, `love_point5` INTEGER, `intro` TEXT, `additional_info` TEXT, `last_updated` TEXT, PRIMARY KEY(`forpet_hash`))",
+        "fields": [
+          {
+            "fieldPath": "no",
+            "columnName": "no",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "forpetHash",
+            "columnName": "forpet_hash",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "addressName",
+            "columnName": "address_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "categoryGroupCode",
+            "columnName": "category_group_code",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "kakaoId",
+            "columnName": "kakao_id",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "phone",
+            "columnName": "phone",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "placeName",
+            "columnName": "place_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "placeImageUrl",
+            "columnName": "place_image_url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "homepage",
+            "columnName": "homepage",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "roadAddressName",
+            "columnName": "road_address_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "x",
+            "columnName": "x",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "y",
+            "columnName": "y",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "optParking",
+            "columnName": "opt_parking",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "optReservation",
+            "columnName": "opt_reservation",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "optWifi",
+            "columnName": "opt_wifi",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "opt365",
+            "columnName": "opt_365",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "optNight",
+            "columnName": "opt_night",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "optShop",
+            "columnName": "opt_shop",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "optBeauty",
+            "columnName": "opt_beauty",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "optBigdog",
+            "columnName": "opt_bigdog",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "optHotel",
+            "columnName": "opt_hotel",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "event",
+            "columnName": "event",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dc",
+            "columnName": "dc",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "forpetRecommend",
+            "columnName": "forpet_recommend",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lovePoint1",
+            "columnName": "love_point1",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lovePoint2",
+            "columnName": "love_point2",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lovePoint3",
+            "columnName": "love_point3",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lovePoint4",
+            "columnName": "love_point4",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lovePoint5",
+            "columnName": "love_point5",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "intro",
+            "columnName": "intro",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "additionalInfo",
+            "columnName": "additional_info",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lastUpdated",
+            "columnName": "last_updated",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "forpet_hash"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "idx_shop_category",
+            "unique": false,
+            "columnNames": [
+              "category_group_code"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `idx_shop_category` ON `${TABLE_NAME}` (`category_group_code`)"
+          },
+          {
+            "name": "idx_shop_name",
+            "unique": false,
+            "columnNames": [
+              "place_name"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `idx_shop_name` ON `${TABLE_NAME}` (`place_name`)"
+          },
+          {
+            "name": "idx_shop_x",
+            "unique": false,
+            "columnNames": [
+              "x"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `idx_shop_x` ON `${TABLE_NAME}` (`x`)"
+          },
+          {
+            "name": "idx_shop_y",
+            "unique": false,
+            "columnNames": [
+              "y"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `idx_shop_y` ON `${TABLE_NAME}` (`y`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "forpet_shop_open_time",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`no` INTEGER, `forpet_hash` TEXT, `type` TEXT, `day` TEXT, `offday_type` TEXT, `period` TEXT, `remarks` TEXT, PRIMARY KEY(`no`))",
+        "fields": [
+          {
+            "fieldPath": "no",
+            "columnName": "no",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "forpetHash",
+            "columnName": "forpet_hash",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "day",
+            "columnName": "day",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "offdayType",
+            "columnName": "offday_type",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "period",
+            "columnName": "period",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "remarks",
+            "columnName": "remarks",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "no"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "idx_time_hash",
+            "unique": false,
+            "columnNames": [
+              "forpet_hash"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `idx_time_hash` ON `${TABLE_NAME}` (`forpet_hash`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "forpet_shop_pharmacy",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`no` INTEGER, `forpet_hash` TEXT, `medicine_categories_for_sale` TEXT, PRIMARY KEY(`no`))",
+        "fields": [
+          {
+            "fieldPath": "no",
+            "columnName": "no",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "forpetHash",
+            "columnName": "forpet_hash",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "medicineCategoriesForSale",
+            "columnName": "medicine_categories_for_sale",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "no"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "idx_pharm_hash",
+            "unique": false,
+            "columnNames": [
+              "forpet_hash"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `idx_pharm_hash` ON `${TABLE_NAME}` (`forpet_hash`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4ad7a7c00ba6a30e98ce47723dcb1c2e')"
+    ]
+  }
+}

@@ -16,18 +16,17 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/image_detail_photo"
+                android:id="@+id/image_sheet_photo"
                 android:layout_width="82dp"
                 android:layout_height="82dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="19dp"
-                android:background="@drawable/bg_oval_gray"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@drawable/icon_no_image" />
 
             <Button
-                android:id="@+id/button_detail_regist"
+                android:id="@+id/button_sheet_modify"
                 android:layout_width="71dp"
                 android:layout_height="21dp"
                 android:layout_marginStart="7dp"
@@ -36,22 +35,22 @@
                 android:text="@string/header_modify"
                 android:textColor="#757575"
                 android:textSize="11sp"
-                app:layout_constraintEnd_toEndOf="@+id/image_detail_photo"
-                app:layout_constraintStart_toStartOf="@+id/image_detail_photo"
-                app:layout_constraintTop_toBottomOf="@+id/image_detail_photo" />
+                app:layout_constraintEnd_toEndOf="@+id/image_sheet_photo"
+                app:layout_constraintStart_toStartOf="@+id/image_sheet_photo"
+                app:layout_constraintTop_toBottomOf="@+id/image_sheet_photo" />
 
             <ImageView
-                android:id="@+id/image_detail_clock"
+                android:id="@+id/image_sheet_clock"
                 android:layout_width="14dp"
                 android:layout_height="14dp"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="4dp"
                 android:background="@drawable/icon_opened"
-                app:layout_constraintStart_toEndOf="@+id/image_detail_photo"
-                app:layout_constraintTop_toTopOf="@+id/image_detail_photo" />
+                app:layout_constraintStart_toEndOf="@+id/image_sheet_photo"
+                app:layout_constraintTop_toTopOf="@+id/image_sheet_photo" />
 
             <TextView
-                android:id="@+id/text_detail_opened"
+                android:id="@+id/text_sheet_opened"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
@@ -60,12 +59,12 @@
                 android:text="@string/opened"
                 android:textColor="#ff6586"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/image_detail_clock"
-                app:layout_constraintStart_toEndOf="@+id/image_detail_clock"
-                app:layout_constraintTop_toTopOf="@+id/image_detail_clock" />
+                app:layout_constraintBottom_toBottomOf="@+id/image_sheet_clock"
+                app:layout_constraintStart_toEndOf="@+id/image_sheet_clock"
+                app:layout_constraintTop_toTopOf="@+id/image_sheet_clock" />
 
             <TextView
-                android:id="@+id/text_detail_place"
+                android:id="@+id/text_sheet_place_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4.7dp"
@@ -74,11 +73,11 @@
                 android:text="@string/place"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@+id/image_detail_clock"
-                app:layout_constraintTop_toBottomOf="@+id/image_detail_clock" />
+                app:layout_constraintStart_toStartOf="@+id/image_sheet_clock"
+                app:layout_constraintTop_toBottomOf="@+id/image_sheet_clock" />
 
             <TextView
-                android:id="@+id/text_detail_address"
+                android:id="@+id/text_sheet_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="45.3dp"
@@ -87,11 +86,11 @@
                 android:text="@string/dummy_address"
                 android:textColor="#3b3b3b"
                 android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/text_detail_place"
-                app:layout_constraintTop_toBottomOf="@+id/text_detail_place" />
+                app:layout_constraintStart_toStartOf="@+id/text_sheet_place_name"
+                app:layout_constraintTop_toBottomOf="@+id/text_sheet_place_name" />
 
             <TextView
-                android:id="@+id/text_detail_phone"
+                android:id="@+id/text_sheet_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
@@ -100,11 +99,11 @@
                 android:text="@string/dummy_phone"
                 android:textColor="#3b3b3b"
                 android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/text_detail_address"
-                app:layout_constraintTop_toBottomOf="@+id/text_detail_address" />
+                app:layout_constraintStart_toStartOf="@+id/text_sheet_address"
+                app:layout_constraintTop_toBottomOf="@+id/text_sheet_address" />
 
             <TextView
-                android:id="@+id/text_detail_homepage"
+                android:id="@+id/text_sheet_homepage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
@@ -113,87 +112,88 @@
                 android:text="@string/dummy_url"
                 android:textColor="#ff6586"
                 android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/text_detail_phone"
-                app:layout_constraintTop_toBottomOf="@+id/text_detail_phone" />
+                app:layout_constraintStart_toStartOf="@+id/text_sheet_phone"
+                app:layout_constraintTop_toBottomOf="@+id/text_sheet_phone" />
 
             <TextView
                 android:id="@+id/header_event"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="91dp"
                 android:fontFamily="@font/nanum_square"
                 android:includeFontPadding="false"
                 android:text="@string/header_event"
                 android:textColor="#000000"
                 android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="@+id/image_detail_photo"
-                app:layout_constraintTop_toBottomOf="@+id/image_detail_photo" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_sheet_photo" />
 
             <ImageView
-                android:id="@+id/image_detail_event"
+                android:id="@+id/image_sheet_event"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="19dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="19dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/header_event"
                 app:layout_constraintTop_toBottomOf="@+id/header_event" />
 
             <TextView
-                android:id="@+id/header_open_time"
+                android:id="@+id/header_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="18dp"
                 android:fontFamily="@font/nanum_square"
                 android:includeFontPadding="false"
-                android:text="@string/header_open_time"
+                android:text="@string/header_time"
                 android:textColor="#000000"
                 android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="@+id/image_detail_event"
-                app:layout_constraintTop_toBottomOf="@+id/image_detail_event" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_sheet_event" />
 
             <TextView
-                android:id="@+id/text_open_time"
+                android:id="@+id/text_sheet_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:fontFamily="@font/nanum_square"
                 android:includeFontPadding="false"
                 android:lineSpacingExtra="4sp"
-                android:text="@string/dummy_open_time"
+                android:text="@string/dummy_time"
                 android:textColor="#393939"
                 android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/header_open_time"
-                app:layout_constraintTop_toBottomOf="@+id/header_open_time" />
+                app:layout_constraintStart_toStartOf="@+id/header_time"
+                app:layout_constraintTop_toBottomOf="@+id/header_time" />
 
             <TextView
                 android:id="@+id/header_opt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="17dp"
                 android:fontFamily="@font/nanum_square"
                 android:includeFontPadding="false"
                 android:text="@string/header_opt"
                 android:textColor="#000000"
                 android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="@+id/text_open_time"
-                app:layout_constraintTop_toBottomOf="@+id/text_open_time" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_sheet_time" />
 
             <GridLayout
-                android:id="@+id/linear_detail_option"
+                android:id="@+id/grid_sheet_opt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="20dp"
                 android:columnCount="4"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/header_opt"
                 app:layout_constraintTop_toBottomOf="@+id/header_opt" />
 
             <LinearLayout
-                android:id="@+id/layout_additional_info"
+                android:id="@+id/layout_sheet_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -202,20 +202,20 @@
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linear_detail_option">
+                app:layout_constraintTop_toBottomOf="@+id/grid_sheet_opt">
 
                 <TextView
-                    android:id="@+id/header_additional_info"
+                    android:id="@+id/header_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nanum_square"
                     android:includeFontPadding="false"
-                    android:text="@string/header_additional_info"
+                    android:text="@string/header_info"
                     android:textColor="#000000"
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/text_additional_info"
+                    android:id="@+id/text_sheet_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
@@ -227,7 +227,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/layout_medicine"
+                android:id="@+id/layout_sheet_medicine"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -236,7 +236,7 @@
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_additional_info">
+                app:layout_constraintTop_toBottomOf="@+id/layout_sheet_info">
 
                 <TextView
                     android:id="@+id/header_medicine"
@@ -249,7 +249,7 @@
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/text_medicine"
+                    android:id="@+id/text_sheet_medicine"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
@@ -260,12 +260,144 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/header_recommend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="23dp"
+                android:fontFamily="@font/nanum_square"
+                android:includeFontPadding="false"
+                android:text="@string/header_recommend"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_sheet_medicine" />
+
+            <LinearLayout
+                android:id="@+id/layout__sheet_recommend"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/header_recommend"
+                app:layout_constraintTop_toBottomOf="@+id/header_recommend">
+
+                <CheckBox
+                    android:id="@+id/cb_recommend_consensus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="21dp"
+                    android:button="@drawable/check_box_recommend"
+                    android:paddingLeft="7dp"
+                    android:text="@string/header_recommend_consensus"
+                    android:textColor="#d6d6d6"
+                    android:textSize="13sp" />
+
+                <CheckBox
+                    android:id="@+id/cb_recommend_facility"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="21dp"
+                    android:button="@drawable/check_box_recommend"
+                    android:paddingLeft="7dp"
+                    android:text="@string/header_recommend_facility"
+                    android:textColor="#d6d6d6"
+                    android:textSize="13sp" />
+
+                <CheckBox
+                    android:id="@+id/cb_recommend_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="21dp"
+                    android:button="@drawable/check_box_recommend"
+                    android:paddingLeft="7dp"
+                    android:text="@string/header_recommend_price"
+                    android:textColor="#d6d6d6"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/button_sheet_recommend"
+                android:layout_width="108dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="19dp"
+                android:background="@drawable/bg_corners_pink_15dp"
+                android:drawableEnd="@drawable/arrow_right"
+                android:drawableTint="#ffffff"
+                android:paddingEnd="10dp"
+                android:text="@string/header_recommend"
+                android:textColor="#ffffff"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout__sheet_recommend" />
+
+            <TextView
+                android:id="@+id/header_intro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="23dp"
+                android:fontFamily="@font/nanum_square"
+                android:includeFontPadding="false"
+                android:text="@string/header_intro"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_sheet_recommend" />
+
+            <TextView
+                android:id="@+id/text_sheet_intro"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/nanum_square"
+                android:includeFontPadding="false"
+                android:textColor="#3c3c3c"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/header_intro"
+                app:layout_constraintTop_toBottomOf="@+id/header_intro" />
+
+            <Button
+                android:id="@+id/button_sheet_navigation"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="13dp"
+                android:background="@drawable/bg_oval_pink"
+                android:text="@string/navigation"
+                android:textColor="#ffffff"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button_sheet_call"
+                app:layout_constraintTop_toBottomOf="@+id/text_sheet_intro" />
+
+            <Button
+                android:id="@+id/button_sheet_call"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_oval_pink"
+                android:text="@string/call"
+                android:textColor="#ffffff"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@+id/button_sheet_navigation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/button_sheet_navigation" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
 
     <ImageButton
-        android:id="@+id/button_favorite"
+        android:id="@+id/button_sheet_favorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left|top"
