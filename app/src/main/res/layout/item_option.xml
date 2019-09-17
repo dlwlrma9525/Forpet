@@ -5,23 +5,20 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/image_item_opt"
+        android:id="@+id/image_opt_logo"
         android:layout_width="21dp"
         android:layout_height="21dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/text_item_opt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/text_opt_description"
+        style="@style/NanumSquareStyle"
         android:layout_marginStart="5dp"
-        android:fontFamily="@font/nanum_square"
-        android:includeFontPadding="false"
         android:textColor="#393939"
         android:textSize="13sp"
-        app:layout_constraintBottom_toBottomOf="@+id/image_item_opt"
-        app:layout_constraintStart_toEndOf="@+id/image_item_opt"
-        app:layout_constraintTop_toTopOf="@+id/image_item_opt" />
+        app:layout_constraintBottom_toBottomOf="@+id/image_opt_logo"
+        app:layout_constraintStart_toEndOf="@+id/image_opt_logo"
+        app:layout_constraintTop_toTopOf="@+id/image_opt_logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

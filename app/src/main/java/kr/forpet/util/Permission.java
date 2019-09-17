@@ -11,13 +11,14 @@ public class Permission {
     public static boolean checkPermission(Activity activity, String[] permissionArr, int requestCode) {
         boolean flag = true;
 
-        for (String permission : permissionArr)
+        for (String permission : permissionArr) {
             if (activity.checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
                 activity.requestPermissions(permissionArr, requestCode);
                 flag = false;
 
                 return flag;
             }
+        }
 
         return flag;
     }

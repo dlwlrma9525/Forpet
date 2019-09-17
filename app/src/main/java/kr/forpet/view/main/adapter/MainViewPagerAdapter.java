@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,12 +26,12 @@ import java.util.List;
 import kr.forpet.R;
 import kr.forpet.data.entity.Shop;
 
-public class PopupViewPagerAdapter extends PagerAdapter {
+public class MainViewPagerAdapter extends PagerAdapter {
 
     private Context mContext;
     private List<Shop> mList;
 
-    public PopupViewPagerAdapter(Context context, List<Shop> list) {
+    public MainViewPagerAdapter(Context context, List<Shop> list) {
         this.mContext = context;
         this.mList = list;
     }
@@ -41,50 +40,70 @@ public class PopupViewPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         // super.instantiateItem(container, position);
-        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View itemView = inflater.inflate(R.layout.item_popup, container, false);
-        itemView.setOnClickListener((v) -> onItemListener.onItemClick(mList.get(position)));
-
         Shop shop = mList.get(position);
 
-        TextView textDistance = itemView.findViewById(R.id.text_item_distance);
-        textDistance.setText(String.format("%.2f km", shop.getDistance() / 1000));
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View itemView = inflater.inflate(R.layout.item_main_pager, container, false);
+        itemView.setOnClickListener((v) -> onItemListener.onItemClick(mList.get(position)));
 
-        TextView textPlace = itemView.findViewById(R.id.text_item_place);
-        textPlace.setText(shop.getPlaceName());
 
-        TextView textAddress = itemView.findViewById(R.id.text_item_address);
-        textAddress.setText(shop.getRoadAddressName());
+        TextView textDist = itemView.findViewById(R.id.text_main_pager_dist);
+        TextView textName = itemView.findViewById(R.id.text_main_pager_name);
+        TextView textAddr = itemView.findViewById(R.id.text_main_pager_addr);
 
-        GridLayout grid = itemView.findViewById(R.id.grid_item_opt);
+        textDist.setText(String.format("%.2f km", shop.getDistance() / 1000));
+        textName.setText(shop.getPlaceName());
+        textAddr.setText(shop.getRoadAddressName());
 
-        if (shop.getOptParking() != null)
-            grid.addView(createOptionView(R.drawable.enable_parking));
-        if (shop.getOptReservation() != null)
-            grid.addView(createOptionView(R.drawable.enable_reservation));
-        if (shop.getOptWifi() != null)
-            grid.addView(createOptionView(R.drawable.enable_wifi));
-        if (shop.getOpt365().equals("Y"))
-            grid.addView(createOptionView(R.drawable.enable_365));
-        if (shop.getOptNight().equals("Y"))
-            grid.addView(createOptionView(R.drawable.enable_night));
-        if (shop.getOptShop().equals("Y"))
-            grid.addView(createOptionView(R.drawable.enable_shop));
-        if (shop.getOptBeauty().equals("Y"))
-            grid.addView(createOptionView(R.drawable.enable_beauty));
-        if (shop.getOptBigdog().equals("Y"))
-            grid.addView(createOptionView(R.drawable.enable_bigdog));
-        if (shop.getOptHotel().equals("Y"))
-            grid.addView(createOptionView(R.drawable.enable_hotel));
 
-        Button buttonNavigation = itemView.findViewById(R.id.button_item_navigation);
-        buttonNavigation.setOnClickListener((v) -> {
+        GridLayout gridLayout = itemView.findViewById(R.id.gridlayout_main_pager_opt);
+        if (shop.getOptParking() != null) {
+            gridLayout.addView(createOptionView(R.drawable.enable_parking));
+        }
+
+        if (shop.getOptReservation() != null) {
+            gridLayout.addView(createOptionView(R.drawable.enable_reservation));
+        }
+
+        if (shop.getOptWifi() != null) {
+            gridLayout.addView(createOptionView(R.drawable.enable_wifi));
+        }
+
+        if (shop.getOpt365().equals("Y")) {
+            gridLayout.addView(createOptionView(R.drawable.enable_365));
+        }
+
+        if (shop.getOptNight().equals("Y")) {
+            gridLayout.addView(createOptionView(R.drawable.enable_night));
+        }
+
+        if (shop.getOptShop().equals("Y")) {
+            gridLayout.addView(createOptionView(R.drawable.enable_shop));
+        }
+
+        if (shop.getOptBeauty().equals("Y")) {
+            gridLayout.addView(createOptionView(R.drawable.enable_beauty));
+        }
+
+        if (shop.getOptBigdog().equals("Y")) {
+            gridLayout.addView(createOptionView(R.drawable.enable_bigdog));
+        }
+
+        if (shop.getOptHotel().equals("Y")) {
+            gridLayout.addView(createOptionView(R.drawable.enable_hotel));
+        }
+
+
+        Button buttonNavigate = itemView.findViewById(R.id.button_main_pager_navigate);
+        Button buttonCall = itemView.findViewById(R.id.button_main_pager_call);
+
+        buttonNavigate.setOnClickListener((v) -> {
             try {
                 FusedLocationProviderClient client = LocationServices.getFusedLocationProviderClient(mContext);
                 client.getLastLocation().addOnCompleteListener((@NonNull Task<Location> task) -> {
                     if (task.isSuccessful()) {
-                        Location lastLocation = task.getResult();
-                        LatLng start = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
+                        Location myLocation = task.getResult();
+                        LatLng start = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
 
                         String uri = new StringBuilder("http://maps.google.com/maps?")
                                 .append("saddr=").append(start.latitude).append(",").append(start.longitude)
@@ -104,11 +123,11 @@ public class PopupViewPagerAdapter extends PagerAdapter {
             }
         });
 
-        Button buttonCall = itemView.findViewById(R.id.button_item_call);
         buttonCall.setOnClickListener((v) -> {
             Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + shop.getPhone()));
             mContext.startActivity(intent);
         });
+
 
         container.addView(itemView);
         return itemView;
@@ -130,13 +149,13 @@ public class PopupViewPagerAdapter extends PagerAdapter {
     }
 
     private ImageView createOptionView(int resourceId) {
-        FrameLayout.LayoutParams params
-                = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        ViewGroup.MarginLayoutParams params
+                = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         DisplayMetrics metrics = mContext.getResources().getDisplayMetrics();
+        params.setMarginEnd(Math.round(5 * metrics.density));
         params.height = Math.round(21 * metrics.density);
         params.width = Math.round(21 * metrics.density);
-        params.setMarginEnd(Math.round(5 * metrics.density));
 
         ImageView image = new ImageView(mContext);
         image.setImageResource(resourceId);

@@ -19,10 +19,12 @@ public interface MainPresenter {
     void onMapReady(GoogleMap googleMap);
     void onMapUpdate(LatLngBounds latLngBounds, String categoryGroupCode);
     void onMyLocate();
+    void onDrawer(Context context);
 
     interface View {
 
         void updateMyLocate(LatLng latLng);
         void updateMap(List<Shop> shopList);
+        void updateFavorites(List<Shop> shopList);
     }
 }

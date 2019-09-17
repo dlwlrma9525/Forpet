@@ -28,11 +28,8 @@
 
     <TextView
         android:id="@+id/text_ci"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/NanumSquareStyle"
         android:layout_marginTop="11.8dp"
-        android:fontFamily="@font/nanum_square"
-        android:includeFontPadding="false"
         android:text="@string/app_ci"
         android:textColor="#919191"
         android:textSize="12sp"

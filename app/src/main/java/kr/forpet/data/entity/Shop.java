@@ -22,7 +22,14 @@ import kr.forpet.annotation.Label;
 public class Shop {
 
     public enum CategoryGroupCode {
-        SHOP, PHARM, HOSPITAL, DOGPENSION, DOGGROUND, DOGCAFE, CATCAFE, BEAUTY;
+        SHOP,
+        PHARM,
+        HOSPITAL,
+        DOGPENSION,
+        DOGGROUND,
+        DOGCAFE,
+        CATCAFE,
+        BEAUTY;
 
         public static CategoryGroupCode compare(String str) {
             return valueOf(str.toUpperCase());

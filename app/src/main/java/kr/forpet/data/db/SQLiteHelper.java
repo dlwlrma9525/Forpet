@@ -19,12 +19,13 @@ public class SQLiteHelper {
 
     public static AppDatabase assetsToDisk(Context context) {
         try {
-            File file = context.getDatabasePath(context.getString(R.string.db_name));
+            File file = context.getDatabasePath(context.getString(R.string.app_db_name));
 
-            if (file.exists())
-                return Room.databaseBuilder(context, AppDatabase.class, context.getString(R.string.db_name)).build();
+            if (file.exists()) {
+                return Room.databaseBuilder(context, AppDatabase.class, context.getString(R.string.app_db_name)).build();
+            }
 
-            InputStream is = context.getAssets().open(context.getString(R.string.db_name));
+            InputStream is = context.getAssets().open(context.getString(R.string.app_db_name));
             BufferedInputStream bis = new BufferedInputStream(is);
             FileOutputStream fos = new FileOutputStream(file);
             BufferedOutputStream bos = new BufferedOutputStream(fos);
@@ -32,9 +33,9 @@ public class SQLiteHelper {
             byte buffer[] = new byte[1024];
 
             int read;
-            while ((read = bis.read(buffer, 0, 1024)) != -1)
+            while ((read = bis.read(buffer, 0, 1024)) != -1) {
                 bos.write(buffer, 0, read);
-
+            }
             bos.flush();
 
             is.close();
@@ -46,7 +47,7 @@ public class SQLiteHelper {
         }
 
         // TODO: database migration..
-        return Room.databaseBuilder(context, AppDatabase.class, context.getString(R.string.db_name))
+        return Room.databaseBuilder(context, AppDatabase.class, context.getString(R.string.app_db_name))
                 .addMigrations(VERSION_1)
                 .build();
     }

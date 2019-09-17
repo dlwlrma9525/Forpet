@@ -29,7 +29,6 @@
                 android:id="@+id/button_sheet_modify"
                 android:layout_width="71dp"
                 android:layout_height="21dp"
-                android:layout_marginStart="7dp"
                 android:layout_marginTop="18dp"
                 android:background="@drawable/bg_stroke_gray_dark_15dp"
                 android:text="@string/header_modify"
@@ -39,76 +38,53 @@
                 app:layout_constraintStart_toStartOf="@+id/image_sheet_photo"
                 app:layout_constraintTop_toBottomOf="@+id/image_sheet_photo" />
 
-            <ImageView
-                android:id="@+id/image_sheet_clock"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
+            <TextView
+                android:id="@+id/text_sheet_opened"
+                style="@style/NanumSquareStyle"
                 android:layout_marginStart="13dp"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/icon_opened"
+                android:layout_marginTop="12dp"
+                android:drawableStart="@drawable/icon_opened"
+                android:drawablePadding="3dp"
+                android:text="@string/all_opened"
+                android:textColor="#ff6586"
+                android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/image_sheet_photo"
                 app:layout_constraintTop_toTopOf="@+id/image_sheet_photo" />
 
             <TextView
-                android:id="@+id/text_sheet_opened"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:fontFamily="@font/nanum_square"
-                android:includeFontPadding="false"
-                android:text="@string/opened"
-                android:textColor="#ff6586"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/image_sheet_clock"
-                app:layout_constraintStart_toEndOf="@+id/image_sheet_clock"
-                app:layout_constraintTop_toTopOf="@+id/image_sheet_clock" />
-
-            <TextView
-                android:id="@+id/text_sheet_place_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4.7dp"
-                android:fontFamily="@font/nanum_square"
-                android:includeFontPadding="false"
-                android:text="@string/place"
+                android:id="@+id/text_sheet_name"
+                style="@style/NanumSquareStyle"
+                android:layout_marginTop="3.7dp"
+                android:text="@string/all_place"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@+id/image_sheet_clock"
-                app:layout_constraintTop_toBottomOf="@+id/image_sheet_clock" />
+                app:layout_constraintStart_toStartOf="@+id/text_sheet_opened"
+                app:layout_constraintTop_toBottomOf="@+id/text_sheet_opened" />
 
             <TextView
-                android:id="@+id/text_sheet_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="45.3dp"
-                android:fontFamily="@font/nanum_square"
-                android:includeFontPadding="false"
-                android:text="@string/dummy_address"
+                android:id="@+id/text_sheet_addr"
+                style="@style/NanumSquareStyle"
+                android:layout_marginTop="11.3dp"
+                android:text="@string/dummy_addr"
                 android:textColor="#3b3b3b"
                 android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/text_sheet_place_name"
-                app:layout_constraintTop_toBottomOf="@+id/text_sheet_place_name" />
+                app:layout_constraintStart_toStartOf="@+id/text_sheet_name"
+                app:layout_constraintTop_toBottomOf="@+id/text_sheet_name" />
 
             <TextView
                 android:id="@+id/text_sheet_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/NanumSquareStyle"
                 android:layout_marginTop="1dp"
-                android:fontFamily="@font/nanum_square"
-                android:includeFontPadding="false"
                 android:text="@string/dummy_phone"
                 android:textColor="#3b3b3b"
                 android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/text_sheet_address"
-                app:layout_constraintTop_toBottomOf="@+id/text_sheet_address" />
+                app:layout_constraintStart_toStartOf="@+id/text_sheet_addr"
+                app:layout_constraintTop_toBottomOf="@+id/text_sheet_addr" />
 
             <TextView
                 android:id="@+id/text_sheet_homepage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/NanumSquareStyle"
                 android:layout_marginTop="1dp"
-                android:fontFamily="@font/nanum_square"
-                android:includeFontPadding="false"
                 android:text="@string/dummy_url"
                 android:textColor="#ff6586"
                 android:textSize="13sp"
@@ -117,17 +93,14 @@
 
             <TextView
                 android:id="@+id/header_event"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/NanumSquareStyle"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="91dp"
-                android:fontFamily="@font/nanum_square"
-                android:includeFontPadding="false"
+                android:layout_marginTop="52dp"
                 android:text="@string/header_event"
                 android:textColor="#000000"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_sheet_photo" />
+                app:layout_constraintTop_toBottomOf="@+id/button_sheet_modify" />
 
             <ImageView
                 android:id="@+id/image_sheet_event"
@@ -141,12 +114,9 @@
 
             <TextView
                 android:id="@+id/header_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/NanumSquareStyle"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="18dp"
-                android:fontFamily="@font/nanum_square"
-                android:includeFontPadding="false"
                 android:text="@string/header_time"
                 android:textColor="#000000"
                 android:textSize="15sp"
@@ -155,11 +125,8 @@
 
             <TextView
                 android:id="@+id/text_sheet_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/NanumSquareStyle"
                 android:layout_marginTop="6dp"
-                android:fontFamily="@font/nanum_square"
-                android:includeFontPadding="false"
                 android:lineSpacingExtra="4sp"
                 android:text="@string/dummy_time"
                 android:textColor="#393939"
@@ -169,20 +136,17 @@
 
             <TextView
                 android:id="@+id/header_opt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/NanumSquareStyle"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="17dp"
-                android:fontFamily="@font/nanum_square"
-                android:includeFontPadding="false"
-                android:text="@string/header_opt"
+                android:text="@string/header_option"
                 android:textColor="#000000"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_sheet_time" />
 
             <GridLayout
-                android:id="@+id/grid_sheet_opt"
+                android:id="@+id/gridlayout_sheet_opt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -202,25 +166,19 @@
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/grid_sheet_opt">
+                app:layout_constraintTop_toBottomOf="@+id/gridlayout_sheet_opt">
 
                 <TextView
                     android:id="@+id/header_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nanum_square"
-                    android:includeFontPadding="false"
+                    style="@style/NanumSquareStyle"
                     android:text="@string/header_info"
                     android:textColor="#000000"
                     android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/text_sheet_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/NanumSquareStyle"
                     android:layout_marginTop="6dp"
-                    android:fontFamily="@font/nanum_square"
-                    android:includeFontPadding="false"
                     android:textColor="#393939"
                     android:textSize="13sp" />
 
@@ -240,21 +198,15 @@
 
                 <TextView
                     android:id="@+id/header_medicine"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nanum_square"
-                    android:includeFontPadding="false"
+                    style="@style/NanumSquareStyle"
                     android:text="@string/header_medicine"
                     android:textColor="#000000"
                     android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/text_sheet_medicine"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/NanumSquareStyle"
                     android:layout_marginTop="6dp"
-                    android:fontFamily="@font/nanum_square"
-                    android:includeFontPadding="false"
                     android:textColor="#393939"
                     android:textSize="13sp" />
 
@@ -262,12 +214,9 @@
 
             <TextView
                 android:id="@+id/header_recommend"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/NanumSquareStyle"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="23dp"
-                android:fontFamily="@font/nanum_square"
-                android:includeFontPadding="false"
                 android:text="@string/header_recommend"
                 android:textColor="#000000"
                 android:textSize="15sp"
@@ -275,13 +224,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/layout_sheet_medicine" />
 
             <LinearLayout
-                android:id="@+id/layout__sheet_recommend"
-                android:layout_width="0dp"
+                android:id="@+id/layout_sheet_recommend"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="11dp"
-                android:layout_marginEnd="20dp"
                 android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/header_recommend"
                 app:layout_constraintTop_toBottomOf="@+id/header_recommend">
 
@@ -334,16 +281,13 @@
                 android:textColor="#ffffff"
                 android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout__sheet_recommend" />
+                app:layout_constraintTop_toBottomOf="@+id/layout_sheet_recommend" />
 
             <TextView
                 android:id="@+id/header_intro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/NanumSquareStyle"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="23dp"
-                android:fontFamily="@font/nanum_square"
-                android:includeFontPadding="false"
                 android:text="@string/header_intro"
                 android:textColor="#000000"
                 android:textSize="15sp"
@@ -352,12 +296,10 @@
 
             <TextView
                 android:id="@+id/text_sheet_intro"
+                style="@style/NanumSquareStyle"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:layout_marginEnd="20dp"
-                android:fontFamily="@font/nanum_square"
-                android:includeFontPadding="false"
                 android:textColor="#3c3c3c"
                 android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -365,14 +307,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/header_intro" />
 
             <Button
-                android:id="@+id/button_sheet_navigation"
+                android:id="@+id/button_sheet_navigate"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="26dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="13dp"
                 android:background="@drawable/bg_oval_pink"
-                android:text="@string/navigation"
+                android:text="@string/all_navigate"
                 android:textColor="#ffffff"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -385,23 +327,23 @@
                 android:layout_height="50dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/bg_oval_pink"
-                android:text="@string/call"
+                android:text="@string/all_call"
                 android:textColor="#ffffff"
                 android:textSize="13sp"
-                app:layout_constraintBottom_toBottomOf="@+id/button_sheet_navigation"
+                app:layout_constraintBottom_toBottomOf="@+id/button_sheet_navigate"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/button_sheet_navigation" />
+                app:layout_constraintTop_toTopOf="@+id/button_sheet_navigate" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
 
-    <ImageButton
-        android:id="@+id/button_sheet_favorite"
+    <CheckBox
+        android:id="@+id/cb_sheet_favorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left|top"
         android:layout_marginStart="8dp"
-        android:background="@drawable/icon_favorite" />
+        android:button="@drawable/check_box_favorite" />
 
 </FrameLayout>

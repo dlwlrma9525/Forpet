@@ -9,7 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -50,7 +52,8 @@ import kr.forpet.map.MarkerBuilder;
 import kr.forpet.util.Permission;
 import kr.forpet.view.factory.BottomSheetItemFactory;
 import kr.forpet.view.factory.ItemViewFactory;
-import kr.forpet.view.main.adapter.PopupViewPagerAdapter;
+import kr.forpet.view.main.adapter.FavoriteListAdapter;
+import kr.forpet.view.main.adapter.MainViewPagerAdapter;
 import kr.forpet.view.main.presenter.MainPresenter;
 import kr.forpet.view.main.presenter.MainPresenterImpl;
 import kr.forpet.view.regist.RegistActivity;
@@ -75,25 +78,25 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
 
-    @BindView(R.id.nav_view)
+    @BindView(R.id.navigation_view)
     NavigationView navigationView;
 
     @BindView(R.id.bottom_navigation_view)
     BottomNavigationView bottomNavigationView;
 
-    @BindView(R.id.view_pager_popup)
-    ViewPager popupViewPager;
+    @BindView(R.id.view_pager_main)
+    ViewPager mainViewPager;
 
     @BindView(R.id.bottom_sheet)
     ViewGroup bottomSheet;
 
-    @BindView(R.id.dim_effect)
-    ViewGroup dimEffect;
+    @BindView(R.id.layout_sheet_effect)
+    ViewGroup sheetEffect;
 
-    @BindView(R.id.button_my_locate)
+    @BindView(R.id.button_main_locate)
     ImageButton buttonMyLocate;
 
-    @BindViews({R.id.fab_diagnosis, R.id.fab_search_pharmacy, R.id.fab_search_meal})
+    @BindViews({R.id.fab_main_diagnosis, R.id.fab_main_vaccination, R.id.fab_main_meal})
     List<FloatingActionButton> floatingActionButtons;
 
     @Override
@@ -107,8 +110,9 @@ public class MainActivity extends AppCompatActivity
         mMainPresenter.onCreate(getApplicationContext());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (Permission.checkPermission(this, PERMISSION_ARRAY, REQUEST_PERMISSION))
+            if (Permission.checkPermission(this, PERMISSION_ARRAY, REQUEST_PERMISSION)) {
                 init();
+            }
         }
     }
 
@@ -122,10 +126,11 @@ public class MainActivity extends AppCompatActivity
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (Permission.onCheckResult(grantResults))
+        if (Permission.onCheckResult(grantResults)) {
             init();
-        else
+        } else {
             finish();
+        }
     }
 
     @Override
@@ -146,13 +151,12 @@ public class MainActivity extends AppCompatActivity
             mClickedMarker = marker;
             mClickedMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_current));
 
-            popupViewPager.setVisibility(View.VISIBLE);
-            popupViewPager.setCurrentItem(mMarkerCache.indexOf(mClickedMarker));
+            mainViewPager.setVisibility(View.VISIBLE);
+            mainViewPager.setCurrentItem(mMarkerCache.indexOf(mClickedMarker));
             return true;
         });
 
-        googleMap.setOnCameraIdleListener(() -> {
-            // Called when camera movement has ended, there are no pending animations and the user has stopped interacting with the map.
+        googleMap.setOnCameraIdleListener(() -> {// Called when camera movement has ended, there are no pending animations and the user has stopped interacting with the map.
             Projection projection = mMap.getProjection();
             LatLngBounds latLngBounds = projection.getVisibleRegion().latLngBounds;
 
@@ -169,7 +173,7 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else if (mPersistentBottomSheet.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
             mPersistentBottomSheet.setState(BottomSheetBehavior.STATE_HIDDEN);
-            dimEffect.setVisibility(View.GONE);
+            sheetEffect.setVisibility(View.GONE);
         } else {
             super.onBackPressed();
         }
@@ -183,8 +187,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_search)
+        if (item.getItemId() == R.id.action_search) {
             return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -197,13 +202,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void updateMap(List<Shop> shopList) {
         clearMap();
-
         for (Shop shop : shopList) {
             MarkerOptions markerOptions = new MarkerBuilder(new LatLng(shop.getY(), shop.getX()))
                     .categoryGroupCode(shop.getCategoryGroupCode())
                     .placeName(shop.getPlaceName())
-                    .forpetHash(shop.getForpetHash())
-                    .build();
+                    .forpetHash(shop.getForpetHash()).build();
 
             Marker marker = mMap.addMarker(markerOptions);
             marker.setTag(markerOptions.getIcon());
@@ -214,16 +217,24 @@ public class MainActivity extends AppCompatActivity
             }
 
             mMarkerCache.add(marker);
-            popupViewPager.setVisibility(View.GONE);
-            popupViewPager.setAdapter(createPagerAdapter(shopList));
+            mainViewPager.setVisibility(View.GONE);
+            mainViewPager.setAdapter(createPagerAdapter(shopList));
         }
+    }
+
+    @Override
+    public void updateFavorites(List<Shop> shopList) {
+        BaseAdapter adapter = new FavoriteListAdapter(getApplicationContext(), shopList);
+
+        ListView listFavorite = navigationView.findViewById(R.id.list_navigation_favorite);
+        listFavorite.setAdapter(adapter);
     }
 
     public void clearMap() {
         mMap.clear();
-        mMarkerCache.clear();
 
-        popupViewPager.removeAllViews();
+        mMarkerCache.clear();
+        mainViewPager.removeAllViews();
     }
 
     private void init() {
@@ -246,10 +257,12 @@ public class MainActivity extends AppCompatActivity
         toggle.setDrawerIndicatorEnabled(false);
         toggle.setHomeAsUpIndicator(R.drawable.icon_menu_hamburg);
         toggle.setToolbarNavigationClickListener((v) -> {
-            if (drawer.isDrawerVisible(GravityCompat.START))
+            if (drawer.isDrawerVisible(GravityCompat.START)) {
                 drawer.closeDrawer(GravityCompat.START);
-            else
+            } else {
                 drawer.openDrawer(GravityCompat.START);
+                mMainPresenter.onDrawer(getApplicationContext());
+            }
         });
     }
 
@@ -264,9 +277,9 @@ public class MainActivity extends AppCompatActivity
 
     private void initPopupViewPager() {
         DisplayMetrics metrics = getResources().getDisplayMetrics();
-        popupViewPager.setClipToPadding(false);
-        popupViewPager.setPageMargin(Math.round(5 * metrics.density));
-        popupViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mainViewPager.setPageMargin(Math.round(5 * metrics.density));
+        mainViewPager.setClipToPadding(false);
+        mainViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -289,7 +302,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initNavigationView() {
-        navigationView.findViewById(R.id.button_place).setOnClickListener((v) -> {
+        navigationView.findViewById(R.id.button_navigation_ground).setOnClickListener((v) -> {
             Intent intent = new Intent(this, RegistActivity.class);
             startActivity(intent);
         });
@@ -299,24 +312,25 @@ public class MainActivity extends AppCompatActivity
         bottomNavigationView.setOnNavigationItemSelectedListener((@NonNull MenuItem item) -> {
             if (item.getItemId() == R.id.action_more) {
                 ViewCollections.run(floatingActionButtons, (v, i) -> {
-                    if (v.isShown())
+                    if (v.isShown()) {
                         v.hide();
-                    else
+                    } else {
                         v.show();
+                    }
                 });
             } else {
                 ViewCollections.run(floatingActionButtons, (v, i) -> {
-                    if (v.isShown())
+                    if (v.isShown()) {
                         v.hide();
+                    }
                 });
-
-                mClickedMarker = null;
 
                 Projection projection = mMap.getProjection();
                 LatLngBounds latLngBounds = projection.getVisibleRegion().latLngBounds;
+
+                mClickedMarker = null;
                 mMainPresenter.onMapUpdate(latLngBounds, getCategoryGroupCode(item));
             }
-
             return true;
         });
 
@@ -328,17 +342,16 @@ public class MainActivity extends AppCompatActivity
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 switch (newState) {
                     case BottomSheetBehavior.STATE_SETTLING:
-                        dimEffect.setVisibility(View.VISIBLE);
+                        sheetEffect.setVisibility(View.VISIBLE);
                         break;
                     case BottomSheetBehavior.STATE_HIDDEN:
-                        dimEffect.setVisibility(View.GONE);
+                        sheetEffect.setVisibility(View.GONE);
                         break;
                 }
             }
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-
             }
         });
 
@@ -347,6 +360,7 @@ public class MainActivity extends AppCompatActivity
 
     private String getCategoryGroupCode(MenuItem item) {
         Shop.CategoryGroupCode code;
+
         switch (item.getItemId()) {
             case R.id.action_supplies:
                 code = Shop.CategoryGroupCode.SHOP;
@@ -365,7 +379,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private PagerAdapter createPagerAdapter(List<Shop> shopList) {
-        PopupViewPagerAdapter adapter = new PopupViewPagerAdapter(getApplicationContext(), shopList);
+        MainViewPagerAdapter adapter = new MainViewPagerAdapter(getApplicationContext(), shopList);
         adapter.setOnItemListener((shop) -> {
             ItemViewFactory factory = new BottomSheetItemFactory(shop);
 
