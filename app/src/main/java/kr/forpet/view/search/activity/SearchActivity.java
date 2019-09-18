@@ -53,7 +53,6 @@ public class SearchActivity extends AppCompatActivity
         mCode = bundle.getString("extra");
 
         showSoftKeyboard();
-        mBinding.editTextSearch.requestFocus();
         mBinding.editTextSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -119,11 +118,11 @@ public class SearchActivity extends AppCompatActivity
 
     private void showSoftKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+        imm.showSoftInput(mBinding.editTextSearch, 0);
     }
 
     private void hideSoftKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+        imm.hideSoftInputFromWindow(mBinding.editTextSearch.getWindowToken(), 0);
     }
 }
