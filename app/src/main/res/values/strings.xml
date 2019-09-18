@@ -8,6 +8,7 @@
     <string name="shared_key_favorite">favorite</string>
     <!-- activity -->
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_search">SearchActivity</string>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="title_activity_regist">RegistActivity</string>
     <!-- bottom navigation view menu -->
@@ -24,6 +25,9 @@
     <string name="navigation_item_hospital">병원/약국 등록</string>
     <string name="navigation_item_ground">뱐려동물 동반가능 장소등록</string>
     <string name="navigation_item_ad">광고 요청하기</string>
+    <!-- tab layout -->
+    <string name="tab_item_name">이름</string>
+    <string name="tab_item_region">지역</string>
     <!-- header -->
     <string name="header_ad">광고 요청하기</string>
     <string name="header_dist">km</string>
@@ -32,7 +36,6 @@
     <string name="header_info"> 부가정보</string>
     <string name="header_medicine">구비약품</string>
     <string name="header_modify">수정요청</string>
-    <string name="header_notice">내용을 상세하게 작성해 주셔야 등록이 가능합니다.\n요청내용을 확인 후 담당자가 전화로 확인하는\n과정을 거칩니다.</string>
     <string name="header_option">고객편의</string>
     <string name="header_recommend">만족도평가</string>
     <string name="header_recommend_consensus">펫과의교감</string>
@@ -49,10 +52,13 @@
     <string name="all_opened">영업중</string>
     <string name="all_photo">사진</string>
     <string name="all_place">장소</string>
+    <string name="hint">검색어를 입력해 주세요</string>
+    <string name="notice">내용을 상세하게 작성해 주셔야 등록이 가능합니다.\n요청내용을 확인 후 담당자가 전화로 확인하는\n과정을 거칩니다.</string>
     <!-- dummy -->
     <string name="dummy_addr">서울특별시 강남구 역삼동 테헤란로 152</string>
     <string name="dummy_birth">2019.01.01</string>
     <string name="dummy_email">forpet@forpet.kr</string>
+    <string name="dummy_name">구글코리아</string>
     <string name="dummy_pet">닥스훈트</string>
     <string name="dummy_phone">010-0000-0000</string>
     <string name="dummy_time">월~금 : 오전 9시~ 오후 9시\n토 : 오전 9시 ~ 오후 1시\n일 : 휴일</string>

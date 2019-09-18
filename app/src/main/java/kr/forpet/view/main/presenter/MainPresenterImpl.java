@@ -15,7 +15,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -40,7 +39,7 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onCreate(Context context) {
-        mMainModel.initAppDatabase(context);
+        mMainModel.loadAppDatabase(context);
         mMainModel.initGooglePlayService(context);
 
         initSharedPreferences(context);

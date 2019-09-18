@@ -18,21 +18,21 @@ import kr.forpet.data.entity.Shop;
 public class FavoriteListAdapter extends BaseAdapter {
 
     private Context mContext;
-    private List<Shop> mList;
+    private List<Shop> mDataList;
 
-    public FavoriteListAdapter(Context context, List<Shop> shopList) {
+    public FavoriteListAdapter(Context context, List<Shop> dataList) {
         mContext = context;
-        mList = shopList;
+        mDataList = dataList;
     }
 
     @Override
     public int getCount() {
-        return mList.size();
+        return mDataList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mList.get(position);
+        return mDataList.get(position);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class FavoriteListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Shop shop = mList.get(position);
+        Shop shop = mDataList.get(position);
         int resourceId = 0;
 
         switch (Shop.CategoryGroupCode.compare(shop.getCategoryGroupCode())) {

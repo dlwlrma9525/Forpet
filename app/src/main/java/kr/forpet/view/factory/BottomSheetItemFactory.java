@@ -35,17 +35,17 @@ import kr.forpet.data.entity.ShopOpenTime;
 
 public class BottomSheetItemFactory implements ItemViewFactory {
 
-    private Shop mShop;
+    private Shop mData;
 
     public BottomSheetItemFactory(Shop shop) {
-        this.mShop = shop;
+        this.mData = shop;
     }
 
     @Override
     public View createView(Context context) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View contentView = inflater.inflate(R.layout.layout_bottom_sheet, null);
-        createOptionView(context, contentView, mShop);
+        createOptionView(context, contentView, mData);
 
 
         SharedPreferences sharedPref
@@ -57,12 +57,12 @@ public class BottomSheetItemFactory implements ItemViewFactory {
         List<String> favorites = new ArrayList<>(Arrays.asList(json));
 
         CheckBox cbFavorite = contentView.findViewById(R.id.cb_sheet_favorite);
-        cbFavorite.setChecked(favorites.contains(mShop.getForpetHash()) ? true : false);
+        cbFavorite.setChecked(favorites.contains(mData.getForpetHash()) ? true : false);
         cbFavorite.setOnCheckedChangeListener((v, isChecked) -> {
             if (isChecked) {
-                favorites.add(mShop.getForpetHash());
+                favorites.add(mData.getForpetHash());
             } else {
-                favorites.remove(mShop.getForpetHash());
+                favorites.remove(mData.getForpetHash());
             }
 
             SharedPreferences.Editor editor = sharedPref.edit();
@@ -77,13 +77,13 @@ public class BottomSheetItemFactory implements ItemViewFactory {
         TextView textHomepage = contentView.findViewById(R.id.text_sheet_homepage);
         TextView textTime = contentView.findViewById(R.id.text_sheet_time);
 
-        textName.setText(mShop.getPlaceName());
-        textAddr.setText(mShop.getRoadAddressName());
-        textPhone.setText(mShop.getPhone());
-        textHomepage.setText(mShop.getHomepage());
+        textName.setText(mData.getPlaceName());
+        textAddr.setText(mData.getRoadAddressName());
+        textPhone.setText(mData.getPhone());
+        textHomepage.setText(mData.getHomepage());
 
         StringBuilder builder = new StringBuilder();
-        for (ShopOpenTime time : mShop.getShopOpenTimeList()) {
+        for (ShopOpenTime time : mData.getShopOpenTimeList()) {
             if (time.getType().equals("영업일")) {
                 builder.append(time.getDay()).append(":").append(time.getPeriod());
             } else {
@@ -110,22 +110,22 @@ public class BottomSheetItemFactory implements ItemViewFactory {
         cbRecommendPrice.setOnCheckedChangeListener(onCheckedChangeListener);
 
 
-        if (mShop.getAdditionalInfo() != null) {
+        if (mData.getAdditionalInfo() != null) {
             // do something..
         } else {
             contentView.findViewById(R.id.layout_sheet_info).setVisibility(View.GONE);
         }
 
-        if (mShop.getCategoryGroupCode().equals(Shop.CategoryGroupCode.PHARM.toString())) {
+        if (mData.getCategoryGroupCode().equals(Shop.CategoryGroupCode.PHARM.toString())) {
             TextView textMedicine = contentView.findViewById(R.id.text_sheet_medicine);
-            textMedicine.setText(mShop.getShopPharmacy().getMedicineCategoriesForSale());
+            textMedicine.setText(mData.getShopPharmacy().getMedicineCategoriesForSale());
         } else {
             contentView.findViewById(R.id.layout_sheet_medicine).setVisibility(View.GONE);
         }
 
-        if (mShop.getIntro() != null) {
+        if (mData.getIntro() != null) {
             TextView textIntro = contentView.findViewById(R.id.text_sheet_intro);
-            textIntro.setText(mShop.getIntro().replace("\\r\\n", System.getProperty("line.separator")));
+            textIntro.setText(mData.getIntro().replace("\\r\\n", System.getProperty("line.separator")));
         }
 
 
@@ -142,7 +142,7 @@ public class BottomSheetItemFactory implements ItemViewFactory {
 
                         String uri = new StringBuilder("http://maps.google.com/maps?")
                                 .append("saddr=").append(start.latitude).append(",").append(start.longitude)
-                                .append("&daddr=").append(mShop.getY()).append(",").append(mShop.getX())
+                                .append("&daddr=").append(mData.getY()).append(",").append(mData.getX())
                                 .toString();
 
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
@@ -159,7 +159,7 @@ public class BottomSheetItemFactory implements ItemViewFactory {
         });
 
         buttonCall.setOnClickListener((v) -> {
-            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mShop.getPhone()));
+            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mData.getPhone()));
             context.startActivity(intent);
         });
 

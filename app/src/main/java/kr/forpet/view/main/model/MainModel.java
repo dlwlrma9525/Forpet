@@ -17,15 +17,14 @@ import kr.forpet.data.entity.Shop;
 public class MainModel {
 
     private AppDatabase mAppDatabase;
-
     private FusedLocationProviderClient mFusedLocationProviderClient;
-
-    public void initAppDatabase(Context context) {
-        mAppDatabase = SQLiteHelper.assetsToDisk(context);
-    }
 
     public void initGooglePlayService(Context context) {
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
+    }
+
+    public void loadAppDatabase(Context context) {
+        mAppDatabase = SQLiteHelper.getAppDatabase(context);
     }
 
     public Task<Location> getMyLocation() throws SecurityException {

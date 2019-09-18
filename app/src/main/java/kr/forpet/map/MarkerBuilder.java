@@ -8,7 +8,6 @@ import kr.forpet.R;
 import kr.forpet.data.entity.Shop;
 
 public class MarkerBuilder {
-
     private LatLng mLatLng;
 
     private String mCategoryGroupCode = null;

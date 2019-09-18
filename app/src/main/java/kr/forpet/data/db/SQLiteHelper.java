@@ -17,7 +17,23 @@ import kr.forpet.R;
 
 public class SQLiteHelper {
 
-    public static AppDatabase assetsToDisk(Context context) {
+    // https://woovictory.github.io/2019/01/25/Android-Room-Basic/
+    static final Migration VERSION_1 = new Migration(0, 1) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            // database.execSQL("ALTER TABLE..");
+        }
+    };
+    private static AppDatabase sAppDatabase;
+
+    public static AppDatabase getAppDatabase(Context context) {
+        if (sAppDatabase == null)
+            sAppDatabase = assetsToDisk(context);
+
+        return sAppDatabase;
+    }
+
+    private static AppDatabase assetsToDisk(Context context) {
         try {
             File file = context.getDatabasePath(context.getString(R.string.app_db_name));
 
@@ -30,7 +46,7 @@ public class SQLiteHelper {
             FileOutputStream fos = new FileOutputStream(file);
             BufferedOutputStream bos = new BufferedOutputStream(fos);
 
-            byte buffer[] = new byte[1024];
+            byte[] buffer = new byte[1024];
 
             int read;
             while ((read = bis.read(buffer, 0, 1024)) != -1) {
@@ -51,12 +67,4 @@ public class SQLiteHelper {
                 .addMigrations(VERSION_1)
                 .build();
     }
-
-    // https://woovictory.github.io/2019/01/25/Android-Room-Basic/
-    static final Migration VERSION_1 = new Migration(0, 1) {
-        @Override
-        public void migrate(SupportSQLiteDatabase database) {
-            // database.execSQL("ALTER TABLE..");
-        }
-    };
 }

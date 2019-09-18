@@ -53,10 +53,11 @@ import kr.forpet.util.Permission;
 import kr.forpet.view.factory.BottomSheetItemFactory;
 import kr.forpet.view.factory.ItemViewFactory;
 import kr.forpet.view.main.adapter.FavoriteListAdapter;
-import kr.forpet.view.main.adapter.MainViewPagerAdapter;
+import kr.forpet.view.main.adapter.MainPagerAdapter;
 import kr.forpet.view.main.presenter.MainPresenter;
 import kr.forpet.view.main.presenter.MainPresenterImpl;
 import kr.forpet.view.regist.RegistActivity;
+import kr.forpet.view.search.activity.SearchActivity;
 
 public class MainActivity extends AppCompatActivity
         implements MainPresenter.View, OnMapReadyCallback {
@@ -64,13 +65,6 @@ public class MainActivity extends AppCompatActivity
     private static final String[] PERMISSION_ARRAY
             = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.CALL_PHONE};
     private static final int REQUEST_PERMISSION = 0;
-
-    private MainPresenter mMainPresenter;
-    private GoogleMap mMap;
-    private BottomSheetBehavior mPersistentBottomSheet;
-
-    private List<Marker> mMarkerCache = new ArrayList<>();
-    private Marker mClickedMarker;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -98,6 +92,13 @@ public class MainActivity extends AppCompatActivity
 
     @BindViews({R.id.fab_main_diagnosis, R.id.fab_main_vaccination, R.id.fab_main_meal})
     List<FloatingActionButton> floatingActionButtons;
+
+    private MainPresenter mMainPresenter;
+    private GoogleMap mMap;
+    private BottomSheetBehavior mPersistentBottomSheet;
+
+    private List<Marker> mMarkerCache = new ArrayList<>();
+    private Marker mClickedMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,12 +157,13 @@ public class MainActivity extends AppCompatActivity
             return true;
         });
 
-        googleMap.setOnCameraIdleListener(() -> {// Called when camera movement has ended, there are no pending animations and the user has stopped interacting with the map.
+        googleMap.setOnCameraIdleListener(() -> {
+            // Called when camera movement has ended, there are no pending animations and the user has stopped interacting with the map.
             Projection projection = mMap.getProjection();
             LatLngBounds latLngBounds = projection.getVisibleRegion().latLngBounds;
 
-            MenuItem item = bottomNavigationView.getMenu().findItem(bottomNavigationView.getSelectedItemId());
-            mMainPresenter.onMapUpdate(latLngBounds, getCategoryGroupCode(item));
+            mMainPresenter.onMapUpdate(latLngBounds,
+                    getCategoryGroupCode(bottomNavigationView.getSelectedItemId()));
         });
 
         mMainPresenter.onMyLocate();
@@ -264,6 +266,22 @@ public class MainActivity extends AppCompatActivity
                 mMainPresenter.onDrawer(getApplicationContext());
             }
         });
+
+        toolbar.inflateMenu(R.menu.toolbar);
+        toolbar.setOnMenuItemClickListener((item) -> {
+            // TODO: work..
+            if (item.getItemId() == R.id.action_search) {
+                Bundle bundle = new Bundle();
+                bundle.putString("extra", getCategoryGroupCode(bottomNavigationView.getSelectedItemId()));
+
+                Intent intent = new Intent(this, SearchActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                return true;
+            }
+            return false;
+        });
     }
 
     private void initGoogleMap() {
@@ -329,7 +347,7 @@ public class MainActivity extends AppCompatActivity
                 LatLngBounds latLngBounds = projection.getVisibleRegion().latLngBounds;
 
                 mClickedMarker = null;
-                mMainPresenter.onMapUpdate(latLngBounds, getCategoryGroupCode(item));
+                mMainPresenter.onMapUpdate(latLngBounds, getCategoryGroupCode(item.getItemId()));
             }
             return true;
         });
@@ -358,10 +376,10 @@ public class MainActivity extends AppCompatActivity
         ViewCollections.run(floatingActionButtons, (v, i) -> v.hide());
     }
 
-    private String getCategoryGroupCode(MenuItem item) {
+    private String getCategoryGroupCode(int itemId) {
         Shop.CategoryGroupCode code;
 
-        switch (item.getItemId()) {
+        switch (itemId) {
             case R.id.action_supplies:
                 code = Shop.CategoryGroupCode.SHOP;
                 break;
@@ -379,7 +397,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private PagerAdapter createPagerAdapter(List<Shop> shopList) {
-        MainViewPagerAdapter adapter = new MainViewPagerAdapter(getApplicationContext(), shopList);
+        MainPagerAdapter adapter = new MainPagerAdapter(getApplicationContext(), shopList);
         adapter.setOnItemListener((shop) -> {
             ItemViewFactory factory = new BottomSheetItemFactory(shop);
 

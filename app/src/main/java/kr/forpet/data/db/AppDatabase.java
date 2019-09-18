@@ -17,6 +17,8 @@ import kr.forpet.data.entity.ShopPharmacy;
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract ShopDAO shopDAO();
+
     public abstract ShopOpenTimeDAO shopOpenTimeDAO();
+
     public abstract ShopPharmacyDAO shopPharmacyDAO();
 }
