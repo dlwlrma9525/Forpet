@@ -17,6 +17,6 @@ public interface SearchPresenter {
 
     interface View {
 
-        void onResult(List<Shop> shopList);
+        void updateResult(List<Shop> shopList);
     }
 }

@@ -9,7 +9,6 @@ import kr.forpet.data.entity.Shop;
 import kr.forpet.view.search.model.SearchModel;
 
 public class SearchPresenterImpl implements SearchPresenter {
-
     private View mView;
     private SearchModel mSearchModel;
 
@@ -43,7 +42,7 @@ public class SearchPresenterImpl implements SearchPresenter {
             @Override
             protected void onPostExecute(List<Shop> shopList) {
                 super.onPostExecute(shopList);
-                mView.onResult(shopList);
+                mView.updateResult(shopList);
             }
         }.execute(keyword, categoryGroupCode);
     }
@@ -59,7 +58,7 @@ public class SearchPresenterImpl implements SearchPresenter {
             @Override
             protected void onPostExecute(List<Shop> shopList) {
                 super.onPostExecute(shopList);
-                mView.onResult(shopList);
+                mView.updateResult(shopList);
             }
         }.execute(keyword, categoryGroupCode);
     }

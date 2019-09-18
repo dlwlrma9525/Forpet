@@ -5,22 +5,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ObservableArrayList;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import kr.forpet.R;
 import kr.forpet.data.entity.Shop;
+import kr.forpet.databinding.ActivitySearchBinding;
 import kr.forpet.view.search.adapter.SearchRecyclerAdapter;
 import kr.forpet.view.search.presenter.SearchPresenter;
 import kr.forpet.view.search.presenter.SearchPresenterImpl;
@@ -28,23 +26,23 @@ import kr.forpet.view.search.presenter.SearchPresenterImpl;
 public class SearchActivity extends AppCompatActivity
         implements SearchPresenter.View {
 
-    @BindView(R.id.edit_text_search)
-    EditText editTextSearch;
-
-    @BindView(R.id.tab_layout_search)
-    TabLayout tabLayoutSearch;
-
-    @BindView(R.id.recycler_view_search)
-    RecyclerView recyclerViewSearch;
-
+    private ActivitySearchBinding mBinding;
     private SearchPresenter mSearchPresenter;
-    private String categoryGroupCode;
+
+    // https://developer.android.com/reference/android/databinding/ObservableArrayList
+    // https://developer.android.com/reference/android/databinding/ObservableList.OnListChangedCallback.html
+    private ObservableArrayList mObservableList;
+    private SearchRecyclerAdapter mAdapter;
+    private String mCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
-        ButterKnife.bind(this);
+        // A mBinding class is generated for each layout file. By default, the name of the class is based on the name of the layout file,
+        // converting it to Pascal case and adding the Binding suffix to it.
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_search);
+        mObservableList = new ObservableArrayList<>();
+        mBinding.setObservableList(mObservableList);
 
         mSearchPresenter = new SearchPresenterImpl();
         mSearchPresenter.setView(this);
@@ -52,11 +50,11 @@ public class SearchActivity extends AppCompatActivity
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        categoryGroupCode = bundle.getString("extra");
+        mCode = bundle.getString("extra");
 
         showSoftKeyboard();
-        editTextSearch.requestFocus();
-        editTextSearch.addTextChangedListener(new TextWatcher() {
+        mBinding.editTextSearch.requestFocus();
+        mBinding.editTextSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -67,12 +65,12 @@ public class SearchActivity extends AppCompatActivity
                 if (s.length() > 1) {
                     String keyword = s.toString();
 
-                    switch (tabLayoutSearch.getSelectedTabPosition()) {
+                    switch (mBinding.tabLayoutSearch.getSelectedTabPosition()) {
                         case 0:
-                            mSearchPresenter.onSearchByName(keyword, categoryGroupCode);
+                            mSearchPresenter.onSearchByName(keyword, mCode);
                             break;
                         case 1:
-                            mSearchPresenter.onSearchByRegion(keyword, categoryGroupCode);
+                            mSearchPresenter.onSearchByRegion(keyword, mCode);
                             break;
                     }
                 }
@@ -84,7 +82,7 @@ public class SearchActivity extends AppCompatActivity
             }
         });
 
-        tabLayoutSearch.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        mBinding.tabLayoutSearch.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
@@ -101,8 +99,9 @@ public class SearchActivity extends AppCompatActivity
             }
         });
 
-        LinearLayoutManager manager = new LinearLayoutManager(this);
-        recyclerViewSearch.setLayoutManager(manager);
+        mAdapter = new SearchRecyclerAdapter();
+        mBinding.recyclerViewSearch.setLayoutManager(new LinearLayoutManager(this));
+        mBinding.recyclerViewSearch.setAdapter(mAdapter);
     }
 
     @Override
@@ -113,8 +112,9 @@ public class SearchActivity extends AppCompatActivity
     }
 
     @Override
-    public void onResult(List<Shop> shopList) {
-        recyclerViewSearch.setAdapter(new SearchRecyclerAdapter(shopList));
+    public void updateResult(List<Shop> shopList) {
+        mObservableList.clear();
+        mObservableList.addAll(shopList);
     }
 
     private void showSoftKeyboard() {
