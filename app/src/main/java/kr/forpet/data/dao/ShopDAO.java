@@ -24,11 +24,11 @@ public interface ShopDAO {
     @Query("SELECT * From forpet_shop WHERE forpet_hash = :hashCode")
     Shop getByHashCode(String hashCode);
 
-    @Query("SELECT * FROM forpet_shop WHERE category_group_code = :catCode AND place_name LIKE '%'||:name||'%'")
-    List<Shop> getByName(String name, String catCode);
+    @Query("SELECT * FROM forpet_shop WHERE place_name LIKE '%'||:name||'%'")
+    List<Shop> getByName(String name);
 
-    @Query("SELECT * FROM forpet_shop WHERE category_group_code = :catCode AND road_address_name LIKE '%'||:region||'%'")
-    List<Shop> getByRegion(String region, String catCode);
+    @Query("SELECT * FROM forpet_shop WHERE road_address_name LIKE '%'||:region||'%'")
+    List<Shop> getByRegion(String region);
 
     /**
      * @param x1 southwest longitude

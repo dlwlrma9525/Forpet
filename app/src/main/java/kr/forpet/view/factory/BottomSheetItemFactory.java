@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.location.Location;
 import android.net.Uri;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -16,12 +15,7 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
 
 import java.lang.reflect.Field;
@@ -32,6 +26,7 @@ import java.util.List;
 import kr.forpet.R;
 import kr.forpet.data.entity.Shop;
 import kr.forpet.data.entity.ShopOpenTime;
+import kr.forpet.map.GpsManager;
 
 public class BottomSheetItemFactory implements ItemViewFactory {
 
@@ -57,7 +52,7 @@ public class BottomSheetItemFactory implements ItemViewFactory {
         List<String> favorites = new ArrayList<>(Arrays.asList(json));
 
         CheckBox cbFavorite = contentView.findViewById(R.id.cb_sheet_favorite);
-        cbFavorite.setChecked(favorites.contains(mData.getForpetHash()) ? true : false);
+        cbFavorite.setChecked(favorites.contains(mData.getForpetHash()));
         cbFavorite.setOnCheckedChangeListener((v, isChecked) -> {
             if (isChecked) {
                 favorites.add(mData.getForpetHash());
@@ -133,29 +128,20 @@ public class BottomSheetItemFactory implements ItemViewFactory {
         Button buttonCall = contentView.findViewById(R.id.button_sheet_call);
 
         buttonNavigate.setOnClickListener((v) -> {
-            try {
-                FusedLocationProviderClient client = LocationServices.getFusedLocationProviderClient(context);
-                client.getLastLocation().addOnCompleteListener((@NonNull Task<Location> task) -> {
-                    if (task.isSuccessful()) {
-                        Location myLocation = task.getResult();
-                        LatLng start = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
+            GpsManager manager = GpsManager.getInstance(context);
+            LatLng start = new LatLng(manager.getLocation().getLatitude(), manager.getLocation().getLongitude());
 
-                        String uri = new StringBuilder("http://maps.google.com/maps?")
-                                .append("saddr=").append(start.latitude).append(",").append(start.longitude)
-                                .append("&daddr=").append(mData.getY()).append(",").append(mData.getX())
-                                .toString();
+            String uri = new StringBuilder("http://maps.google.com/maps?")
+                    .append("saddr=").append(start.latitude).append(",").append(start.longitude)
+                    .append("&daddr=").append(mData.getY()).append(",").append(mData.getX())
+                    .toString();
 
-                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.addCategory(Intent.CATEGORY_LAUNCHER);
-                        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addCategory(Intent.CATEGORY_LAUNCHER);
+            intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
 
-                        context.startActivity(intent);
-                    }
-                });
-            } catch (SecurityException e) {
-                e.printStackTrace();
-            }
+            context.startActivity(intent);
         });
 
         buttonCall.setOnClickListener((v) -> {

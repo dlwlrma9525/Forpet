@@ -266,14 +266,9 @@ public class MainActivity extends AppCompatActivity
 
         toolbar.inflateMenu(R.menu.toolbar);
         toolbar.setOnMenuItemClickListener((item) -> {
-            // TODO: work..
             if (item.getItemId() == R.id.action_search) {
-                Bundle bundle = new Bundle();
-                bundle.putString("extra", getCategoryGroupCode(bottomNavigationView.getSelectedItemId()));
-
                 Intent intent = new Intent(this, SearchActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                intent.putExtras(bundle);
                 startActivity(intent);
                 return true;
             }

@@ -15,11 +15,11 @@ public class SearchModel {
         mAppDatabase = SQLiteHelper.getAppDatabase(context);
     }
 
-    public List<Shop> getShopListByName(String name, String categoryGroupCode) {
-        return mAppDatabase.shopDAO().getByName(name, categoryGroupCode);
+    public List<Shop> getShopListByName(String name) {
+        return mAppDatabase.shopDAO().getByName(name);
     }
 
-    public List<Shop> getShopListByRegion(String region, String categoryGroupCode) {
-        return mAppDatabase.shopDAO().getByRegion(region, categoryGroupCode);
+    public List<Shop> getShopListByRegion(String region) {
+        return mAppDatabase.shopDAO().getByRegion(region);
     }
 }

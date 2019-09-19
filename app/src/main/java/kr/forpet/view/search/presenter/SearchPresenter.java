@@ -12,8 +12,8 @@ public interface SearchPresenter {
     void onCreate(Context context);
     void onDestroy();
 
-    void onSearchByName(String keyword, String categoryGroupCode);
-    void onSearchByRegion(String keyword, String categoryGroupCode);
+    void onSearchByName(String keyword);
+    void onSearchByRegion(String keyword);
 
     interface View {
 

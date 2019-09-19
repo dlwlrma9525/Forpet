@@ -1,7 +1,6 @@
 package kr.forpet.view.search.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -33,7 +32,6 @@ public class SearchActivity extends AppCompatActivity
     // https://developer.android.com/reference/android/databinding/ObservableList.OnListChangedCallback.html
     private ObservableArrayList mObservableList;
     private SearchRecyclerAdapter mAdapter;
-    private String mCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +45,6 @@ public class SearchActivity extends AppCompatActivity
         mSearchPresenter = new SearchPresenterImpl();
         mSearchPresenter.setView(this);
         mSearchPresenter.onCreate(getApplicationContext());
-
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        mCode = bundle.getString("extra");
 
         showSoftKeyboard();
         mBinding.editTextSearch.addTextChangedListener(new TextWatcher() {
@@ -66,10 +60,10 @@ public class SearchActivity extends AppCompatActivity
 
                     switch (mBinding.tabLayoutSearch.getSelectedTabPosition()) {
                         case 0:
-                            mSearchPresenter.onSearchByName(keyword, mCode);
+                            mSearchPresenter.onSearchByName(keyword);
                             break;
                         case 1:
-                            mSearchPresenter.onSearchByRegion(keyword, mCode);
+                            mSearchPresenter.onSearchByRegion(keyword);
                             break;
                     }
                 }
