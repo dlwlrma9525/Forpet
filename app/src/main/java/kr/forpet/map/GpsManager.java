@@ -48,6 +48,6 @@ public class GpsManager {
     }
 
     public interface OnCompleteListener {
-        void onComplete(Location location);
+        void onComplete(Location result);
     }
 }

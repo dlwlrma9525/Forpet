@@ -136,9 +136,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        mMainPresenter.onMapReady(googleMap);
-
         googleMap.setOnMarkerClickListener((marker) -> {
             if (mClickedMarker != null) {
                 try {
@@ -148,7 +145,6 @@ public class MainActivity extends AppCompatActivity
                     mClickedMarker.remove();
                 }
             }
-
             mClickedMarker = marker;
             mClickedMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_current));
 
@@ -166,7 +162,8 @@ public class MainActivity extends AppCompatActivity
                     getCategoryGroupCode(bottomNavigationView.getSelectedItemId()));
         });
 
-        mMainPresenter.onMyLocate();
+        mMap = googleMap;
+        mMainPresenter.onMapReady(googleMap);
     }
 
     @Override

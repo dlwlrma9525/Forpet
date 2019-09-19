@@ -15,8 +15,8 @@ public interface MainPresenter {
     void setView(View view);
     void onCreate(Context context);
     void onDestroy();
-
     void onMapReady(GoogleMap googleMap);
+
     void onMapUpdate(LatLngBounds latLngBounds, String categoryGroupCode);
     void onMyLocate();
     void onDrawer(Context context);
