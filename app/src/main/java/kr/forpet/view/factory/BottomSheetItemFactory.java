@@ -15,6 +15,7 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 
@@ -66,6 +67,14 @@ public class BottomSheetItemFactory implements ItemViewFactory {
         });
 
 
+        ImageView imagePhoto = contentView.findViewById(R.id.image_sheet_photo);
+        Glide.with(contentView)
+                .load(new StringBuilder("http://forpets.kr/images/main/").append(mData.getForpetHash()).append(".jpg").toString())
+                .error(R.drawable.icon_no_image)
+                .centerCrop()
+                .into(imagePhoto);
+
+
         TextView textName = contentView.findViewById(R.id.text_sheet_name);
         TextView textAddr = contentView.findViewById(R.id.text_sheet_addr);
         TextView textPhone = contentView.findViewById(R.id.text_sheet_phone);
@@ -77,19 +86,21 @@ public class BottomSheetItemFactory implements ItemViewFactory {
         textPhone.setText(mData.getPhone());
         textHomepage.setText(mData.getHomepage());
 
-        StringBuilder builder = new StringBuilder();
-        for (ShopOpenTime time : mData.getShopOpenTimeList()) {
-            if (time.getType().equals("영업일")) {
-                builder.append(time.getDay()).append(":").append(time.getPeriod());
-            } else {
-                builder.append(time.getType()).append(":").append(time.getDay());
-            }
+        if (mData.getShopOpenTimeList() != null) {
+            StringBuilder builder = new StringBuilder();
+            for (ShopOpenTime time : mData.getShopOpenTimeList()) {
+                if (time.getType().equals("영업일")) {
+                    builder.append(time.getDay()).append(":").append(time.getPeriod());
+                } else {
+                    builder.append(time.getType()).append(":").append(time.getDay());
+                }
 
-            String remarks = time.getRemarks();
-            builder.append((remarks != null) ? remarks : "");
-            builder.append(System.getProperty("line.separator"));
+                String remarks = time.getRemarks();
+                builder.append((remarks != null) ? remarks : "");
+                builder.append(System.getProperty("line.separator"));
+            }
+            textTime.setText(builder.toString());
         }
-        textTime.setText(builder.toString());
 
 
         CheckBox cbRecommendConsensus = contentView.findViewById(R.id.cb_recommend_consensus);
@@ -112,8 +123,10 @@ public class BottomSheetItemFactory implements ItemViewFactory {
         }
 
         if (mData.getCategoryGroupCode().equals(Shop.CategoryGroupCode.PHARM.toString())) {
-            TextView textMedicine = contentView.findViewById(R.id.text_sheet_medicine);
-            textMedicine.setText(mData.getShopPharmacy().getMedicineCategoriesForSale());
+            if (mData.getShopPharmacy() != null) {
+                TextView textMedicine = contentView.findViewById(R.id.text_sheet_medicine);
+                textMedicine.setText(mData.getShopPharmacy().getMedicineCategoriesForSale());
+            }
         } else {
             contentView.findViewById(R.id.layout_sheet_medicine).setVisibility(View.GONE);
         }

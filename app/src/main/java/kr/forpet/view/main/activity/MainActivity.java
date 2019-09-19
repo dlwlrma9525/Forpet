@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.button_main_locate)
     ImageButton buttonMyLocate;
 
-    @BindViews({R.id.fab_main_diagnosis, R.id.fab_main_vaccination, R.id.fab_main_meal})
+    @BindViews({R.id.fab_main_health, R.id.fab_main_vaccine, R.id.fab_main_meal})
     List<FloatingActionButton> floatingActionButtons;
 
     private MainPresenter mMainPresenter;
