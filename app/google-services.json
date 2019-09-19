@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "53758924093",
+    "firebase_url": "https://forpet-2d5a3.firebaseio.com",
+    "project_id": "forpet-2d5a3",
+    "storage_bucket": "forpet-2d5a3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53758924093:android:b3aaec564b3844e4046154",
+        "android_client_info": {
+          "package_name": "kr.forpet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "53758924093-6l75anoao96lra509gfc0j4lh8rhnd8u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.forpet",
+            "certificate_hash": "e7d957379e47ec0459c5e8673f548b41b93b85ee"
+          }
+        },
+        {
+          "client_id": "53758924093-fbbkuu248fkve9cf41s2aava4o9bmk29.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIL6SVkCFALuTKO_maIyyl5QlPEd2N98Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "53758924093-fbbkuu248fkve9cf41s2aava4o9bmk29.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "53758924093-hgqnjvn1l0p0fh4c3qflv8eubvlompp8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "kr.forpet.forpetios"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
