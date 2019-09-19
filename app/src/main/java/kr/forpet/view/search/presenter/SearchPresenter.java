@@ -14,9 +14,11 @@ public interface SearchPresenter {
 
     void onSearchByName(String keyword);
     void onSearchByRegion(String keyword);
+    void onItemClick(Shop shop);
 
     interface View {
 
-        void updateResult(List<Shop> shopList);
+        void updateItems(List<Shop> shopList);
+        void showDetail(Shop shop);
     }
 }

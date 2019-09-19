@@ -81,11 +81,11 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.view_pager_main)
     ViewPager mainViewPager;
 
-    @BindView(R.id.bottom_sheet)
-    ViewGroup bottomSheet;
+    @BindView(R.id.layout_bottom_sheet)
+    ViewGroup layoutBottomSheet;
 
     @BindView(R.id.layout_sheet_effect)
-    ViewGroup sheetEffect;
+    ViewGroup layoutSheetEffect;
 
     @BindView(R.id.button_main_locate)
     ImageButton buttonMyLocate;
@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else if (mPersistentBottomSheet.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
             mPersistentBottomSheet.setState(BottomSheetBehavior.STATE_HIDDEN);
-            sheetEffect.setVisibility(View.GONE);
+            layoutSheetEffect.setVisibility(View.GONE);
         } else {
             super.onBackPressed();
         }
@@ -344,24 +344,25 @@ public class MainActivity extends AppCompatActivity
             return true;
         });
 
-        bottomSheet.setVisibility(View.VISIBLE);
-        mPersistentBottomSheet = BottomSheetBehavior.from(bottomSheet);
+        layoutBottomSheet.setVisibility(View.VISIBLE);
+        mPersistentBottomSheet = BottomSheetBehavior.from(layoutBottomSheet);
         mPersistentBottomSheet.setState(BottomSheetBehavior.STATE_HIDDEN);
         mPersistentBottomSheet.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 switch (newState) {
                     case BottomSheetBehavior.STATE_SETTLING:
-                        sheetEffect.setVisibility(View.VISIBLE);
+                        layoutSheetEffect.setVisibility(View.VISIBLE);
                         break;
                     case BottomSheetBehavior.STATE_HIDDEN:
-                        sheetEffect.setVisibility(View.GONE);
+                        layoutSheetEffect.setVisibility(View.GONE);
                         break;
                 }
             }
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
             }
         });
 
@@ -393,8 +394,8 @@ public class MainActivity extends AppCompatActivity
         adapter.setOnItemListener((shop) -> {
             ItemViewFactory factory = new BottomSheetItemFactory(shop);
 
-            bottomSheet.removeAllViews();
-            bottomSheet.addView(factory.createView(getApplicationContext()));
+            layoutBottomSheet.removeAllViews();
+            layoutBottomSheet.addView(factory.createView(getApplicationContext()));
             mPersistentBottomSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
         });
 

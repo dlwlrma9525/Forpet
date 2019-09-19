@@ -16,10 +16,28 @@ public class SearchModel {
     }
 
     public List<Shop> getShopListByName(String name) {
-        return mAppDatabase.shopDAO().getByName(name);
+        List<Shop> shopList = mAppDatabase.shopDAO().getByName(name);
+
+        for (Shop shop : shopList) {
+            if (shop.getCategoryGroupCode().equals(Shop.CategoryGroupCode.PHARM.toString()))
+                shop.setShopPharmacy(mAppDatabase.shopPharmacyDAO().getByHashCode(shop.getForpetHash()));
+
+            shop.setShopOpenTimeList(mAppDatabase.shopOpenTimeDAO().getByHashCode(shop.getForpetHash()));
+        }
+
+        return shopList;
     }
 
     public List<Shop> getShopListByRegion(String region) {
-        return mAppDatabase.shopDAO().getByRegion(region);
+        List<Shop> shopList = mAppDatabase.shopDAO().getByRegion(region);
+
+        for (Shop shop : shopList) {
+            if (shop.getCategoryGroupCode().equals(Shop.CategoryGroupCode.PHARM.toString()))
+                shop.setShopPharmacy(mAppDatabase.shopPharmacyDAO().getByHashCode(shop.getForpetHash()));
+
+            shop.setShopOpenTimeList(mAppDatabase.shopOpenTimeDAO().getByHashCode(shop.getForpetHash()));
+        }
+
+        return shopList;
     }
 }

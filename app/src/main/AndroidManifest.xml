@@ -20,10 +20,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".view.search.activity.SearchActivity"
-            android:label="@string/title_activity_search"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
         <!-- android:allowBackup="false": Android 6.0 (API 레벨 23)부터 기본적으로 사용되는 자동 백업 -->
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -37,6 +33,12 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity
+            android:name=".view.search.activity.SearchActivity"
+            android:label="@string/title_activity_search"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".view.regist.RegistActivity"
             android:screenOrientation="portrait" />

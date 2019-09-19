@@ -71,7 +71,7 @@ public class SearchPresenterImpl implements SearchPresenter {
             @Override
             protected void onPostExecute(List<Shop> shopList) {
                 super.onPostExecute(shopList);
-                mView.updateResult(shopList);
+                mView.updateItems(shopList);
             }
         }.execute(keyword);
     }
@@ -110,8 +110,13 @@ public class SearchPresenterImpl implements SearchPresenter {
             @Override
             protected void onPostExecute(List<Shop> shopList) {
                 super.onPostExecute(shopList);
-                mView.updateResult(shopList);
+                mView.updateItems(shopList);
             }
         }.execute(keyword);
+    }
+
+    @Override
+    public void onItemClick(Shop shop) {
+        mView.showDetail(shop);
     }
 }

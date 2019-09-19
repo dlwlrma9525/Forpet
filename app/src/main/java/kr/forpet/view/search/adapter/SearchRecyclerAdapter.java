@@ -11,12 +11,15 @@ import java.util.List;
 
 import kr.forpet.data.entity.Shop;
 import kr.forpet.databinding.ItemSearchBinding;
+import kr.forpet.view.search.presenter.SearchPresenter;
 
 public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAdapter.ViewHolder> {
 
+    private SearchPresenter mPresenter;
     private List<Shop> mDataList;
 
-    public SearchRecyclerAdapter() {
+    public SearchRecyclerAdapter(SearchPresenter presenter) {
+        mPresenter = presenter;
         mDataList = new ArrayList<>();
     }
 
@@ -25,6 +28,7 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
     public SearchRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ItemSearchBinding binding
                 = ItemSearchBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        binding.setPresenter(mPresenter);
         return new ViewHolder(binding);
     }
 
