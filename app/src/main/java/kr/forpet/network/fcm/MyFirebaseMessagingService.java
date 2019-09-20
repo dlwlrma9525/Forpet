@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
@@ -88,6 +89,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Log.d(TAG, "Refreshed token: " + token);
 
         sendRegistrationToServer(token);
+    }
+
+    private String getSettingSecureAndroidId() {
+        // https://developer.android.com/training/articles/user-data-ids#java
+        // https://healingpaper.github.io/android/2019/07/01/privacy-changes-in-android-q-2.html
+        String SSAID = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        return (SSAID != null) ? SSAID : "";
     }
 
     private void sendRegistrationToServer(String token) {

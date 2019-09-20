@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity
         implements MainPresenter.View, OnMapReadyCallback {
 
     private static final String[] PERMISSION_ARRAY
-            = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.CALL_PHONE};
+            = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.CALL_PHONE};
     private static final int REQUEST_PERMISSION = 0;
 
     @BindView(R.id.toolbar)
@@ -114,6 +114,8 @@ public class MainActivity extends AppCompatActivity
             if (Permission.checkPermission(this, PERMISSION_ARRAY, REQUEST_PERMISSION)) {
                 init();
             }
+        } else {
+            init();
         }
     }
 
