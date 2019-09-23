@@ -1,0 +1,1423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- https://developer.android.com/guide/topics/ui/themes.html?hl=ko -->
+    <style name="NanumSquareStyle" parent="@android:style/TextAppearance">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="Style01Headline1Dark02B01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style01Headline1Light02B03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style01Headline1Medium02B01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style01Headline1Medium02B02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style01Headline1Light02B02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style01Headline1White02B01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style01Headline1White02B02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style01Headline1White02B03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style01Headline1Dark02B03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style01Headline1Light02B01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style01Headline1Medium02B03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style01Headline1Dark02B02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style01Headline1Dark01Ex03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style01Headline1Medium01Ex01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style01Headline1Medium01Ex02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style01Headline1Medium01Ex03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style01Headline1Light01Ex03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style01Headline1White01Ex02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style01Headline1White01Ex03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style01Headline1Dark01Ex01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style01Headline1Dark01Ex02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style01Headline1Light01Ex02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style01Headline1White01Ex01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style01Headline1Light01Ex01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style01Headline1Light03R01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style01Headline1Light03R03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style01Headline1Medium03R01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style01Headline1Dark03R02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style01Headline1Light03R02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style01Headline1White03R01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style01Headline1White03R02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style01Headline1White03R03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style01Headline1Dark03R01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style01Headline1Dark03R03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style01Headline1Medium03R03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style01Headline1Medium03R02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style02Headline2Dark02B03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style02Headline2Light02B02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style02Headline2Light02B03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style02Headline2Medium02B01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style02Headline2Medium02B02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style02Headline2Medium02B03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style02Headline2White02B01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style02Headline2White02B02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style02Headline2White02B03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style02Headline2Light02B01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style02Headline2Dark02B02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style02Headline2Dark02B01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style02Headline2Light01Ex01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style02Headline2Light01Ex02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style02Headline2Light01Ex03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style02Headline2Medium01Ex01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style02Headline2Dark01Ex03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style02Headline2Medium01Ex03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style02Headline2White01Ex01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style02Headline2White01Ex02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style02Headline2White01Ex03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style02Headline2Dark01Ex01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style02Headline2Medium01Ex02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style02Headline2Dark01Ex02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style02Headline2Dark03R02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style02Headline2Light03R03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style02Headline2Medium03R01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style02Headline2Medium03R02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style02Headline2Light03R02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style02Headline2White03R01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style02Headline2White03R02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style02Headline2White03R03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style02Headline2Dark03R03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style02Headline2Light03R01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style02Headline2Medium03R03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style02Headline2Dark03R01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style03Medium1Dark02B02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style03Medium1Light02B03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style03Medium1Medium02B01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style03Medium1Dark02B01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style03Medium1Light02B02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style03Medium1Point02B02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/pink_red</item>
+    </style>
+
+    <style name="Style03Medium1Point02B03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/pink_red</item>
+    </style>
+
+    <style name="Style03Medium1White02B01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style03Medium1White02B02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style03Medium1White02B03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style03Medium1Light02B01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style03Medium1Dark02B03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style03Medium1Medium02B03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style03Medium1Medium02B02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style03Medium1Dark01Ex02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style03Medium1Light01Ex01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style03Medium1Light01Ex02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style03Medium1Light01Ex03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style03Medium1Dark01Ex03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style03Medium1Medium01Ex02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style03Medium1Medium01Ex03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style03Medium1White01Ex01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style03Medium1White01Ex02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style03Medium1White01Ex03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style03Medium1Dark01Ex01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style03Medium1Medium01Ex01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style03Medium1Dark03R01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style03Medium1Light03R03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style03Medium1Medium03R01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style03Medium1Medium03R02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style03Medium1Light03R02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style03Medium1White03R01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style03Medium1White03R02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style03Medium1White03R03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style03Medium1Dark03R03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style03Medium1Light03R01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style03Medium1Medium03R03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style03Medium1Dark03R02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style04Medium2Dark02B02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style04Medium2Light02B03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style04Medium2Medium02B01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style04Medium2Medium02B02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style04Medium2Light02B02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style04Medium2Point02B01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/pink_red</item>
+    </style>
+
+    <style name="Style04Medium2Point02B03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/pink_red</item>
+    </style>
+
+    <style name="Style04Medium2White02B01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style04Medium2White02B02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style04Medium2Dark02B01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style04Medium2Light02B01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style04Medium2Dark02B03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style04Medium2Medium02B03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style04Medium2White02B03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style04Medium2Dark01Ex02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style04Medium2Light01Ex03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style04Medium2Medium01Ex01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style04Medium2Medium01Ex02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style04Medium2Light01Ex02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style04Medium2White01Ex01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style04Medium2White01Ex02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style04Medium2White01Ex03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style04Medium2Light01Ex01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style04Medium2Dark01Ex01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style04Medium2Medium01Ex03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style04Medium2Dark01Ex03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style04Medium2Dark03R03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style04Medium2Light03R01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style04Medium2Light03R02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style04Medium2Dark03R02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style04Medium2Medium03R01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style04Medium2Medium03R02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style04Medium2Medium03R03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style04Medium2White03R01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style04Medium2White03R02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style04Medium2White03R03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style04Medium2Dark03R01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style04Medium2Light03R03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style05Small1Dark02B01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style05Small1Light02B03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style05Small1Medium02B01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style05Small1Medium02B02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style05Small1Light02B02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style05Small1White02B01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style05Small1White02B02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style05Small1White02B03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style05Small1Light02B01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style05Small1Dark02B02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style05Small1Medium02B03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style05Small1Dark02B03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_B</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style05Small1Dark01Ex03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style05Small1Light01Ex01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style05Small1Light01Ex02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style05Small1Light01Ex03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style05Small1Dark01Ex02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style05Small1Medium01Ex02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style05Small1Medium01Ex03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style05Small1White01Ex01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style05Small1White01Ex02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style05Small1White01Ex03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style05Small1Dark01Ex01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style05Small1Medium01Ex01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_EB</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style05Small1Dark03R01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style05Small1Dark03R03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style05Small1Light03R01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style05Small1Light03R02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style05Small1Light03R03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/light_blue_grey</item>
+    </style>
+
+    <style name="Style05Small1Dark03R02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Style05Small1Medium03R02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style05Small1Medium03R03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+
+    <style name="Style05Small1White03R01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style05Small1White03R02CenterAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style05Small1White03R03RightAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Style05Small1Medium03R01LeftAligned">
+        <item name="android:fontFamily">@font/nanum_square_R</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
+    </style>
+    
+</resources>

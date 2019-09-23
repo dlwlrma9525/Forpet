@@ -85,7 +85,7 @@
             android:id="@+id/layout_sheet_effect"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorDim"
+            android:background="@color/dim"
             android:visibility="gone" />
 
         <FrameLayout
