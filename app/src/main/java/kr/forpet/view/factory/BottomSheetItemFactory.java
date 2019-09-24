@@ -143,7 +143,6 @@ public class BottomSheetItemFactory implements ItemViewFactory {
 
         buttonRecommend.setOnClickListener((v) -> {
             Intent intent = new Intent(context, RecommendActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             context.startActivity(intent);
         });
 

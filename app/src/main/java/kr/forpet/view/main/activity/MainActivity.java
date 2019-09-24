@@ -62,8 +62,15 @@ import kr.forpet.view.search.activity.SearchActivity;
 public class MainActivity extends AppCompatActivity
         implements MainPresenter.View, OnMapReadyCallback {
 
-    private static final String[] PERMISSION_ARRAY
-            = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.CALL_PHONE};
+    private static final String[] PERMISSION_ARRAY = {
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.CAMERA,
+            Manifest.permission.CALL_PHONE
+    };
     private static final int REQUEST_PERMISSION = 0;
 
     @BindView(R.id.toolbar)
