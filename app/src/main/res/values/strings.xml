@@ -35,6 +35,7 @@
     <!-- header -->
     <string name="header_ad">광고 요청하기</string>
     <string name="header_dist">km</string>
+    <string name="header_evaluate">평가하기</string>
     <string name="header_event">이벤트</string>
     <string name="header_intro">간단소개</string>
     <string name="header_info"> 부가정보</string>
@@ -43,9 +44,10 @@
     <string name="header_option">고객편의</string>
     <string name="header_recommend">만족도평가</string>
     <string name="header_recommend_consensus">펫과의교감</string>
-    <string name="header_recommend_facility">시설만족도</string>
+    <string name="header_recommend_facility">시설</string>
     <string name="header_recommend_forpet">포펫평가</string>
-    <string name="header_recommend_price">가격만족도</string>
+    <string name="header_recommend_price">가격</string>
+    <string name="header_recommend_kindness">친절</string>
     <string name="header_regist">등록요청</string>
     <string name="header_time">운영시간</string>
     <string name="header_treatment_pay">치료비 공개</string>

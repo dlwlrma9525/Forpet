@@ -1421,8 +1421,11 @@
     </style>
 
     <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
-        <item name="android:textSize">13sp</item>
-        <item name="android:textColor">#b2b2b2</item>
+        <item name="android:fontFamily">@font/nanum_square_bold</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/bluey_grey</item>
         <item name="android:textStyle">normal</item>
     </style>
 

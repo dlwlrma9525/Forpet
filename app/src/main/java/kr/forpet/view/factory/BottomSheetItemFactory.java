@@ -28,6 +28,7 @@ import kr.forpet.R;
 import kr.forpet.data.entity.Shop;
 import kr.forpet.data.entity.ShopOpenTime;
 import kr.forpet.map.GpsManager;
+import kr.forpet.view.recommend.RecommendActivity;
 
 public class BottomSheetItemFactory implements ItemViewFactory {
 
@@ -136,9 +137,15 @@ public class BottomSheetItemFactory implements ItemViewFactory {
             textIntro.setText(mData.getIntro().replace("\\r\\n", System.getProperty("line.separator")));
         }
 
-
+        Button buttonRecommend = contentView.findViewById(R.id.button_sheet_recommend);
         Button buttonNavigate = contentView.findViewById(R.id.button_sheet_navigate);
         Button buttonCall = contentView.findViewById(R.id.button_sheet_call);
+
+        buttonRecommend.setOnClickListener((v) -> {
+            Intent intent = new Intent(context, RecommendActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            context.startActivity(intent);
+        });
 
         buttonNavigate.setOnClickListener((v) -> {
             GpsManager manager = GpsManager.getInstance(context);

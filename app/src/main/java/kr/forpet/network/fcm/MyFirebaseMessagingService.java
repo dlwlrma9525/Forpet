@@ -18,7 +18,13 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import kr.forpet.R;
+import kr.forpet.network.api.ForpetApiService;
 import kr.forpet.view.main.activity.MainActivity;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
@@ -104,6 +110,24 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(getString(R.string.shared_key_fcm_token), token);
         editor.commit();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://forpets.kr/api/")
+                .build();
+
+        ForpetApiService service = retrofit.create(ForpetApiService.class);
+        service.registDevice(getSettingSecureAndroidId(), token, "android")
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        Log.i(ForpetApiService.class.getName(), response.body().toString());
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
     }
 
     private void sendNotification(String messageBody) {
