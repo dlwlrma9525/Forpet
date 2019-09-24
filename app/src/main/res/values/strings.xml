@@ -50,8 +50,9 @@
     <string name="header_time">운영시간</string>
     <string name="header_treatment_pay">치료비 공개</string>
     <!-- global -->
-    <string name="all_call">전화</string>
+    <string name="all_call">전화하기</string>
     <string name="all_choice">선택</string>
+    <string name="all_favorite">즐겨찾기</string>
     <string name="all_navigate">길찾기</string>
     <string name="all_opened">영업중</string>
     <string name="all_photo">사진</string>

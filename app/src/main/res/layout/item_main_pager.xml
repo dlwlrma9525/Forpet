@@ -2,74 +2,99 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="97dp"
-    android:background="@drawable/bg_toolbar"
-    android:elevation="5dp">
+    android:layout_height="212dp"
+    android:background="@drawable/bg_main_pager">
 
-    <TextView
-        android:id="@+id/text_main_pager_dist"
-        style="@style/NanumSquareStyle"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="12dp"
-        android:text="@string/header_dist"
-        android:textColor="#ff6586"
-        android:textSize="14sp"
+    <GridLayout
+        android:id="@+id/gridlayout_main_pager_opt"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/text_main_pager_name"
-        style="@style/NanumSquareStyle"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/dummy_name"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/text_main_pager_dist"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <GridLayout
-        android:id="@+id/gridlayout_main_pager_opt"
+        style="@style/Font02Headline2Dark02B01LeftAligned"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        app:layout_constraintStart_toStartOf="@+id/text_main_pager_addr"
-        app:layout_constraintTop_toBottomOf="@+id/text_main_pager_addr" />
+        android:layout_marginTop="8dp"
+        android:text="@string/dummy_name"
+        app:layout_constraintStart_toStartOf="@+id/gridlayout_main_pager_opt"
+        app:layout_constraintTop_toBottomOf="@+id/gridlayout_main_pager_opt" />
+
+    <TextView
+        android:id="@+id/text_main_pager_dist"
+        style="@style/Font04Medium2Dark03R01LeftAligned"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/header_dist"
+        app:layout_constraintBottom_toBottomOf="@+id/text_main_pager_name"
+        app:layout_constraintStart_toEndOf="@+id/text_main_pager_name" />
 
     <TextView
         android:id="@+id/text_main_pager_addr"
-        style="@style/NanumSquareStyle"
+        style="@style/Font04Medium2Dark03R01LeftAligned"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="@string/dummy_addr"
-        android:textColor="#444444"
-        android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="@+id/text_main_pager_dist"
-        app:layout_constraintTop_toBottomOf="@+id/text_main_pager_dist" />
+        app:layout_constraintStart_toStartOf="@+id/text_main_pager_name"
+        app:layout_constraintTop_toBottomOf="@+id/text_main_pager_name" />
 
-    <Button
-        android:id="@+id/button_main_pager_navigate"
-        android:layout_width="65dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/bg_stroke_pink_15dp"
-        android:text="@string/all_navigate"
-        android:textColor="#ff6586"
-        android:textSize="13sp"
+    <LinearLayout
+        android:id="@+id/layout_main_pager"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="46dp"
+        android:background="@drawable/bg_stroke_gray_8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_main_pager_call" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <Button
-        android:id="@+id/button_main_pager_call"
-        android:layout_width="65dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/bg_stroke_pink_15dp"
-        android:text="@string/all_call"
-        android:textColor="#ff6586"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <Button
+            android:id="@+id/button_main_pager_call"
+            style="@style/Font05Small1Dark03R01LeftAligned"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:text="@string/all_call" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="10dp"
+            android:layout_gravity="center"
+            android:background="@color/light_blue_grey" />
+
+        <Button
+            android:id="@+id/button_main_pager_navigate"
+            style="@style/Font05Small1Dark03R01LeftAligned"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:text="@string/all_navigate" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="10dp"
+            android:layout_gravity="center"
+            android:background="@color/light_blue_grey" />
+
+        <Button
+            android:id="@+id/button_main_pager_favorite"
+            style="@style/Font05Small1Dark03R01LeftAligned"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:text="@string/all_favorite" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

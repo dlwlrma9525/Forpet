@@ -7,6 +7,7 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 
 import kr.forpet.R;
+import kr.forpet.data.db.SQLiteHelper;
 import kr.forpet.view.main.activity.MainActivity;
 
 public class SplashActivity extends AppCompatActivity {
@@ -17,10 +18,15 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         new Handler().postDelayed(() -> {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-
-            this.finish();
+            SQLiteHelper.getAppDatabase(getApplicationContext());
+            goToMain();
         }, 1000);
+    }
+
+    private void goToMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+
+        this.finish();
     }
 }
