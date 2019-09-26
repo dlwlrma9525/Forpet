@@ -32,6 +32,8 @@
     <!-- tab layout -->
     <string name="tab_item_name">이름</string>
     <string name="tab_item_region">지역</string>
+    <string name="tab_item_dog">강아지</string>
+    <string name="tab_item_cat">고양이</string>
     <!-- header -->
     <string name="header_ad">광고 요청하기</string>
     <string name="header_dist">km</string>
@@ -51,6 +53,7 @@
     <string name="header_regist">등록요청</string>
     <string name="header_time">운영시간</string>
     <string name="header_treatment_pay">치료비 공개</string>
+    <string name="header_vaccine">예방접종</string>
     <!-- global -->
     <string name="all_call">전화하기</string>
     <string name="all_choice">선택</string>

@@ -56,6 +56,7 @@
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/text_search_addr"
             app:layout_constraintTop_toBottomOf="@+id/text_search_addr" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

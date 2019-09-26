@@ -30,11 +30,11 @@ import kr.forpet.data.entity.ShopOpenTime;
 import kr.forpet.map.GpsManager;
 import kr.forpet.view.recommend.RecommendActivity;
 
-public class BottomSheetItemFactory implements ItemViewFactory {
+public class SheetViewFactory implements ViewFactory {
 
     private Shop mData;
 
-    public BottomSheetItemFactory(Shop shop) {
+    public SheetViewFactory(Shop shop) {
         this.mData = shop;
     }
 

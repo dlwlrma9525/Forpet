@@ -21,8 +21,8 @@ import java.util.List;
 import kr.forpet.R;
 import kr.forpet.data.entity.Shop;
 import kr.forpet.databinding.ActivitySearchBinding;
-import kr.forpet.view.factory.BottomSheetItemFactory;
-import kr.forpet.view.factory.ItemViewFactory;
+import kr.forpet.view.factory.SheetViewFactory;
+import kr.forpet.view.factory.ViewFactory;
 import kr.forpet.view.search.adapter.SearchRecyclerAdapter;
 import kr.forpet.view.search.presenter.SearchPresenter;
 import kr.forpet.view.search.presenter.SearchPresenterImpl;
@@ -163,7 +163,7 @@ public class SearchActivity extends AppCompatActivity
 
     @Override
     public void showDetail(Shop shop) {
-        ItemViewFactory factory = new BottomSheetItemFactory(shop);
+        ViewFactory factory = new SheetViewFactory(shop);
         hideSoftKeyboard();
 
         mBinding.layoutBottomSheet.removeAllViews();

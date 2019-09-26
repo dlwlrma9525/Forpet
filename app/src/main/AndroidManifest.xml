@@ -24,7 +24,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.recommend.RecommendActivity"></activity>
         <!-- android:allowBackup="false": Android 6.0 (API 레벨 23)부터 기본적으로 사용되는 자동 백업 -->
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -52,12 +51,17 @@
             android:authorities="kr.forpet.provider"
             android:exported="false"
             android:grantUriPermissions="true">
-
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/path" />
         </provider>
 
+        <activity
+            android:name=".view.knowledge.activity.KnowledgeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.recommend.RecommendActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.search.activity.SearchActivity"
             android:label="@string/title_activity_search"

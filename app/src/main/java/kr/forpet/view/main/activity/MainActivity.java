@@ -50,8 +50,9 @@ import kr.forpet.R;
 import kr.forpet.data.entity.Shop;
 import kr.forpet.map.MarkerBuilder;
 import kr.forpet.util.Permission;
-import kr.forpet.view.factory.BottomSheetItemFactory;
-import kr.forpet.view.factory.ItemViewFactory;
+import kr.forpet.view.factory.SheetViewFactory;
+import kr.forpet.view.factory.ViewFactory;
+import kr.forpet.view.knowledge.activity.KnowledgeActivity;
 import kr.forpet.view.main.adapter.FavoriteListAdapter;
 import kr.forpet.view.main.adapter.MainPagerAdapter;
 import kr.forpet.view.main.presenter.MainPresenter;
@@ -375,6 +376,22 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        for (FloatingActionButton fab : floatingActionButtons) {
+            fab.setOnClickListener((v) -> {
+                switch (v.getId()) {
+                    case R.id.fab_main_meal:
+                        break;
+                    case R.id.fab_main_vaccine:
+                        break;
+                    case R.id.fab_main_health:
+                        break;
+                }
+
+                Intent intent = new Intent(this, KnowledgeActivity.class);
+                startActivity(intent);
+            });
+        }
+
         ViewCollections.run(floatingActionButtons, (v, i) -> v.hide());
     }
 
@@ -401,7 +418,7 @@ public class MainActivity extends AppCompatActivity
     private PagerAdapter createPagerAdapter(List<Shop> shopList) {
         MainPagerAdapter adapter = new MainPagerAdapter(getApplicationContext(), shopList);
         adapter.setOnItemListener((shop) -> {
-            ItemViewFactory factory = new BottomSheetItemFactory(shop);
+            ViewFactory factory = new SheetViewFactory(shop);
 
             layoutBottomSheet.removeAllViews();
             layoutBottomSheet.addView(factory.createView(getApplicationContext()));
