@@ -45,6 +45,7 @@
                 android:layout_weight="0.25" />
 
             <RadioButton
+                android:id="@+id/radiobutton_recommend_consensus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@drawable/radio_button_selector"
@@ -86,6 +87,7 @@
                 android:layout_weight="0.25" />
 
             <RadioButton
+                android:id="@+id/radiobutton_recommend_facility"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@drawable/radio_button_selector"
@@ -127,6 +129,7 @@
                 android:layout_weight="0.25" />
 
             <RadioButton
+                android:id="@+id/radiobutton_recommend_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@drawable/radio_button_selector"
@@ -168,6 +171,7 @@
                 android:layout_weight="0.25" />
 
             <RadioButton
+                android:id="@+id/radiobutton_recommend_kindness"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@drawable/radio_button_selector"

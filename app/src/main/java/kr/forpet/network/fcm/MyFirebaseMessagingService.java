@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.Settings;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
@@ -17,8 +16,11 @@ import androidx.core.app.NotificationCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.io.IOException;
+
 import kr.forpet.R;
 import kr.forpet.network.api.ForpetApiService;
+import kr.forpet.util.UniqueIdentifiers;
 import kr.forpet.view.main.activity.MainActivity;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -97,13 +99,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         sendRegistrationToServer(token);
     }
 
-    private String getSettingSecureAndroidId() {
-        // https://developer.android.com/training/articles/user-data-ids#java
-        // https://healingpaper.github.io/android/2019/07/01/privacy-changes-in-android-q-2.html
-        String SSAID = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        return (SSAID != null) ? SSAID : "";
-    }
-
     private void sendRegistrationToServer(String token) {
         // TODO: Implement this method to send token to your app server.
         SharedPreferences sharedPref = getSharedPreferences(getString(R.string.shared_name), MODE_PRIVATE);
@@ -116,11 +111,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .build();
 
         ForpetApiService service = retrofit.create(ForpetApiService.class);
-        service.registDevice(getSettingSecureAndroidId(), token, "android")
+        service.registDevice(UniqueIdentifiers.getSettingSecureAndroidId(getApplicationContext()), token, "android")
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        Log.i(ForpetApiService.class.getName(), response.body().toString());
+                        try {
+                            Log.i(ForpetApiService.class.getName(), response.body().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
 
                     @Override
