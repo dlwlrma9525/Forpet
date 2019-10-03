@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "4ad7a7c00ba6a30e98ce47723dcb1c2e",
+    "identityHash": "1b8bd1d79349131dc272ef045004d701",
     "entities": [
       {
         "tableName": "forpet_shop",
@@ -348,12 +348,86 @@
           }
         ],
         "foreignKeys": []
+      },
+      {
+        "tableName": "forpet_vaccination",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`no` INTEGER, `pet_type` TEXT, `vaccine_name` TEXT, `week1` TEXT, `week2` TEXT, `week3` TEXT, `week4` TEXT, `week5` TEXT, `week6` TEXT, `years` TEXT, PRIMARY KEY(`no`))",
+        "fields": [
+          {
+            "fieldPath": "no",
+            "columnName": "no",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "petType",
+            "columnName": "pet_type",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "vaccineName",
+            "columnName": "vaccine_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "week1",
+            "columnName": "week1",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "week2",
+            "columnName": "week2",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "week3",
+            "columnName": "week3",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "week4",
+            "columnName": "week4",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "week5",
+            "columnName": "week5",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "week6",
+            "columnName": "week6",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "years",
+            "columnName": "years",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "no"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4ad7a7c00ba6a30e98ce47723dcb1c2e')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1b8bd1d79349131dc272ef045004d701')"
     ]
   }
 }

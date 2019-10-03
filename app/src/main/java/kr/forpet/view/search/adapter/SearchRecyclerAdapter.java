@@ -16,11 +16,11 @@ import kr.forpet.view.search.presenter.SearchPresenter;
 public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAdapter.ViewHolder> {
 
     private SearchPresenter mPresenter;
-    private List<Shop> mDataList;
+    private List<Shop> mList;
 
     public SearchRecyclerAdapter(SearchPresenter presenter) {
         mPresenter = presenter;
-        mDataList = new ArrayList<>();
+        mList = new ArrayList<>();
     }
 
     @NonNull
@@ -34,17 +34,17 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
 
     @Override
     public void onBindViewHolder(@NonNull SearchRecyclerAdapter.ViewHolder holder, int position) {
-        Shop shop = mDataList.get(position);
+        Shop shop = mList.get(position);
         holder.bind(shop);
     }
 
     @Override
     public int getItemCount() {
-        return mDataList.size();
+        return mList.size();
     }
 
     public void setItem(List<Shop> dataList) {
-        mDataList = dataList;
+        mList = dataList;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

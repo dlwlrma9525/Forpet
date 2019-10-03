@@ -62,8 +62,9 @@
     <string name="all_opened">영업중</string>
     <string name="all_photo">사진</string>
     <string name="all_place">장소</string>
-    <string name="hint">검색어를 입력해 주세요</string>
-    <string name="notice">내용을 상세하게 작성해 주셔야 등록이 가능합니다.\n요청내용을 확인 후 담당자가 전화로 확인하는\n과정을 거칩니다.</string>
+    <string name="regist_notice">내용을 상세하게 작성해 주셔야 등록이 가능합니다.\n요청내용을 확인 후 담당자가 전화로 확인하는\n과정을 거칩니다.</string>
+    <string name="search_hint">검색어를 입력해 주세요</string>
+    <string name="vaccine_source">[자료출처 : 농림축산검역본부]</string>
     <!-- dummy -->
     <string name="dummy_addr">서울특별시 강남구 역삼동 테헤란로 152</string>
     <string name="dummy_birth">2019.01.01</string>

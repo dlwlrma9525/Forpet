@@ -29,22 +29,23 @@ import kr.forpet.data.entity.Shop;
 public class MainPagerAdapter extends PagerAdapter {
 
     private Context mContext;
-    private List<Shop> mDataList;
+    private List<Shop> mList;
+    private OnItemListener onItemListener;
 
-    public MainPagerAdapter(Context context, List<Shop> dataList) {
+    public MainPagerAdapter(Context context, List<Shop> list) {
         this.mContext = context;
-        this.mDataList = dataList;
+        this.mList = list;
     }
 
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         // super.instantiateItem(container, position);
-        Shop shop = mDataList.get(position);
+        Shop shop = mList.get(position);
 
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = inflater.inflate(R.layout.item_main_pager, container, false);
-        itemView.setOnClickListener((v) -> onItemListener.onItemClick(mDataList.get(position)));
+        itemView.setOnClickListener((v) -> onItemListener.onItemClick(mList.get(position)));
 
 
         TextView textDist = itemView.findViewById(R.id.text_main_pager_dist);
@@ -145,7 +146,7 @@ public class MainPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return mDataList.size();
+        return mList.size();
     }
 
     private ImageView createOptionView(int resourceId) {
@@ -163,8 +164,6 @@ public class MainPagerAdapter extends PagerAdapter {
 
         return image;
     }
-
-    private OnItemListener onItemListener;
 
     public void setOnItemListener(OnItemListener onItemListener) {
         this.onItemListener = onItemListener;

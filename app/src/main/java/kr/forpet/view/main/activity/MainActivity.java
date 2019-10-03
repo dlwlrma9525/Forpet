@@ -52,11 +52,11 @@ import kr.forpet.map.MarkerBuilder;
 import kr.forpet.util.Permission;
 import kr.forpet.view.factory.SheetViewFactory;
 import kr.forpet.view.factory.ViewFactory;
-import kr.forpet.view.knowledge.activity.KnowledgeActivity;
 import kr.forpet.view.main.adapter.FavoriteListAdapter;
 import kr.forpet.view.main.adapter.MainPagerAdapter;
 import kr.forpet.view.main.presenter.MainPresenter;
 import kr.forpet.view.main.presenter.MainPresenterImpl;
+import kr.forpet.view.pet.activity.PetActivity;
 import kr.forpet.view.regist.RegistActivity;
 import kr.forpet.view.search.activity.SearchActivity;
 
@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void updateFavorites(List<Shop> shopList) {
-        BaseAdapter adapter = new FavoriteListAdapter(getApplicationContext(), shopList);
+        BaseAdapter adapter = new FavoriteListAdapter(shopList);
 
         ListView listFavorite = navigationView.findViewById(R.id.list_navigation_favorite);
         listFavorite.setAdapter(adapter);
@@ -387,7 +387,7 @@ public class MainActivity extends AppCompatActivity
                         break;
                 }
 
-                Intent intent = new Intent(this, KnowledgeActivity.class);
+                Intent intent = new Intent(this, PetActivity.class);
                 startActivity(intent);
             });
         }

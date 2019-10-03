@@ -1,6 +1,5 @@
 package kr.forpet.view.main.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,22 +16,20 @@ import kr.forpet.data.entity.Shop;
 
 public class FavoriteListAdapter extends BaseAdapter {
 
-    private Context mContext;
-    private List<Shop> mDataList;
+    private List<Shop> mList;
 
-    public FavoriteListAdapter(Context context, List<Shop> dataList) {
-        mContext = context;
-        mDataList = dataList;
+    public FavoriteListAdapter(List<Shop> list) {
+        mList = list;
     }
 
     @Override
     public int getCount() {
-        return mDataList.size();
+        return mList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mDataList.get(position);
+        return mList.get(position);
     }
 
     @Override
@@ -45,7 +42,7 @@ public class FavoriteListAdapter extends BaseAdapter {
         ViewHolder holder;
 
         if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
             convertView = inflater.inflate(R.layout.item_favorite, parent, false);
             holder = new ViewHolder(convertView);
 
@@ -54,7 +51,7 @@ public class FavoriteListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Shop shop = mDataList.get(position);
+        Shop shop = mList.get(position);
         int resourceId = 0;
 
         switch (Shop.CategoryGroupCode.compare(shop.getCategoryGroupCode())) {
