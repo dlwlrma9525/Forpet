@@ -378,16 +378,20 @@ public class MainActivity extends AppCompatActivity
 
         for (FloatingActionButton fab : floatingActionButtons) {
             fab.setOnClickListener((v) -> {
+                int type;
                 switch (v.getId()) {
                     case R.id.fab_main_meal:
+                        type = PetActivity.TYPE_MEAL;
                         break;
                     case R.id.fab_main_vaccine:
+                        type = PetActivity.TYPE_VACCINE;
                         break;
-                    case R.id.fab_main_health:
-                        break;
+                    default:
+                        type = PetActivity.TYPE_HEALTH;
                 }
 
                 Intent intent = new Intent(this, PetActivity.class);
+                intent.putExtra("type", type);
                 startActivity(intent);
             });
         }

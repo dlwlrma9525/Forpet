@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "1b8bd1d79349131dc272ef045004d701",
+    "identityHash": "06e2858ec13131674e6ac0d23cca942d",
     "entities": [
       {
         "tableName": "forpet_shop",
@@ -422,12 +422,118 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "forpet_emergency",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`no` INTEGER, `problem` TEXT, `problem_image` TEXT, `solution` TEXT, `solution_image` TEXT, `pet_type` TEXT, PRIMARY KEY(`no`))",
+        "fields": [
+          {
+            "fieldPath": "no",
+            "columnName": "no",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "problem",
+            "columnName": "problem",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "problemImage",
+            "columnName": "problem_image",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "solution",
+            "columnName": "solution",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "solutionImage",
+            "columnName": "solution_image",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "petType",
+            "columnName": "pet_type",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "no"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "forpet_common_disease",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`no` INTEGER, `disease` TEXT, `image` TEXT, `infection` TEXT, `symptom` TEXT, `prevention` TEXT, `pet_type` TEXT, PRIMARY KEY(`no`))",
+        "fields": [
+          {
+            "fieldPath": "no",
+            "columnName": "no",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "disease",
+            "columnName": "disease",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "image",
+            "columnName": "image",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "infection",
+            "columnName": "infection",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "symptom",
+            "columnName": "symptom",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "prevention",
+            "columnName": "prevention",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "petType",
+            "columnName": "pet_type",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "no"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1b8bd1d79349131dc272ef045004d701')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '06e2858ec13131674e6ac0d23cca942d')"
     ]
   }
 }

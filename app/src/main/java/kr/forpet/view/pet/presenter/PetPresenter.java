@@ -10,6 +10,10 @@ public interface PetPresenter {
     void onCreate(Context context);
     void onDestroy();
 
+    void loadMeal();
+    void loadVaccine();
+    void loadHealth();
+
     interface View {
         void updateView(ViewFactory factory);
     }
