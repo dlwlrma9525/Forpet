@@ -53,9 +53,9 @@ public class CommonDiseaseListAdapter extends BaseAdapter {
         CommonDisease disease = mList.get(position);
 
         holder.textDiseaseName.setText(disease.getDisease());
-        holder.textDiseaseInfection.setText(disease.getInfection());
-        holder.textDiseaseSymptom.setText(disease.getSymptom());
-        holder.textDiseasePrevention.setText(disease.getPrevention());
+        holder.textDiseaseInfection.setText(disease.getInfection().replace("\\n", System.getProperty("line.separator")));
+        holder.textDiseaseSymptom.setText(disease.getSymptom().replace("\\n", System.getProperty("line.separator")));
+        holder.textDiseasePrevention.setText(disease.getPrevention().replace("\\n", System.getProperty("line.separator")));
 
         return convertView;
     }

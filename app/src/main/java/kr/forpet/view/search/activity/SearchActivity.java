@@ -21,7 +21,7 @@ import java.util.List;
 import kr.forpet.R;
 import kr.forpet.data.entity.Shop;
 import kr.forpet.databinding.ActivitySearchBinding;
-import kr.forpet.view.factory.SheetViewFactory;
+import kr.forpet.view.main.factory.SheetViewFactory;
 import kr.forpet.view.factory.ViewFactory;
 import kr.forpet.view.search.adapter.SearchRecyclerAdapter;
 import kr.forpet.view.search.presenter.SearchPresenter;

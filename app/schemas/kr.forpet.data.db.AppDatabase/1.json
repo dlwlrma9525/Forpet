@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "06e2858ec13131674e6ac0d23cca942d",
+    "identityHash": "b094a7bfb7170679689fc5e5fc910b76",
     "entities": [
       {
         "tableName": "forpet_shop",
@@ -528,12 +528,101 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "forpet_food",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`no` INTEGER, `pet_type` TEXT, `food_type` TEXT, `image_url` TEXT, `spec` TEXT, `strong` TEXT, `weak` TEXT, `precaution` TEXT, `remarks` TEXT, `option` TEXT, `last_updated` TEXT, PRIMARY KEY(`no`))",
+        "fields": [
+          {
+            "fieldPath": "no",
+            "columnName": "no",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "petType",
+            "columnName": "pet_type",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "foodType",
+            "columnName": "food_type",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "imageUrl",
+            "columnName": "image_url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "spec",
+            "columnName": "spec",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "strong",
+            "columnName": "strong",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weak",
+            "columnName": "weak",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "precaution",
+            "columnName": "precaution",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "remarks",
+            "columnName": "remarks",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "option",
+            "columnName": "option",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lastUpdated",
+            "columnName": "last_updated",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "no"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "idx_food_no",
+            "unique": false,
+            "columnNames": [
+              "no"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `idx_food_no` ON `${TABLE_NAME}` (`no`)"
+          }
+        ],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '06e2858ec13131674e6ac0d23cca942d')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b094a7bfb7170679689fc5e5fc910b76')"
     ]
   }
 }

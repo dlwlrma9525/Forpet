@@ -3,9 +3,10 @@ package kr.forpet.view.pet.presenter;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import kr.forpet.view.factory.HealthViewFactory;
-import kr.forpet.view.factory.VaccineViewFactory;
 import kr.forpet.view.factory.ViewFactory;
+import kr.forpet.view.pet.factory.HealthViewFactory;
+import kr.forpet.view.pet.factory.MealViewFactory;
+import kr.forpet.view.pet.factory.VaccineViewFactory;
 import kr.forpet.view.pet.model.PetModel;
 
 public class PetPresenterImpl implements PetPresenter {
@@ -34,7 +35,21 @@ public class PetPresenterImpl implements PetPresenter {
 
     @Override
     public void loadMeal() {
+        new AsyncTask<Void, Void, ViewFactory>() {
+            @Override
+            protected ViewFactory doInBackground(Void... voids) {
+                return new MealViewFactory(
+                        mPetModel.getFoodListByPetType("강아지"),
+                        mPetModel.getFoodListByPetType("고양이")
+                );
+            }
 
+            @Override
+            protected void onPostExecute(ViewFactory factory) {
+                super.onPostExecute(factory);
+                mView.updateView(factory);
+            }
+        }.execute();
     }
 
     @Override

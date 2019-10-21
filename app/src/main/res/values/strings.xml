@@ -15,6 +15,8 @@
     <string name="title_activity_search">SearchActivity</string>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="title_activity_regist">RegistActivity</string>
+    <string name="title_activity_recommend">RecommendActivity</string>
+    <string name="title_activity_pet">PetActivity</string>
     <!-- bottom navigation view menu -->
     <string name="menu_item_shop">반려용품샵</string>
     <string name="menu_item_pharmacy">약국</string>
@@ -45,9 +47,11 @@
     <string name="header_intro">간단소개</string>
     <string name="header_infection">- 감염경로</string>
     <string name="header_info"> 부가정보</string>
+    <string name="header_meal">사료 선택하기</string>
     <string name="header_medicine">구비약품</string>
     <string name="header_modify">수정요청</string>
     <string name="header_option">고객편의</string>
+    <string name="header_precaution">주의사항</string>
     <string name="header_prevention">- 예방하기</string>
     <string name="header_recommend">만족도평가</string>
     <string name="header_recommend_consensus">펫과의교감</string>
@@ -56,10 +60,13 @@
     <string name="header_recommend_price">가격</string>
     <string name="header_recommend_kindness">친절</string>
     <string name="header_regist">등록요청</string>
+    <string name="header_spec">특징</string>
+    <string name="header_strong">장점</string>
     <string name="header_symptom">- 증상</string>
     <string name="header_time">운영시간</string>
     <string name="header_treatment_pay">치료비 공개</string>
     <string name="header_vaccine">예방접종</string>
+    <string name="header_week">단점</string>
     <!-- global -->
     <string name="all_call">전화하기</string>
     <string name="all_choice">선택</string>

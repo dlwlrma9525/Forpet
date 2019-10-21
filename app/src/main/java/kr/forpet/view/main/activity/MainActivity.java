@@ -50,7 +50,7 @@ import kr.forpet.R;
 import kr.forpet.data.entity.Shop;
 import kr.forpet.map.MarkerBuilder;
 import kr.forpet.util.Permission;
-import kr.forpet.view.factory.SheetViewFactory;
+import kr.forpet.view.main.factory.SheetViewFactory;
 import kr.forpet.view.factory.ViewFactory;
 import kr.forpet.view.main.adapter.FavoriteListAdapter;
 import kr.forpet.view.main.adapter.MainPagerAdapter;
