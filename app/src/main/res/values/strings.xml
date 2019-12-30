@@ -3,6 +3,9 @@
     <string name="app_name">Forpet</string>
     <string name="app_ci">반려동물을 위한 모든 장소 \'포펫\'</string>
     <string name="app_db_name">forpet.sqlite</string>
+    <!-- facebook -->
+    <string name="facebook_app_id">591424385022023</string>
+    <string name="fb_login_protocol_scheme">fb591424385022023</string>
     <!-- shared preference -->
     <string name="shared_name">app_data</string>
     <string name="shared_key_favorite">favorite</string>

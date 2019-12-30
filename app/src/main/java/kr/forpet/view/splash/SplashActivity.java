@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import kr.forpet.R;
 import kr.forpet.data.db.SQLiteHelper;
-import kr.forpet.view.main.activity.MainActivity;
+import kr.forpet.view.login.activity.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -24,7 +24,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void goToMain() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
 
         this.finish();
